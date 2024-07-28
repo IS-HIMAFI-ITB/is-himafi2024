@@ -108,7 +108,7 @@ model Event {
   date                   DateTime
   enablePresensi         Boolean  @default(false)
   disabled               Boolean  @default(true)
-  checkRecheckForm       String?  @default("NONE") @db.Text
+  checkRecheckForm       String?  @db.Text
   presensiQuestion       String?  @db.Text
   presensiQuestionAnswer String?
   hadir                  User[]   @relation("hadir")
