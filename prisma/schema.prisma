@@ -14,17 +14,17 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+// model Post {
+//     id        Int      @id @default(autoincrement())
+//     name      String
+//     createdAt DateTime @default(now())
+//     updatedAt DateTime @updatedAt
 
-    createdBy   User   @relation(fields: [createdById], references: [id])
-    createdById String
+//     createdBy   User   @relation(fields: [createdById], references: [id])
+//     createdById String
 
-    @@index([name])
-}
+//     @@index([name])
+// }
 
 // Necessary for Next auth
 model Account {
@@ -54,15 +54,162 @@ model Session {
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+
+enum Role {
+  KETUA
+  SEKJEN
+  SEKBEN
+  FUNDRAISING
+  EO
+  MAMET
+  EVALUATOR
+  LAPANGAN
+  MENTOR
+  MEDIK
+  KEAMANAN
+  KREATIF
+  PUBDOK
+  IT
+  MSDM
+  PERSONALIA
+  PERIZINAN
+  LOGISTIK
+  PESERTA
+}
+
+model Tugas {
+  id          Int          @id @default(autoincrement())
+  title       String       @unique
+  description String       @db.Text
+  dueDate     DateTime
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  attachments String?      @db.Text
+  comments    Post[]
+  submissions Submission[]
+}
+
+model Submission {
+  id          String   @id @default(cuid())
+  submittedAt DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId      String?
+  tugas       Tugas?   @relation(fields: [tugasId], references: [id], onDelete: SetNull)
+  tugasId     Int?
+  files       String?  @db.Text
+  links       String?  @db.Text
+  score       Int?
+  feedback    Post[]
+}
+
+model Post {
+  id           Int         @id @default(autoincrement())
+  title        String?
+  content      String      @db.Text
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  type         String?     @default("POST")
+  author       User?       @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  authorId     String?
+  originalId   Int?
+  original     Post?       @relation("replies", fields: [originalId], references: [id], onDelete: SetNull)
+  replies      Post[]      @relation("replies")
+  Tugas        Tugas?      @relation(fields: [tugasId], references: [id], onDelete: SetNull)
+  tugasId      Int?
+  Submission   Submission? @relation(fields: [submissionId], references: [id], onDelete: SetNull)
+  submissionId String?
+}
+
+enum TipeIzin {
+  FULL
+  MENYUSUL
+  MENINGGALKAN_LEBIH_AWAL
+}
+
+enum StatusIzin {
+  DITERIMA
+  DITOLAK
+  MENUNGGU
+}
+
+model Izin {
+  id         Int        @id @default(autoincrement())
+  user       User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String?
+  event      Event?     @relation("izin", fields: [eventId], references: [id], onDelete: SetNull)
+  eventId    String?
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  status     StatusIzin @default(MENUNGGU)
+  tipe       TipeIzin   @default(FULL)
+  keterangan String?    @db.Text
+  bukti      String?    @db.Text
+}
+
+model Event {
+  id                     String   @id @default(cuid())
+  title                  String
+  description            String?  @db.Text
+  date                   DateTime
+  enablePresensi         Boolean  @default(false)
+  disabled               Boolean  @default(true)
+  checkRecheckForm       String?  @default("NONE") @db.Text
+  presensiQuestion       String?  @db.Text
+  presensiQuestionAnswer String?
+  hadir                  User[]   @relation("hadir")
+  izin                   Izin[]   @relation("izin")
+}
+
+model Notification {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  type        String
+  createdAt   DateTime @default(now())
+  receiver    User[]   @relation("received")
+  readBy      User[]   @relation("readBy")
+}
+
+model Kelompok {
+  id      Int    @id @default(autoincrement())
+  name    String @unique
+  anggota User[]
+}
+
+// model User {
+//     id            String    @id @default(cuid())
+//     name          String?
+//     email         String?   @unique
+//     emailVerified DateTime?
+//     image         String?
+//     accounts      Account[]
+//     sessions      Session[]
+//     posts         Post[]
+// }
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
-    posts         Post[]
+  id                 String         @id @default(uuid())
+  name               String
+  nim                String?        @unique
+  role               Role           @default(PESERTA)
+  password           String?
+  phoneNumber        String?
+  kelompok           Kelompok?      @relation(fields: [kelompokId], references: [id])
+  kelompokId         Int?
+  lastPasswordChange DateTime?
+  email              String?        @unique
+  emailVerified      DateTime?      @map("email_verified")
+  image              String?
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  submisiTugas       Submission[]
+  izin               Izin[]
+  eventAttendance    Event[]        @relation("hadir")
+  notifications      Notification[] @relation("received")
+  readNotifications  Notification[] @relation("readBy")
+  posts              Post[]
+  accounts           Account[]
+  sessions           Session[]
 }
 
 model VerificationToken {
