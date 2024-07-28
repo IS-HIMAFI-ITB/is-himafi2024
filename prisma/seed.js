@@ -2,7 +2,35 @@ const { PrismaClient, TipeIzin, StatusIzin } = require("@prisma/client");
 const { Role } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-const akunPanit = [
+const akunPesertas = [
+  {
+    name: "ikan1",
+    nim: "10223065",
+    password: "Ua5tkXqb",
+    role: Role.PESERTA,
+  },
+  {
+    name: "ikan2",
+    nim: "10223066",
+    password: "Ua5tkXqb2",
+    role: Role.PESERTA,
+  },
+  {
+    name: "ikan3",
+    nim: "10223067",
+    password: "Ua5tkXqb3",
+    role: Role.PESERTA,
+  },
+];
+
+const akunPanits = [
+  {
+    name: "Ahmad Royyan Fatah",
+    nim: "10222065",
+    password: "7KsQHj2T",
+    role: Role.IT,
+  },
+
   {
     name: "Muhamad Daffa Fawwaz F J",
     nim: "10221040",
@@ -397,6 +425,28 @@ const akunPanit = [
 
 const load = async () => {
   try {
+    // !seed akun panit
+    for (let akunPanit of akunPanits) {
+      await prisma.User.create({
+        data: akunPanit,
+      });
+    }
+    //! seed akun peserta
+    for (let akunPeserta of akunPesertas) {
+      await prisma.User.create({
+        data: akunPeserta,
+      });
+    }
+
+    //! new event
+    // await prisma.event.create({
+    //   data: {
+    //     title: "Wawancara Anggota Baru",
+    //     description: "Lorem ipsum dolor sit amet",
+    //     date: new Date(),
+    //   },
+    // });
+
     // ! INI UNTUK BUAT NOTIFIKASI, BODY KURANG LEBIH KEK GINI
     // ! {
     // !  title: "judul",
