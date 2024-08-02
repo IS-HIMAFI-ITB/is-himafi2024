@@ -54,15 +54,63 @@ model Session {
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+enum Role {
+    ADMIN
+    PESERTA
+}
+
 model User {
     id            String    @id @default(cuid())
-    name          String?
+    name          String?      @unique
+    nim           String?      @unique
+    password            String?
+    passwordOverride    Boolean     @default(false)
+    role                Role        @default(PESERTA)
+
     email         String?   @unique
     emailVerified DateTime?
     image         String?
     accounts      Account[]
+
     sessions      Session[]
+    submissions   Submission[]   @relation("submission")
+    comments      Comment[]      @relation("comment")
     posts         Post[]
+}
+
+model Tugas{
+    id          String  @id @default(cuid())
+    judul       String
+    body        String?
+    attachment  String?
+    deadline    DateTime?
+
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+
+    submissions Submission[]
+}
+
+model Submission {
+    id              String  @id @default(cuid())
+    submissionUrl   String?
+    score           Int?
+    feedback        Comment[]
+    submissionTugas Tugas   @relation(fields: [submissionTugasId], references: [id])
+    submissionBy    User    @relation("submission", fields: [submissionById], references: [name])
+    submissionById    String
+    submissionTugasId String
+
+}
+
+model Comment {
+    id                  Int         @id @default(autoincrement())
+    text                String
+    createdAt           DateTime    @default(now())
+    submissionOrigin    Submission  @relation(fields: [submissionOriginId],references: [id])
+    createdBy           User        @relation("comment",fields: [createdById],references: [name])
+    submissionOriginId  String
+    createdById         String
 }
 
 model VerificationToken {
