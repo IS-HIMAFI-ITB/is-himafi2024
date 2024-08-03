@@ -1,6 +1,7 @@
 import { getServerAuthSession } from "~/server/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { PostList } from "../_components/postList";
 
 export default async function PesertaPage() {
     const session = await getServerAuthSession()
@@ -28,9 +29,10 @@ export default async function PesertaPage() {
             <div className="flex min-h-screen flex-col items-center justify-center">
                 
                 <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-                    Peserta <span className="text-[hsl(280,100%,70%)]">Page</span>
+                    Intelektuelle <span className="text-[hsl(280,100%,70%)]">schule</span>
                     
                 </h1>
+                <PostList/>
                 
             </div>
         </div>

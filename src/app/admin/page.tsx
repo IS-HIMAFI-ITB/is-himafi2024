@@ -3,6 +3,11 @@ import { getServerAuthSession } from "~/server/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
+import { TugasCreateAdmin } from "~/app/_components/tugasCreate-admin";
+import { PostCreateAdmin } from "~/app/_components/postCreate-admin";
+import { PostList } from "../_components/postList";
+import { TugasList } from "../_components/tugasList";
+
 export default async function AdminPage() {
     const session = await getServerAuthSession();
     if (!session) {
@@ -32,8 +37,12 @@ export default async function AdminPage() {
                 <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
                     Admin <span className="text-[hsl(280,100%,70%)]">Page</span>
                 </h1>
-                
-                
+                <PostCreateAdmin/>
+                <TugasCreateAdmin/>
+                <PostList/>
+                <h1>end of postlist</h1>
+                <TugasList/>
+                <h1>end of tugaslist</h1>
             </div>
         </div>
     );

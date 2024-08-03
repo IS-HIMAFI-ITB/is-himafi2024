@@ -13,18 +13,18 @@ datasource db {
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
 }
+//!original post from t3 boilerplate
+// model Post {
+//     id        Int      @id @default(autoincrement())
+//     name      String
+//     createdAt DateTime @default(now())
+//     updatedAt DateTime @updatedAt
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+//     createdBy   User   @relation(fields: [createdById], references: [id])
+//     createdById String
 
-    createdBy   User   @relation(fields: [createdById], references: [id])
-    createdById String
-
-    @@index([name])
-}
+//     @@index([name])
+// }
 
 // Necessary for Next auth
 model Account {
@@ -76,6 +76,19 @@ model User {
     submissions   Submission[]   @relation("submission")
     comments      Comment[]      @relation("comment")
     posts         Post[]
+}
+
+model Post {
+    id        Int      @id @default(autoincrement())
+    judul     String?
+    body      String?
+    attachment String?
+    
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    createdBy   User   @relation(fields: [createdById], references: [id])
+    createdById String
 }
 
 model Tugas{
