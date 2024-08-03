@@ -5,7 +5,6 @@ import {
   type NextAuthOptions,
 } from "next-auth";
 import { type Adapter } from "next-auth/adapters";
-import DiscordProvider from "next-auth/providers/discord";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 
@@ -24,20 +23,35 @@ const prisma = new PrismaClient();
  */
 declare module "next-auth" {
   interface Session extends DefaultSession {
+    accessToken: string;
     user: {
       id: string;
-      role: "ADMIN" | "PESERTA" | "PANITIA";
+      role: string;
       nim: string;
+      password: string;
       // ...
       // ...other properties
       // role: UserRole;
-    } & DefaultSession["user"];
+     } & DefaultSession["user"];
   }
 
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
+  interface User {
+    id: string;
+    role: string;
+    nim: string;
+    password: string;
+    // ...other properties
+    // role: UserRole;
+  }
+}
+declare module "next-auth/jwt" {
+  interface JWT {
+    id: string;
+    role: string;
+    nim: string;
+    password: string;
+    accessToken: string;
+  }
 }
 
 /**
@@ -78,13 +92,8 @@ export const authOptions: NextAuthOptions = {
     //   },
     // }),
   },
-  adapter: PrismaAdapter(db) as Adapter,
-  providers: [
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
-    }),
-    
+  adapter: PrismaAdapter(db) as Adapter,  
+  providers: [    
     CredentialsProvider({
       name: 'Credentials',
       credentials: {},
@@ -106,7 +115,8 @@ export const authOptions: NextAuthOptions = {
             }
             console.log("user credentials logged in --------------------------------------------------")
             console.log(user)
-            return user
+            /* eslint-disable-next-line */
+            return user as any
         }
     })
   ],
