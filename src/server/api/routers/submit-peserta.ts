@@ -7,13 +7,15 @@ export const submitPesertaRouter = createTRPCRouter({
     }),
     submitPesertaCreate: publicProcedure.input(z.object({ url:z.string(), tugasId: z.string() }))
     .mutation(async ({ ctx, input }) => {
-        return ctx.db.submission.create({
-                data:{
-                    submissionUrl: input.url,
-                    submissionTugas: {connect: { id: input.tugasId }},
-                    submissionBy: { connect: { id: ctx.session.user.id } },
-                }
-            })
+        if (ctx.session && ctx.session.user) {
+            return ctx.db.submission.create({
+                    data:{
+                        submissionUrl: input.url,
+                        submissionTugas: {connect: { id: input.tugasId }},
+                        submissionBy: { connect: { id: ctx.session.user.id } },
+                    }
+                })
+        }
 
     }),
         

@@ -30,8 +30,8 @@ export function TugasList() {
                     <UploadButton
                         endpoint="blobUploader"
                         onClientUploadComplete={(res) => {
-                            console.log("Files: ", res[0].url);
-                            createSubmission.mutate({ tugasId: tugas.id, url: res[0].url });
+                            console.log("Files: ", res[0]!.url);
+                            createSubmission.mutate({ tugasId: tugas.id, url: res[0]!.url });
                             alert("Upload Completed");
                         }}
                         onUploadError={(error: Error) => {
