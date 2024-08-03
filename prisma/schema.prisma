@@ -63,7 +63,7 @@ model User {
     id            String    @id @default(cuid())
     name          String?      @unique
     nim           String?      @unique
-    password            String?
+    password            String? @default("password")
     passwordOverride    Boolean     @default(true)
     role                Role        @default(PESERTA)
 
@@ -108,6 +108,8 @@ model Submission {
     id              String  @id @default(cuid())
     submissionUrl   String?
     score           Int?
+    createdAt       DateTime    @default(now())
+
     feedback        Comment[]
     submissionTugas Tugas   @relation(fields: [submissionTugasId], references: [id])
     submissionBy    User    @relation("submission", fields: [submissionById], references: [id])
