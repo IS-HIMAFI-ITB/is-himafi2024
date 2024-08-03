@@ -14,9 +14,9 @@ export default function ResetPasswordPage() {
     }
 
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+        <div className="flex min-h-screen flex-col items-center justify-center bg-[linear-gradient(to_right_bottom,#512d0d81,#2b1807),url('/panorama-vertical-red-background.png')] text-white">
             <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-                Change <span className="text-[hsl(280,100%,70%)]">Password</span>
+                Change <span className="text-[#f59e0b]">Password</span>
             </h1>
             <div>
                 <form onSubmit={handleSubmit} className='flex flex-col gap-4 mt-10 items-center justify-center text-[hsl(0,0,0)]'>

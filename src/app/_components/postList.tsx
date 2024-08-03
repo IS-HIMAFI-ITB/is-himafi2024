@@ -20,7 +20,7 @@ export function PostList() {
                 <li key={post.id} >
                     <p><b>{post.judul}</b></p>
                     <p>{post.body}</p>
-                    <Link
+                    <Link 
                         href={post.attachment ? post.attachment : '#'}
                         >attachments
                     </Link>

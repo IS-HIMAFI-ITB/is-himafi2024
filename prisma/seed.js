@@ -108,7 +108,8 @@ const akunPesertas = [
     {nim: "10223102", name: "Nairaya Zaizafun",},
     {nim: "10223103", name: "Kaisa Nida Assafira",},
     {nim: "10223104", name: "Zharfan Aksa Khoiri",},
-
+    
+    {nim: "1", name: "pesertaDummy", passwordOverride: false, password: "1"},
 ]
 
 const akunPanits = [
