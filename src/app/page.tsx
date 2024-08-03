@@ -3,14 +3,24 @@ import Link from "next/link";
 import { getServerAuthSession } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
 import { redirect } from 'next/navigation'
-
+import { PrismaClient } from  "@prisma/client";
+const prisma = new PrismaClient();
 
 export default async function Home() {
-  const session = await getServerAuthSession();
+  const session = await getServerAuthSession();  
   console.log("jwt session -------------------------------------------------------")
   console.log(session)
   if (!session) {
       redirect('/authpage/login/')
+  }
+  const canResetPassword = await prisma.user.findFirst({
+    where: {
+      nim: session.user.nim,
+      passwordOverride: true,
+    },
+  })
+  if (canResetPassword) {
+    redirect('/authpage/resetpassword/')
   }
   if (session.user.role === 'PESERTA') {
       redirect('/peserta/')

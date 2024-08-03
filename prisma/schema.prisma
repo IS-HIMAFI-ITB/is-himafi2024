@@ -64,7 +64,7 @@ model User {
     name          String?      @unique
     nim           String?      @unique
     password            String?
-    passwordOverride    Boolean     @default(false)
+    passwordOverride    Boolean     @default(true)
     role                Role        @default(PESERTA)
 
     email         String?   @unique
