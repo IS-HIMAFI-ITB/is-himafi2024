@@ -21,7 +21,7 @@ export function PostList() {
                     <p><b>{post.judul}</b></p>
                     <p>{post.body}</p>
                     <Link
-                        href={post.attachment}
+                        href={post.attachment ? post.attachment : '#'}
                         >attachments
                     </Link>
                 </li>

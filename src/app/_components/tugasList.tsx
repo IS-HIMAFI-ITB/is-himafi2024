@@ -21,7 +21,7 @@ export function TugasList() {
                     <p><b>{tugas.judul}</b></p>
                     <p>{tugas.body}</p>
                     <Link
-                        href={tugas.attachment}
+                        href={tugas.attachment ? tugas.attachment : '#'}
                         >attachments
                     </Link>
                     <p>deadline: {tugas.deadline?.toString()}</p>
