@@ -7,6 +7,7 @@ export const postAdminRouter = createTRPCRouter({
     }),
     postAdminCreate: publicProcedure.input(z.object({ judul: z.string(),body: z.string(),attachment: z.string() }))
       .mutation(async ({ ctx, input }) => {
+        if (ctx.session && ctx.session.user) {
           return ctx.db.post.create({
               data:{
                   judul: input.judul,
@@ -15,5 +16,6 @@ export const postAdminRouter = createTRPCRouter({
                   createdBy: { connect: { id: ctx.session.user.id } },
               }
           })
+        }
       }),
   })

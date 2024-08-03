@@ -9,16 +9,18 @@ export const userRouter = createTRPCRouter({
     changePassword: publicProcedure
     .input(z.object({ password: z.string() }))
     .mutation(({ ctx, input }) => {
-        return (
-            ctx.db.user.update({
-                where: {
-                    id: ctx.session.user.id
-                },
-                data: {
-                    password: input.password,
-                    passwordOverride: false
-                }
-            })
-        )
+        if (ctx.session && ctx.session.user) {
+            return (
+                ctx.db.user.update({
+                    where: {
+                        id: ctx.session.user.id
+                    },
+                    data: {
+                        password: input.password,
+                        passwordOverride: false
+                    }
+                })
+            )
+        }
     }),
   })
