@@ -3,6 +3,7 @@ import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { tugasAdminRouter } from "~/server/api/routers/tugas-admin";
 import { postAdminRouter } from "~/server/api/routers/post-admin";
 import { userRouter } from "~/server/api/routers/user";
+import { submitPesertaRouter } from "./routers/submit-peserta";
 
 /**
  * This is the primary router for your server.
@@ -13,6 +14,7 @@ export const appRouter = createTRPCRouter({
   tugasAdmin: tugasAdminRouter,
   postAdmin: postAdminRouter,
   user: userRouter,
+  submitPeserta: submitPesertaRouter,
 });
 
 // export type definition of API

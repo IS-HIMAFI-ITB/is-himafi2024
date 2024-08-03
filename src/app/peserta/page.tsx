@@ -2,6 +2,8 @@ import { getServerAuthSession } from "~/server/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { PostList } from "../_components/postList";
+import { TugasList } from "../_components/tugasList";
+import { ImageUpload } from "../_components/image-upload";
 
 export default async function PesertaPage() {
     const session = await getServerAuthSession()
@@ -33,6 +35,8 @@ export default async function PesertaPage() {
                     
                 </h1>
                 <PostList/>
+                <h1>tugas below</h1>
+                <TugasList/>
                 
             </div>
         </div>

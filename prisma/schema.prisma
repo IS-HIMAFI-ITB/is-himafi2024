@@ -110,7 +110,7 @@ model Submission {
     score           Int?
     feedback        Comment[]
     submissionTugas Tugas   @relation(fields: [submissionTugasId], references: [id])
-    submissionBy    User    @relation("submission", fields: [submissionById], references: [name])
+    submissionBy    User    @relation("submission", fields: [submissionById], references: [id])
     submissionById    String
     submissionTugasId String
 
@@ -121,7 +121,7 @@ model Comment {
     text                String
     createdAt           DateTime    @default(now())
     submissionOrigin    Submission  @relation(fields: [submissionOriginId],references: [id])
-    createdBy           User        @relation("comment",fields: [createdById],references: [name])
+    createdBy           User        @relation("comment",fields: [createdById],references: [id])
     submissionOriginId  String
     createdById         String
 }
