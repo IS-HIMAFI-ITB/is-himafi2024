@@ -55,12 +55,12 @@ export function TugasListPeserta() {
     const createSubmission = api.submitPeserta.submitPesertaCreate.useMutation();
     
     return (
-    <div className="m-5 bg-local bg-repeat-y"
+    <div className="m-0 sm:m-5 bg-local bg-repeat-y"
         style={{
                 backgroundImage: `url('/wooden board.png')`,
                 backgroundSize: "100% "
             }}>
-        <div className="p-6 md:p-20">
+        <div className="p-0 sm:p-6 md:p-20">
             <ul className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3  items-start" >
                 {tugass?.map((tugas) => (
                     <li className="bg-local"
@@ -71,9 +71,9 @@ export function TugasListPeserta() {
                         }}
                         key={tugas.id} >
                         
-                        <div className="m-[7rem] text-amber-900 font-bold text-center">
+                        <div className="m-[4rem] sm:m-[7rem] text-amber-900 font-bold text-center">
                             <h1 className="text-[2rem] font-extrabold tracking-tight ">{tugas.judul}</h1>
-                            <p className="font-bold">Deadline: {tugas.deadline?.toLocaleString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                            <p className="font-black">Deadline: {tugas.deadline?.toLocaleString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
                             <p className="text-justify">{tugas.body}</p>
                             <div className="pt-4"> {tugas.attachment &&
                                 <Link className="bg-amber-900/100 text-orange-200 rounded px-10 py-3 font-semibold no-underline transition hover:bg-amber-900/70"

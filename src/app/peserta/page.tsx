@@ -38,7 +38,7 @@ export default async function PesertaPage() {
                 </div>
             </div>
             <div className="flex min-h-screen flex-col items-center justify-center pt-48">
-                <h1 className="text-5xl font-extrabold tracking-tight md:text-[5rem]">
+                <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight md:text-6xl">
                     Intellektuelle<span className="text-[#f59e0b]">schule</span>
                 </h1>
                 <p className="pt-10 text-base w-9/12 text-center text-[#f59f0bbb] font-extrabold tracking-widest md:text-xl">
