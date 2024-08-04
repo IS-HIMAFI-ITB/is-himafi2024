@@ -84,7 +84,7 @@ export function TugasListPeserta() {
                             <p className="pt-8 text-[1.2rem]">Upload</p>
                             <UploadButton 
                                 className="ut-button:bg-amber-900/100 ut-label:'ese'"
-                                endpoint="blobUploader"
+                                endpoint="blobUploaderLarge"
                                 onClientUploadComplete={(res) => {
                                     console.log("Files: ", res[0]!.url);
                                     createSubmission.mutate({ tugasId: tugas.id, url: res[0]!.url });

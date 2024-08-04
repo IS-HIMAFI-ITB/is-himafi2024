@@ -24,7 +24,21 @@ export const uploadthingFileRouter = {
       return { 
         // url: file.url 
         };
+    }),
+
+  blobUploaderLarge: f({blob: {maxFileSize: "128MB"}})
+    .onUploadComplete(async ({ file }) => {
+      //!! This code RUNS ON YOUR SERVER after upload is complete
+      console.log("file url", file.url);
+ 
+      // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
+      return { 
+        // url: file.url 
+        };
     })
+
+
+
 } satisfies FileRouter;
  
 export type uploadthingFileRouter = typeof uploadthingFileRouter;
