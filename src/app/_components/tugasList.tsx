@@ -52,13 +52,6 @@ export function TugasListPeserta() {
     // sort tugas by date
     if (tugass){
         tugass.sort((a,b)=>{
-            // const dateA = new Date(b.updatedAt)
-            // const dateB = new Date(a.updatedAt);
-            // if (isNaN(dateA) || isNaN(dateB)) {
-            //     // Handle invalid date strings
-            //     return 0;
-            //   }
-            // return dateB - dateA;
             return new Date(b.updatedAt).valueOf() - new Date(a.updatedAt).valueOf();
         })
     }
@@ -85,7 +78,7 @@ export function TugasListPeserta() {
                             backgroundSize: "100% 100%"
                         }}
                         >
-                        {tugas.isTugasSpesial && <Image className="opacity-30 absolute right-0 left-0 bottom-0 top-0 m-auto" src="/logo-himafi-old-stamp.png" alt="" width={400} height={400} ></Image>}
+                        {tugas.isTugasSpesial && <Image className="opacity-40 absolute right-0 left-0 top-0 bottom-0 m-auto" src="/logo-himafi-old-stamp.png" alt="" width={400} height={400} ></Image>}
                         <div className="m-[4rem] sm:m-[7rem] text-amber-900 font-bold text-center z-10 relative">
                             <h1 className="text-[2rem] font-extrabold tracking-tight">{tugas.judul}</h1>
                             <p className="font-black ">Deadline: {tugas.deadline?.toLocaleString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
