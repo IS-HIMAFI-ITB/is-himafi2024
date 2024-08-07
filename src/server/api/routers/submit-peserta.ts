@@ -2,8 +2,12 @@ import {z} from "zod";
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "~/server/api/trpc";
 
 export const submitPesertaRouter = createTRPCRouter({
-    getAll: publicProcedure.query(({ ctx }) => {
-        return ctx.db.submission.findMany();
+    getAll: publicProcedure.query(({ ctx, }) => {
+        return ctx.db.submission.findMany({
+            where: {
+                submissionBy: { id: ctx.session?.user.id },
+            },
+        });
     }),
     submitPesertaCreate: publicProcedure.input(z.object({ url:z.string(), tugasId: z.string() }))
     .mutation(async ({ ctx, input }) => {

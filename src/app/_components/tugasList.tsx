@@ -52,6 +52,7 @@ export function TugasList() {
 
 export function TugasListPeserta() {
     const { data: tugass, refetch: refetchTugass } = api.tugasAdmin.getAll.useQuery();
+    const { data: tugasSubmits, refetch: refetchTugasSubmits } = api.submitPeserta.getAll.useQuery();
     const createSubmission = api.submitPeserta.submitPesertaCreate.useMutation();
     
     return (
@@ -88,13 +89,26 @@ export function TugasListPeserta() {
                                 onClientUploadComplete={(res) => {
                                     console.log("Files: ", res[0]!.url);
                                     createSubmission.mutate({ tugasId: tugas.id, url: res[0]!.url });
-                                    alert("Upload Completed");
+                                    void refetchTugasSubmits();
+                                    // tugasSubmits.query({tugasId: tugas.id});
+                                    // alert("Upload Completed");
                                 }}
                                 onUploadError={(error: Error) => {
                                     // Do something with the error.
                                     alert(`ERROR! ${error.message}`);
                                 }}
                             />
+                            <div>
+                                {/* {tugasSubmits[tugas.id] &&} */}
+                                {/* {JSON.stringify(tugasSubmits[submissionTugasId = tugas.id])} */}
+                                {tugasSubmits?.map((submission) => (
+                                    submission.submissionTugasId === tugas.id && (
+                                        <div key={submission.id}>
+                                            <p>{submission.submissionUrl}</p>
+                                        </div>
+                                    )
+                                ))}
+                            </div>
                         </div>
                     </li>
                 ))}

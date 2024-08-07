@@ -109,7 +109,8 @@ const akunPesertas = [
     {nim: "10223103", name: "Kaisa Nida Assafira",},
     {nim: "10223104", name: "Zharfan Aksa Khoiri",},
     
-    {nim: "1", name: "pesertaDummy", passwordOverride: false, password: "1"},
+    {nim: "1", name: "pesertaDummy1", passwordOverride: false, password: "1"},
+    {nim: "2", name: "pesertaDummy2", passwordOverride: false, password: "2"},
 ]
 
 const akunPanits = [
@@ -119,11 +120,13 @@ const akunPanits = [
 const load = async () => {
     try {
         // //!seed akun peserta 
-        const akunPeserta = await prisma.user.createMany({
+        // const akunPeserta = 
+        await prisma.user.createMany({
                 data: akunPesertas, skipDuplicates: true,
         });
         // //!seed akun panit
-        const akunPanit = await prisma.user.createMany({
+        // const akunPanit = 
+        await prisma.user.createMany({
                 data: akunPanits, skipDuplicates: true,
         });
     } catch (e) {
