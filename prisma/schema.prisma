@@ -12,6 +12,7 @@ datasource db {
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
+    directUrl = env("DIRECT_URL")
 }
 //!original post from t3 boilerplate
 // model Post {
@@ -97,6 +98,8 @@ model Tugas{
     body        String?
     attachment  String?
     deadline    DateTime?
+    isTugasSpesial        Boolean @default(false)
+    hidden      Boolean @default(false)
 
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
@@ -109,6 +112,8 @@ model Submission {
     submissionUrl   String?
     score           Int?
     createdAt       DateTime    @default(now())
+    filename        String?
+    hidden          Boolean @default(false)
 
     feedback        Comment[]
     submissionTugas Tugas   @relation(fields: [submissionTugasId], references: [id])

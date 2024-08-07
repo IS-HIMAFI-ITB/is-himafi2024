@@ -6,13 +6,20 @@ import { FormEvent } from "react";
 
 
 export function TugasCreateAdmin() {
-    
-    const [formcontent, setFormcontent] = useState({judul:'', body: '', attachment: '', deadline: '' });
+    const [formcontent, setFormcontent] = useState({judul:'', body: '', attachment: '', deadline: '', tugasSpesial: false});
     const createTugas = api.tugasAdmin.tugasAdminCreate.useMutation();
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        createTugas.mutate({ judul: formcontent.judul, body: formcontent.body, attachment: formcontent.attachment, deadline: new Date(formcontent.deadline), });
+        try {
+            createTugas.mutate({ judul: formcontent.judul, body: formcontent.body, attachment: formcontent.attachment, deadline: new Date(formcontent.deadline), isTugasSpesial: formcontent.tugasSpesial });
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setFormcontent({ judul: '', body: '', attachment: '', deadline: '', tugasSpesial: false });
+        }
+        
     };
+
     return (
         <div className="w-full max-w-xs">
             <h1>Create tugas</h1>
@@ -36,6 +43,16 @@ export function TugasCreateAdmin() {
                     value={formcontent.deadline} 
                     onChange={({ target }) => setFormcontent({ ...formcontent, deadline: target.value })}
                     type="date" />
+                <label className="text-[#FFFFFF]">
+                    <input
+                        
+                        type="checkbox"
+                        onChange={() => {setFormcontent({ ...formcontent, tugasSpesial: !formcontent.tugasSpesial });
+                            }}
+                    />
+                Misi spesial
+                </label>
+                
                 <button className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20 text-white"
                     type="submit"> Submit
                 </button>
