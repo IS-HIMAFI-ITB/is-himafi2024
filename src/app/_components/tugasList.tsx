@@ -149,7 +149,7 @@ export function TugasListPeserta() {
                                 </div>
                                 <UploadButton 
                                     className="ut-button:bg-amber-900/100 ut-label:'ese'"
-                                    endpoint="blobUploaderLarge"
+                                    endpoint="blobUploader"
                                     onClientUploadComplete={async (res) => {
                                         console.log("Files: ", res[0]!.url);
                                         await createSubmission.mutateAsync({ tugasId: tugas.id, url: res[0]!.url, filename: res[0]!.name, key: res[0]!.key});
