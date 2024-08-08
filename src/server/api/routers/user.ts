@@ -6,6 +6,9 @@ export const userRouter = createTRPCRouter({
     getAll: publicProcedure.query(({ ctx }) => {
         return ctx.db.user.findMany();
     }),
+    getUserSession: publicProcedure.query(({ ctx }) => {
+        return ctx.session!.user
+    }),
     changePassword: publicProcedure.input(z.object({ password: z.string() }))
     .mutation(({ ctx, input }) => {
         if (ctx.session && ctx.session.user) {

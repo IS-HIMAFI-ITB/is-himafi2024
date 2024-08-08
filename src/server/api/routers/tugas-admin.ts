@@ -5,7 +5,7 @@ export const tugasAdminRouter = createTRPCRouter({
     getAll: publicProcedure.query(({ ctx }) => {
         return ctx.db.tugas.findMany();
     }),
-    tugasAdminCreate: publicProcedure.input(z.object({ judul: z.string(),body: z.string(),attachment: z.string(),deadline: z.date(), isTugasSpesial: z.boolean() }))
+    tugasAdminCreate: publicProcedure.input(z.object({ judul: z.string(),body: z.string(),attachment: z.string(),deadline: z.date(), isTugasSpesial: z.boolean(), targetNimPeserta: z.array(z.string()),}))
     .mutation(async ({ ctx, input }) => {
         return ctx.db.tugas.create({
             data:{
@@ -14,6 +14,7 @@ export const tugasAdminRouter = createTRPCRouter({
                 attachment: input.attachment,
                 deadline: input.deadline,
                 isTugasSpesial: input.isTugasSpesial,
+                targetNimPeserta: input.targetNimPeserta
             }
         })
     }),

@@ -100,6 +100,7 @@ model Tugas{
     deadline    DateTime?
     isTugasSpesial        Boolean @default(false)
     hidden      Boolean @default(false)
+    targetNimPeserta String[]
 
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt

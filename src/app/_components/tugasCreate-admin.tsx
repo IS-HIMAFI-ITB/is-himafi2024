@@ -6,16 +6,17 @@ import { FormEvent } from "react";
 
 
 export function TugasCreateAdmin() {
-    const [formcontent, setFormcontent] = useState({judul:'', body: '', attachment: '', deadline: '', tugasSpesial: false});
+    const [formcontent, setFormcontent] = useState({judul:'', body: '', attachment: '', deadline: '', tugasSpesial: false, targetNimPesertaString: ''});
     const createTugas = api.tugasAdmin.tugasAdminCreate.useMutation();
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        const targetNimPesertaList = formcontent.targetNimPesertaString.split(',');
         try {
-            createTugas.mutate({ judul: formcontent.judul, body: formcontent.body, attachment: formcontent.attachment, deadline: new Date(formcontent.deadline), isTugasSpesial: formcontent.tugasSpesial });
+            createTugas.mutate({ judul: formcontent.judul, body: formcontent.body, attachment: formcontent.attachment, deadline: new Date(formcontent.deadline), isTugasSpesial: formcontent.tugasSpesial, targetNimPeserta: targetNimPesertaList });
         } catch (error) {
             console.log(error);
         } finally {
-            setFormcontent({ judul: '', body: '', attachment: '', deadline: '', tugasSpesial: false });
+            setFormcontent({ judul: '', body: '', attachment: '', deadline: '', tugasSpesial: false, targetNimPesertaString: '' });
         }
         
     };
@@ -43,16 +44,17 @@ export function TugasCreateAdmin() {
                     value={formcontent.deadline} 
                     onChange={({ target }) => setFormcontent({ ...formcontent, deadline: target.value })}
                     type="date" />
+                <input 
+                    value={formcontent.targetNimPesertaString} 
+                    onChange={({ target }) => setFormcontent({ ...formcontent, targetNimPesertaString: target.value })}
+                    type="text" placeholder='targetNimPeserta (comma separated)' />
                 <label className="text-[#FFFFFF]">
                     <input
-                        
                         type="checkbox"
                         onChange={() => {setFormcontent({ ...formcontent, tugasSpesial: !formcontent.tugasSpesial });
                             }}
-                    />
-                Misi spesial
+                    />Misi spesial
                 </label>
-                
                 <button className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20 text-white"
                     type="submit"> Submit
                 </button>
