@@ -2,7 +2,7 @@ import { getServerAuthSession } from "~/server/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { PostList } from "../_components/postList";
-import { TugasList, TugasListPeserta } from "../_components/tugasList";
+import { TugasListPeserta } from "../_components/tugasList";
 import { ImageUpload } from "../_components/image-upload";
 
 export default async function PesertaPage() {

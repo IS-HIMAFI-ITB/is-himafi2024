@@ -5,8 +5,9 @@ import Link from "next/link";
 
 import { TugasCreateAdmin } from "~/app/_components/tugasCreate-admin";
 import { PostCreateAdmin } from "~/app/_components/postCreate-admin";
-import { PostList } from "../_components/postList";
-import { TugasList } from "../_components/tugasList";
+import { PostList } from "~/app/_components/postList";
+import { TugasListAdmin } from "~/app/_components/tugasList";
+import {MarkOrphanedSubmissions} from "~/app/_components-for-backend/renameOrphanedSubmissions";
 
 export default async function AdminPage() {
     const session = await getServerAuthSession();
@@ -39,10 +40,14 @@ export default async function AdminPage() {
                 </h1>
                 <PostCreateAdmin/>
                 <TugasCreateAdmin/>
+                <h1>start of postlist</h1>
                 <PostList/>
                 <h1>end of postlist</h1>
-                <TugasList/>
+                <h1>start of tugaslist</h1>
+                <TugasListAdmin/>
                 <h1>end of tugaslist</h1>
+                <h1>backend stuff:</h1>
+                <MarkOrphanedSubmissions/>
             </div>
         </div>
     );

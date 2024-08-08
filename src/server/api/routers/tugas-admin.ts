@@ -17,5 +17,35 @@ export const tugasAdminRouter = createTRPCRouter({
             }
         })
     }),
+    getTugasSubmissions: publicProcedure.query(({ ctx }) => {
+        return ctx.db.submission.findMany({
+            where: {
+                hidden: false
+            },
+            include: {
+                submissionBy: true
+            }
+        });
+    }),
+    hideTugas: publicProcedure.input(z.object({ tugasId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+        if (ctx.session && ctx.session.user) {
+            console.log(console.log("hiding tugasId "+input.tugasId))
+            return ctx.db.tugas.update({
+                where: { id: input.tugasId },
+                data: { hidden: true },
+            })
+        }
+    }),
+    unhideTugas: publicProcedure.input(z.object({ tugasId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+        if (ctx.session && ctx.session.user) {
+            console.log(console.log("unhiding tugasId "+ input.tugasId ))
+            return ctx.db.tugas.update({
+                where: { id: input.tugasId },
+                data: { hidden: false },
+            })
+        }
+    }),
         
 })

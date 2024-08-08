@@ -10,15 +10,28 @@ import Image from 'next/image'
 import { url } from "inspector";
 import { Url } from "next/dist/shared/lib/router/router";
 
-export function TugasList() {
+export function TugasListAdmin() {
     const { data: tugass, refetch: refetchTugass } = api.tugasAdmin.getAll.useQuery();
-    const createSubmission = api.submitPeserta.submitPesertaCreate.useMutation();
+    const {data: submissions, refetch: refetchSubmissions} = api.tugasAdmin.getTugasSubmissions.useQuery();
+    const hideTugas = api.tugasAdmin.hideTugas.useMutation();
+    const unhideTugas = api.tugasAdmin.unhideTugas.useMutation();
+
+    // sort submissions by NIM
+    if (submissions){
+        submissions.sort((a,b)=>{
+            const aNim = Number(a.submissionBy.nim);//eslint-disable-line
+            const bNim = Number(b.submissionBy.nim );//eslint-disable-line
+            return aNim - bNim;
+        })
+    }
     return (
     <div>
         <h1>Tugas:</h1>
         <button
-            onClick={() => refetchTugass()}
-        >
+            onClick={() => {
+                void refetchTugass()
+                void refetchSubmissions()
+            }}>
             Refetch 
         </button>
         <ul className="grid gap-4 grid-cols-1">
@@ -31,6 +44,35 @@ export function TugasList() {
                         >attachments
                     </Link>
                     <p>deadline: {tugas.deadline?.toString()}</p>
+                    <p>isTugasSpesial: {tugas.isTugasSpesial?"true":"false"}</p>
+                    <p>hidden: {tugas.hidden?"true":"false"}</p>
+                    <button onClick={async() => {
+                        await hideTugas.mutateAsync({tugasId: tugas.id})
+                        void refetchTugass()
+                    }}>hide tugas</button>
+                    <br/>
+                    <button onClick={async() => {
+                        await unhideTugas.mutateAsync({tugasId: tugas.id})
+                        void refetchTugass()
+                    }}>unhide tugas</button>
+                    <ul className="grid gap-4 grid-cols-1">
+                        <p>Submissions: </p>
+                        {submissions?.map((submission) => (
+                            submission.submissionTugasId === tugas.id &&
+                            <li key={submission.id} className="grid gap-4 grid-cols-3" >
+                                {/* <p><b>{JSON.stringify(submission)}</b></p> */}
+                                <p><b>{submission.submissionBy.nim // eslint-disable-line
+                                    }</b></p>
+                                <p><b>{
+                                    submission.submissionBy.name // eslint-disable-line
+                                    }</b></p>
+                                <Link
+                                    href={submission.submissionUrl as Url}
+                                    >{submission.filename}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
                 </li>
             ))}
         </ul>
@@ -38,10 +80,6 @@ export function TugasList() {
     </div>
     )
 }
-
-// export function TugasListAdmin() {
-
-// }
 
 export function TugasListPeserta() {
     const { data: tugass, refetch: refetchTugass } = api.tugasAdmin.getAll.useQuery();
@@ -70,7 +108,7 @@ export function TugasListPeserta() {
             }}>
         <div className="p-0 sm:p-6 md:p-20">
             <ul className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3  items-start" >
-                {tugass?.map((tugas) => (
+                {tugass?.map((tugas) => (tugas.hidden === false && (
                     <li key={tugas.id} className="bg-local relative"
                         style={{
                             backgroundImage: `url('/paper1.png')`,
@@ -95,7 +133,7 @@ export function TugasListPeserta() {
                                 endpoint="blobUploaderLarge"
                                 onClientUploadComplete={async (res) => {
                                     console.log("Files: ", res[0]!.url);
-                                    await createSubmission.mutateAsync({ tugasId: tugas.id, url: res[0]!.url, filename: res[0]!.name });
+                                    await createSubmission.mutateAsync({ tugasId: tugas.id, url: res[0]!.url, filename: res[0]!.name, key: res[0]!.key});
                                     void refetchTugasSubmits()
                                 }}
                                 onUploadError={(error: Error) => {
@@ -115,7 +153,7 @@ export function TugasListPeserta() {
                             </div>
                         </div>
                     </li>
-                ))}
+                )))}
             </ul>
         </div>
     </div>

@@ -110,6 +110,7 @@ model Tugas{
 model Submission {
     id              String  @id @default(cuid())
     submissionUrl   String?
+    submissionKey   String?
     score           Int?
     createdAt       DateTime    @default(now())
     filename        String?
