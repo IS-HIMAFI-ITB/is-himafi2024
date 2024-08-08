@@ -1,6 +1,8 @@
+
 import { utapi } from "~/server/uploadthing";
 import {any, z} from "zod";
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "~/server/api/trpc";
+
 
 export const backendRouter = createTRPCRouter({
     markOrphanedSubmissions:  publicProcedure.mutation(async({ ctx }) => {
@@ -10,8 +12,12 @@ export const backendRouter = createTRPCRouter({
         });
         hiddenSubmissions.map((submission) => {
             if (submission.submissionKey !== null) {
-                void utapi.renameFiles({fileKey:submission.submissionKey, newName:".orphaned." + submission.filename,}) //eslint-disable-line
-                console.log([{url:"https://utfs.io/f/"+submission.submissionKey, newName:".orphaned." + submission.filename,}])
+
+                // UT API (uploadthing api) bug workaround, bad request if used with key instead of fileKey
+                // @ts-expect-error: Unreachable code error
+                void utapi.renameFiles({fileKey:submission.submissionKey, newName:".orphaned." + submission.filename,}) 
+
+                console.log([{key: submission.submissionKey, url:"https://utfs.io/f/"+submission.submissionKey, newName:".orphaned." + submission.filename,}])
             }
         })
         // await utapi.renameFiles({
