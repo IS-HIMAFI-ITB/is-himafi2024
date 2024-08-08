@@ -5,6 +5,8 @@ import { PostList } from "../_components/postList";
 import { TugasListPeserta } from "../_components/tugasList";
 import { ImageUpload } from "../_components/image-upload";
 
+import { api, HydrateClient } from "~/trpc/server";
+
 export default async function PesertaPage() {
     const session = await getServerAuthSession()
     if (!session) {
@@ -13,12 +15,15 @@ export default async function PesertaPage() {
     if (session.user.role === 'ADMIN') {
         redirect('/')
     }
+
+    const getCumulativeScore = await api.user.getCumulativeScore({ userId: session.user.id })
+
     return (
         <div className="flex min-h-screen flex-col text-white
             bg-[linear-gradient(to_right_bottom,#512d0d81,#2b1807),url('/panorama-vertical-red-background.png')]"
             >
         
-            <div className="absolute top-0 right-0 max-w-[25rem] max-h-[15rem] bg-local" 
+            <div className="absolute top-0 right-0 max-w-[25rem] max-h-[15rem] bg-local"  // session status bar
                         style={{
                             backgroundImage: `url('/woodsign(2)-burn-shortchain.png')`,
                             backgroundRepeat: "no-repeat",
@@ -26,9 +31,10 @@ export default async function PesertaPage() {
                         }}>
                 <div className="flex h-full flex-col items-center justify-center gap-2 pt-12 pb-12">
                     <p className="text-center text-amber-50 font-extrabold px-20" >
-                    {session && <span>
-                        {session.user?.name}<br /> ({session.user?.role})</span>}
+                    {session && <span>{session.user?.name}<br /> ({session.user?.role})</span>}<br />
+                        Points: {getCumulativeScore}
                     </p>
+                    
                     <Link
                         href={"/api/auth/signout"}
                             className="rounded bg-amber-900/80 text-orange-200 px-10 font-semibold no-underline transition hover:bg-white/20"
