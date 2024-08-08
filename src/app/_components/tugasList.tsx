@@ -113,7 +113,7 @@ export function TugasListPeserta() {
                 }}>
             <div className="p-0 sm:p-6 md:p-20">
                 <ul className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3  items-start" >
-                    {tugass?.map((tugas) => (tugas.hidden === false && ((tugas.targetNimPeserta.length === 0 ||  tugas.targetNimPeserta.includes(userSession.data!.nim)) ? true : false) &&(
+                    {tugass?.map((tugas) => (tugas.hidden === false && ((tugas.targetNimPeserta.length === 1 ||  tugas.targetNimPeserta.includes(userSession.data!.nim)) ? true : false) &&(
                         <li key={tugas.id} className="bg-local relative"
                             style={{
                                 backgroundImage: `url('/paper1.png')`,

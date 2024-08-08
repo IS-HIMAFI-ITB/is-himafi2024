@@ -47,7 +47,7 @@ export function TugasCreateAdmin() {
                 <input 
                     value={formcontent.targetNimPesertaString} 
                     onChange={({ target }) => setFormcontent({ ...formcontent, targetNimPesertaString: target.value })}
-                    type="text" placeholder='targetNimPeserta (comma separated)' />
+                    type="text" placeholder='targetNimPeserta (comma separated no whitespace)' />
                 <label className="text-[#FFFFFF]">
                     <input
                         type="checkbox"
