@@ -58,7 +58,7 @@ export default async function PesertaPage() {
                     <p className=" text-base text-center text-[#f59f0bbb] font-extrabold tracking-widest md:text-xl">
                         Teman adalah saudara <br/>
                         Saudara adalah keluarga <br/>
-                        Kebersamaan adalah semuanya <br/>
+                        Kebersamaan adalah segalanya <br/>
                     </p>
                 </div>
                 

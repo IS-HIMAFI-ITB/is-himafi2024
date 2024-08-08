@@ -10,7 +10,7 @@ export const submitPesertaRouter = createTRPCRouter({
             },
         });
     }),
-    submitPesertaCreate: publicProcedure.input(z.object({ url:z.string(), tugasId: z.string(),filename: z.string(),key: z.string() }))
+    submitPesertaCreate: publicProcedure.input(z.object({ url:z.string(), tugasId: z.string(),filename: z.string(),key: z.string().optional() }))
     .mutation(async ({ ctx, input }) => {
         if (ctx.session && ctx.session.user) {
             return ctx.db.submission.create({
@@ -19,7 +19,7 @@ export const submitPesertaRouter = createTRPCRouter({
                         submissionTugas: {connect: { id: input.tugasId }},
                         submissionBy: { connect: { id: ctx.session.user.id } },
                         filename: input.filename,
-                        submissionKey: input.key,
+                        submissionKey: input.key??null,
                     }
                 })
         }

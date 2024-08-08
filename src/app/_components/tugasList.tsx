@@ -127,7 +127,21 @@ export function TugasListPeserta() {
                                     >attachment
                                 </Link>
                             }</div>
-                            <p className="pt-8 text-[1.2rem]">Upload</p>
+                            <p className="pt-20 text-[1.2rem]">Upload</p>
+                            <div>
+                            <form onSubmit={async (e) => {
+                                e.preventDefault();
+                                const formData = new FormData(e.target as HTMLFormElement);
+                                const link = formData.get('link') as string;
+                                await createSubmission.mutateAsync({tugasId: tugas.id, url: link, filename: link.substring(0,32)+".....", key: undefined});
+                                void refetchTugasSubmits()
+                            }}>
+                                <div className="flex flex-row px-10 py-3 self-center justify-center">
+                                    <input type="text" name="link" id="link" placeholder="Enter link here" className="max-w-[15rem] border p-1 border-gray-400 rounded"/>
+                                    <button type="submit" className="bg-amber-900/100 text-orange-200 rounded px-4 font-semibold no-underline transition hover:bg-amber-900/70">Submit</button>
+                                </div>
+                            </form>
+                            </div>
                             <UploadButton 
                                 className="ut-button:bg-amber-900/100 ut-label:'ese'"
                                 endpoint="blobUploaderLarge"
