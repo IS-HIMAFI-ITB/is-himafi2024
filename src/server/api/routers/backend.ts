@@ -20,10 +20,6 @@ export const backendRouter = createTRPCRouter({
                 console.log([{key: submission.submissionKey, url:"https://utfs.io/f/"+submission.submissionKey, newName:".orphaned." + submission.filename,}])
             }
         })
-        // await utapi.renameFiles({
-        //     key: "d108f9f0-db5a-479b-b754-148ebdcafc7d-hru0oc.ico",
-        //     newName: "myImage.ico",
-        //   });
       }),
   })
   

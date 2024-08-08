@@ -4,6 +4,7 @@ import Link from "next/link";
 import { PostList } from "../_components/postList";
 import { TugasListPeserta } from "../_components/tugasList";
 import { ImageUpload } from "../_components/image-upload";
+import { Footer } from "../_components/footer"
 
 export default async function PesertaPage() {
     const session = await getServerAuthSession()
@@ -48,7 +49,13 @@ export default async function PesertaPage() {
                 <div className="pt-24">
                     <TugasListPeserta/>
                 </div>
-                
+                <div className="flex flex-col items-center justify-center pt-10 pb-20">
+                    <p className=" text-base text-center text-[#f59f0bbb] font-extrabold tracking-widest md:text-xl">
+                        Teman adalah saudara <br/>
+                        Saudara adalah keluarga <br/>
+                        Kebersamaan adalah semuanya <br/>
+                    </p>
+                </div>
                 
             </div>
         </div>
