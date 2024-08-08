@@ -4,7 +4,6 @@ import Link from "next/link";
 import { PostList } from "../_components/postList";
 import { TugasListPeserta } from "../_components/tugasList";
 import { ImageUpload } from "../_components/image-upload";
-import { Footer } from "../_components/footer"
 
 export default async function PesertaPage() {
     const session = await getServerAuthSession()
