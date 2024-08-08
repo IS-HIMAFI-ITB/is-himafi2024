@@ -10,16 +10,16 @@ export const backendRouter = createTRPCRouter({
         const  hiddenSubmissions = await ctx.db.submission.findMany({
             where: { hidden: true },
         });
-        hiddenSubmissions.map((submission) => {
+        await Promise.all(hiddenSubmissions.map(async(submission) => {
             if (submission.submissionKey !== null) {
 
                 // UT API (uploadthing api) bug workaround, bad request if used with key instead of fileKey
                 // @ts-expect-error: Unreachable code error
-                void utapi.renameFiles({fileKey:submission.submissionKey, newName:".orphaned." + submission.filename,}) 
+                await utapi.renameFiles({fileKey:submission.submissionKey, newName:".orphaned." + submission.filename,}) 
 
                 console.log([{key: submission.submissionKey, url:"https://utfs.io/f/"+submission.submissionKey, newName:".orphaned." + submission.filename,}])
             }
-        })
+        }))
       }),
   })
   
