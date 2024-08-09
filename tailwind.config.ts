@@ -9,7 +9,8 @@ export default withUt({
     extend: {
       fontFamily: {
         sans: ["var(--font-geist-sans)", ...fontFamily.sans],
-        witcher: ["var(--font-witcher)"],
+        bluecashews: ["var(--font-bluecashews)"],
+        roman: ["var(--font-roman)"],
       },
     },
   },

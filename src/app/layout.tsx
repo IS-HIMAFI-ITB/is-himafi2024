@@ -6,12 +6,20 @@ import localfont from "next/font/local"
 
 import { TRPCReactProvider } from "~/trpc/react";
 
-const witcher = localfont({
+const bluecashews = localfont({
   src: [{
-    path:'../../public/fonts/Thewitcher-jnOj.ttf',
+    path:'../../public/fonts/Blue_Cashews.otf',
     weight: "700"
   }],
-  variable: "--font-witcher",
+  variable: "--font-bluecashews",
+})
+
+const roman = localfont({
+  src: [{
+    path:'../../public/fonts/RomanSerif.ttf',
+    weight: "400"
+  }],
+  variable: "--font-roman",
 })
 
 export const metadata: Metadata = {
@@ -24,7 +32,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${witcher.variable}`}>
+    <html lang="en" className={`${GeistSans.variable} ${bluecashews.variable} ${roman.variable} font-serif`}>
       <body>
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
