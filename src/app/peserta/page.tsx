@@ -4,6 +4,7 @@ import Link from "next/link";
 import { PostList } from "../_components/postList";
 import { TugasListPeserta } from "../_components/tugasList";
 import { ImageUpload } from "../_components/image-upload";
+import { News } from "../_components/news";
 
 import { api, HydrateClient } from "~/trpc/server";
 
@@ -51,6 +52,9 @@ export default async function PesertaPage() {
                 lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
                 </p>
                 {/* <PostList/> */}
+                <div className="pt-24">
+                    <News/>
+                </div>
                 <div className="pt-24">
                     <TugasListPeserta/>
                 </div>
