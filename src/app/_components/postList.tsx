@@ -22,7 +22,7 @@ export function PostList() {
                     <p>{post.body}</p>
                     <Link 
                         href={post.attachment ? post.attachment : '#'}
-                        >attachments
+                        >Attachments
                     </Link>
                 </li>
             ))}

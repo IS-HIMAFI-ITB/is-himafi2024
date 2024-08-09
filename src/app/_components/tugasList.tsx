@@ -43,7 +43,7 @@ export function TugasListAdmin() {
                     <p>{tugas.body}</p>
                     <Link
                         href={tugas.attachment ? tugas.attachment : '#'}
-                        >attachments
+                        >Attachments
                     </Link>
                     <p>deadline: {tugas.deadline?.toString()}</p>
                     <p>isTugasSpesial: {tugas.isTugasSpesial?"true":"false"}</p>
@@ -123,16 +123,16 @@ export function TugasListPeserta() {
                             >
                             {tugas.isTugasSpesial && <Image className="opacity-40 absolute right-0 left-0 top-0 bottom-0 m-auto" src="/logo-himafi-old-stamp.png" alt="" width={400} height={400} ></Image>}
                             <div className="m-[4rem] sm:m-[7rem] text-amber-900 font-bold text-center z-10 relative">
-                                <h1 className="text-[2rem] font-extrabold tracking-tight">{tugas.judul}</h1>
-                                <p className="font-black ">Deadline: {tugas.deadline?.toLocaleString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                                <p className="text-justify">{tugas.body}</p>
+                                <h1 className="text-[2rem] font-extrabold tracking-tight font-bluecashews">{tugas.judul}</h1>
+                                <p className="font-black font-roman">Deadline: {tugas.deadline?.toLocaleString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                                <p className="text-justify font-roman">{tugas.body}</p>
                                 <div className="pt-4"> {tugas.attachment &&
-                                    <Link className="bg-amber-900/100 text-orange-200 rounded px-10 py-3 font-semibold no-underline transition hover:bg-amber-900/70"
+                                    <Link className="bg-amber-900/100 text-orange-200 rounded px-10 py-3 font-semibold no-underline transition hover:bg-amber-900/70 font-roman"
                                         href={tugas.attachment ? tugas.attachment : '#'}
-                                        >attachment
+                                        >Attachment
                                     </Link>
                                 }</div>
-                                <p className="pt-20 text-[1.2rem]">Upload</p>
+                                <p className="pt-20 text-[1.2rem] font-bluecashews">Upload</p>
                                 <div>
                                 <form onSubmit={async (e) => {
                                     e.preventDefault();
@@ -143,7 +143,7 @@ export function TugasListPeserta() {
                                 }}>
                                     <div className="flex flex-row px-10 py-3 self-center justify-center">
                                         <input type="text" name="link" id="link" placeholder="Enter link here" className="max-w-[15rem] border p-1 border-gray-400 rounded"/>
-                                        <button type="submit" className="bg-amber-900/100 text-orange-200 rounded px-4 font-semibold no-underline transition hover:bg-amber-900/70">Submit</button>
+                                        <button type="submit" className="bg-amber-900/100 text-orange-200 rounded px-4 font-semibold no-underline transition hover:bg-amber-900/70 font-roman">Submit</button>
                                     </div>
                                 </form>
                                 </div>
