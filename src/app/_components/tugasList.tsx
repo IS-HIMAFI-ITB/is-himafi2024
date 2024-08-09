@@ -43,7 +43,7 @@ export function TugasListAdmin() {
                     <p>{tugas.body}</p>
                     <Link
                         href={tugas.attachment ? tugas.attachment : '#'}
-                        >attachments
+                        >Attachments
                     </Link>
                     <p>deadline: {tugas.deadline?.toString()}</p>
                     <p>isTugasSpesial: {tugas.isTugasSpesial?"true":"false"}</p>
@@ -129,12 +129,12 @@ export function TugasListPeserta() {
                                 <pre className="text-center font-black font-sans">{tugas.perintahMisi}</pre>
                                 {/* <h1 className="text-center font-black">{tugas.perintahMisi}</h1> */}
                                 <div className="pt-4"> {tugas.attachment &&
-                                    <Link className="bg-amber-900/100 text-orange-200 rounded px-10 py-3 font-semibold no-underline transition hover:bg-amber-900/70"
+                                    <Link className="bg-amber-900/100 text-orange-200 rounded px-10 py-3 font-semibold no-underline transition hover:bg-amber-900/70 font-roman"
                                         href={tugas.attachment ? tugas.attachment : '#'}
-                                        >attachment
+                                        >Attachment
                                     </Link>
                                 }</div>
-                                <p className="pt-10 text-[1.2rem]">Upload</p>
+                                <p className="pt-20 text-[1.2rem]">Upload</p>
                                 <div>
                                 <form onSubmit={async (e) => {
                                     e.preventDefault();
@@ -145,7 +145,7 @@ export function TugasListPeserta() {
                                     (e.target as HTMLFormElement).reset();
                                 }}>
                                     <div className="flex flex-row px-10 py-3 self-center justify-center">
-                                        <input type="text" name="link" id="link" placeholder="Enter link here" className="max-w-[10rem] md:max-w-[20rem] border p-1 border-gray-400 rounded"/>
+                                        <input type="text" name="link" id="link" placeholder="Enter link here" className="max-w-[15rem] border p-1 border-gray-400 rounded"/>
                                         <button type="submit" className="bg-amber-900/100 text-orange-200 rounded px-4 font-semibold no-underline transition hover:bg-amber-900/70">Submit</button>
                                     </div>
                                 </form>
