@@ -93,13 +93,14 @@ model Post {
 }
 
 model Tugas{
-    id          String  @id @default(cuid())
-    judul       String
-    body        String?
-    attachment  String?
-    deadline    DateTime?
-    isTugasSpesial        Boolean @default(false)
-    hidden      Boolean @default(false)
+    id              String  @id @default(cuid())
+    judul           String
+    body            String?
+    perintahMisi    String?
+    attachment      String?
+    deadline        DateTime?
+    isTugasSpesial  Boolean @default(false)
+    hidden          Boolean @default(false)
     targetNimPeserta String[]
 
     createdAt   DateTime @default(now())

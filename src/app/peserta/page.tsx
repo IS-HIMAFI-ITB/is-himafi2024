@@ -48,8 +48,8 @@ export default async function PesertaPage() {
                 <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight md:text-6xl font-bluecashews">
                     Intellektuelle<span className="text-[#f59e0b]">schule</span>
                 </h1>
-                <p className="pt-10 text-base w-9/12 text-center text-[#f59f0bbb] font-extrabold tracking-widest md:text-xl font-roman">
-                lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
+                <p className="pt-10 text-base w-9/12 text-center text-[#f59f0bbb] font-extrabold tracking-widest md:text-xl">
+                    Selamat datang, para kurcaci pengembara cahaya. Hutan yang lebat mungkin telah menutup pandanganmu, namun penduduk istana selalu menunggumu untuk menemuinya, tapi kapankah datangnya kesempatan itu? Jalanilah proses ini, hingga kau menemukan celah terang...
                 </p>
                 {/* <PostList/> */}
                 <div className="pt-24">

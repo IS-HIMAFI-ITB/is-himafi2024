@@ -112,8 +112,8 @@ export function TugasListPeserta() {
                     backgroundSize: "100% "
                 }}>
             <div className="p-0 sm:p-6 md:p-20">
-                <ul className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3  items-start" >
-                    {tugass?.map((tugas) => (tugas.hidden === false && ((tugas.targetNimPeserta.length === 1 ||  tugas.targetNimPeserta.includes(userSession.data!.nim)) ? true : false) &&(
+                <ul className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3  items-start" >
+                    {tugass?.map((tugas) => (tugas.hidden === false && ((tugas.targetNimPeserta.length === 0 ||  tugas.targetNimPeserta.includes(userSession.data!.nim)) ? true : false) &&(
                         <li key={tugas.id} className="bg-local relative"
                             style={{
                                 backgroundImage: `url('/paper1.png')`,
@@ -123,27 +123,30 @@ export function TugasListPeserta() {
                             >
                             {tugas.isTugasSpesial && <Image className="opacity-40 absolute right-0 left-0 top-0 bottom-0 m-auto" src="/logo-himafi-old-stamp.png" alt="" width={400} height={400} ></Image>}
                             <div className="m-[4rem] sm:m-[7rem] text-amber-900 font-bold text-center z-10 relative">
-                                <h1 className="text-[2rem] font-extrabold tracking-tight font-bluecashews">{tugas.judul}</h1>
-                                <p className="font-black font-roman">Deadline: {tugas.deadline?.toLocaleString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                                <p className="text-justify font-roman">{tugas.body}</p>
+                                <h1 className="text-[2rem] font-extrabold tracking-tight">{tugas.judul}</h1>
+                                <p className="font-black ">Deadline: {tugas.deadline?.toLocaleString('en-GB', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</p>
+                                <p className="text-justify">{tugas.body}</p>
+                                <pre className="text-center font-black font-sans">{tugas.perintahMisi}</pre>
+                                {/* <h1 className="text-center font-black">{tugas.perintahMisi}</h1> */}
                                 <div className="pt-4"> {tugas.attachment &&
                                     <Link className="bg-amber-900/100 text-orange-200 rounded px-10 py-3 font-semibold no-underline transition hover:bg-amber-900/70 font-roman"
                                         href={tugas.attachment ? tugas.attachment : '#'}
                                         >Attachment
                                     </Link>
                                 }</div>
-                                <p className="pt-20 text-[1.2rem] font-bluecashews">Upload</p>
+                                <p className="pt-20 text-[1.2rem]">Upload</p>
                                 <div>
                                 <form onSubmit={async (e) => {
                                     e.preventDefault();
                                     const formData = new FormData(e.target as HTMLFormElement);
                                     const link = formData.get('link') as string;
                                     await createSubmission.mutateAsync({tugasId: tugas.id, url: link, filename: link.substring(0,32)+".....", key: undefined});
-                                    void refetchTugasSubmits()
+                                    void refetchTugasSubmits();
+                                    (e.target as HTMLFormElement).reset();
                                 }}>
                                     <div className="flex flex-row px-10 py-3 self-center justify-center">
                                         <input type="text" name="link" id="link" placeholder="Enter link here" className="max-w-[15rem] border p-1 border-gray-400 rounded"/>
-                                        <button type="submit" className="bg-amber-900/100 text-orange-200 rounded px-4 font-semibold no-underline transition hover:bg-amber-900/70 font-roman">Submit</button>
+                                        <button type="submit" className="bg-amber-900/100 text-orange-200 rounded px-4 font-semibold no-underline transition hover:bg-amber-900/70">Submit</button>
                                     </div>
                                 </form>
                                 </div>
