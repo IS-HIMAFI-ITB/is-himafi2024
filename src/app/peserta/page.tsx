@@ -20,7 +20,7 @@ export default async function PesertaPage() {
     const getCumulativeScore = await api.user.getCumulativeScore({ userId: session.user.id })
 
     return (
-        <div className="flex min-h-screen flex-col text-white
+        <div className="flex min-h-screen flex-col text-white bg-cover
             bg-[url('/background.png')]"
             >
         
@@ -59,7 +59,7 @@ export default async function PesertaPage() {
                     <TugasListPeserta/>
                 </div>
                 <div className="flex flex-col items-center justify-center pt-10 pb-20">
-                    <p className=" text-base text-center text-[#e490f5] font-extrabold tracking-widest md:text-xl font-bluecashews">
+                    <p className=" text-base text-center text-[#772da8] font-extrabold tracking-widest md:text-2xl font-bluecashews">
                         Teman adalah saudara <br/>
                         Saudara adalah keluarga <br/>
                         Kebersamaan adalah segalanya <br/>
