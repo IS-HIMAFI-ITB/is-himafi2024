@@ -9,7 +9,6 @@ import { TRPCReactProvider } from "~/trpc/react";
 const bluecashews = localfont({
   src: [{
     path:'../../public/fonts/Blue_Cashews.otf',
-    weight: "700"
   }],
   variable: "--font-bluecashews",
 })
@@ -17,7 +16,6 @@ const bluecashews = localfont({
 const roman = localfont({
   src: [{
     path:'../../public/fonts/RomanSerif.ttf',
-    weight: "400"
   }],
   variable: "--font-roman",
 })
@@ -32,7 +30,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${bluecashews.variable} ${roman.variable} font-serif`}>
+    <html lang="en" className={`${GeistSans.variable} ${bluecashews.variable} ${roman.variable} font-roman`}>
       <body>
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
