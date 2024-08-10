@@ -138,8 +138,8 @@ export function TugasListPeserta() {
                                 <div className="m-[4rem] sm:m-[7rem] text-purple-900 font-bold text-center z-10 relative pt-20">
                                     <h1 className="text-[2rem] font-extrabold tracking-tight">{tugas.judul}</h1>
                                     <p className="font-black">Deadline: {tugas.deadline?.toLocaleString('en-GB', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</p>
-                                    <p className="text-justify">{tugas.body}</p>
-                                    <p className="text-center font-black font-serif pt-6">{tugas.perintahMisi}</p>
+                                    <p className="text-justify whitespace-pre-wrap">{tugas.body}</p>
+                                    <p className="text-center font-black font-serif pt-6 whitespace-pre-wrap">{tugas.perintahMisi}</p>
                                     {/* <h1 className="text-center font-black">{tugas.perintahMisi}</h1> */}
                                     <div className="pt-4"> {tugas.attachment &&
                                         <Link className="bg-purple-900/100 text-purple-200 rounded px-10 py-3 font-semibold no-underline transition hover:bg-purple-900/70 font-roman"
