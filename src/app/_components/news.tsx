@@ -1,5 +1,3 @@
-"use client"
-
 export function News() {
     return (
         <div className="flex flex-col bg-local w-[100vw] md:w-[90vw] px-10 md:px-28 py-20 text-amber-900 font-bold font-serif"
