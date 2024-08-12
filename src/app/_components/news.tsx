@@ -1,3 +1,4 @@
+import Link from 'next/link';
 export function News() {
     return (
         <div className="flex flex-col bg-local w-[100vw] md:w-[90vw] px-10 md:px-28 py-20 text-amber-900 font-bold font-roman"
@@ -5,16 +6,22 @@ export function News() {
             backgroundImage: `url('/news-paper.png')`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "100% 100%"
+            
         }}>
             <h1 className="text-center text-3xl md:text-6xl font-extrabold tracking-widest pb-10 pt-10 font-bluecashews">SELAMAT DATANG MASSA FISIKA&apos;23</h1>
             <div className="flex flex-col lg:flex-row justify-between gap-20 pb-4 text-justify">
                 <div>
                     <p className="text-center pb-2 font-black text-2xl font-bluecashews">
-                        Relativitas Diri: Perjalanan Eksistensial Melalui Ruang dan Waktu
+                    &quot;Entropi Pikiran:  Eksplorasi Peran Insan Akademis dalam Berpikir dan Pengembangan Potensi&quot;
                     </p>
                     <p className="first-letter:float-left first-letter:uppercase first-letter:leading-[4.5rem] first-letter:text-[5rem] first-letter:font-black">
-                        Layaknya ruang dan waktu yang relatif, diri juga merupakan sesuatu yang selalu berbeda jika dipandang dari kerangka yang berbeda. Seperti teori relativitas yang memperlihatkan betapa ruang dan waktu tidaklah mutlak, begitu pula dengan pemahaman kita tentang diri. Setiap individu memiliki perspektif unik, yang mempengaruhi bagaimana mereka melihat dunia dan bagaimana dunia melihat mereka. Dalam perjalanan ini, kita mengarungi misteri diri yang ada di dalam ruang dan waktu, mempertanyakan eksistensi kita, dan merenungi kemana semua ini akan berlanjut. Sebuah eksplorasi tentang identitas, tujuan, dan makna yang terus berubah seiring dengan perjalanan kita melalui ruang dan waktu yang tak terbatas.
+                    Dalam dunia fisika, entropi sering kali dikaitkan dengan ketidakberaturan dan perubahan. Begitu pula dengan pikiran manusia yang penuh dengan potensi tak terbatas dan tantangan yang harus dihadapi. Sebagai insan akademis, kita memiliki peran penting dalam mengarungi lautan entropi pikiran ini, mengubah ketidakberaturan menjadi kreativitas, dan memanfaatkan potensi yang ada untuk mencapai hal-hal besar. Eksplorasi ini bukan hanya tentang ilmu pengetahuan, tetapi juga tentang bagaimana kita berpikir, berinovasi, dan berkembang sebagai individu. Mari kita bersama-sama mengeksplorasi peran kita dalam dunia akademis, memahami bagaimana cara berpikir kita dapat membentuk masa depan, dan mengembangkan potensi diri untuk menjadi agen perubahan yang membawa dampak positif bagi dunia. 
                     </p>
+                    <p className="text-center font-bold font-sans pt-2 pb-5">Hadirilah Day 1, 15 Agustus 2024, 08.00</p>
+                    {/* <div className="flex flex-row justify-center gap-10">
+                        <Link href="https://www.youtube.com/watch?v=xvFZjo5PgG0" className='rounded-full bg-violet-800 px-10 py-3 text-white font-semibold no-underline transition hover:bg-violet-700'>Buku ungu</Link>
+                        <Link href="https://www.youtube.com/watch?v=xvFZjo5PgG0" className='rounded-full bg-red-700 px-10 py-3 text-white font-semibold no-underline transition hover:bg-red-600'>Buku merah</Link>
+                    </div> */}
                 </div>
                 
                 {//posts are unused at day 0
