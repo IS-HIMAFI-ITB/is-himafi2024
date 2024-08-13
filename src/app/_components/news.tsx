@@ -8,7 +8,7 @@ export function News() {
             backgroundSize: "100% 100%"
             
         }}>
-            <h1 className="text-center text-3xl md:text-6xl font-extrabold tracking-widest pb-10 pt-10 font-bluecashews">you have found your soul, but...</h1>
+            <h1 className="text-center text-3xl md:text-6xl font-extrabold tracking-widest pb-10 pt-10 font-bluecashews">You have found your soul, but...</h1>
             <div className="flex flex-col lg:flex-row justify-between gap-20 pb-4 text-justify">
                 <div>
                     <p className="text-center pb-2 font-black text-2xl font-bluecashews">
