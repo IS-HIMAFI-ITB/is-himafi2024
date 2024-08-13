@@ -8,7 +8,7 @@ export function News() {
             backgroundSize: "100% 100%"
             
         }}>
-            <h1 className="text-center text-3xl md:text-6xl font-extrabold tracking-widest pb-10 pt-10 font-bluecashews">SELAMAT DATANG MASSA FISIKA&apos;23</h1>
+            <h1 className="text-center text-3xl md:text-6xl font-extrabold tracking-widest pb-10 pt-10 font-bluecashews">you have found your soul, but...</h1>
             <div className="flex flex-col lg:flex-row justify-between gap-20 pb-4 text-justify">
                 <div>
                     <p className="text-center pb-2 font-black text-2xl font-bluecashews">
@@ -22,7 +22,7 @@ export function News() {
                     </div>
                     <p className="text-center font-bold font-sans pt-2 pb-5">Hadirilah Day 1, 15 Agustus 2024, 07.30</p>
                     <div className="flex flex-row justify-center gap-10">
-                        <Link href="https://drive.google.com/file/d/1qzkg5dDU5fUdXsCyKK8QGWYYXk1JQonw/view?usp=sharing" className='rounded-full bg-violet-800 px-10 py-3 text-white font-semibold no-underline transition hover:bg-violet-700'>Buku ungu</Link>
+                        <Link href="https://drive.google.com/file/d/1ELOjJhzWJ4OKUIm7QeNcrqNwD-Drr_i1/view?usp=sharing" className='rounded-full bg-violet-800 px-10 py-3 text-white font-semibold no-underline transition hover:bg-violet-700'>Buku ungu</Link>
                         <Link href="https://drive.google.com/file/d/1zRHCbBsZu3rkIOC3BdQQBy4JI1z9md69/view?usp=drive_link" className='rounded-full bg-red-700 px-10 py-3 text-white font-semibold no-underline transition hover:bg-red-600'>Buku merah</Link>
                     </div>
                 </div>
