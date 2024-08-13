@@ -17,11 +17,14 @@ export function News() {
                     <p className="first-letter:float-left first-letter:uppercase first-letter:leading-[4.5rem] first-letter:text-[5rem] first-letter:font-black">
                     Dalam dunia fisika, entropi sering kali dikaitkan dengan ketidakberaturan dan perubahan. Begitu pula dengan pikiran manusia yang penuh dengan potensi tak terbatas dan tantangan yang harus dihadapi. Sebagai insan akademis, kita memiliki peran penting dalam mengarungi lautan entropi pikiran ini, mengubah ketidakberaturan menjadi kreativitas, dan memanfaatkan potensi yang ada untuk mencapai hal-hal besar. Eksplorasi ini bukan hanya tentang ilmu pengetahuan, tetapi juga tentang bagaimana kita berpikir, berinovasi, dan berkembang sebagai individu. Mari kita bersama-sama mengeksplorasi peran kita dalam dunia akademis, memahami bagaimana cara berpikir kita dapat membentuk masa depan, dan mengembangkan potensi diri untuk menjadi agen perubahan yang membawa dampak positif bagi dunia. 
                     </p>
-                    <p className="text-center font-bold font-sans pt-2 pb-5">Hadirilah Day 1, 15 Agustus 2024, 08.00</p>
-                    {/* <div className="flex flex-row justify-center gap-10">
-                        <Link href="https://www.youtube.com/watch?v=xvFZjo5PgG0" className='rounded-full bg-violet-800 px-10 py-3 text-white font-semibold no-underline transition hover:bg-violet-700'>Buku ungu</Link>
-                        <Link href="https://www.youtube.com/watch?v=xvFZjo5PgG0" className='rounded-full bg-red-700 px-10 py-3 text-white font-semibold no-underline transition hover:bg-red-600'>Buku merah</Link>
-                    </div> */}
+                    <div className='py-3'>
+                    <Link href="https://www.youtube.com/watch?v=WXBA4eWskrc&pp=ygUXcGhpbG9zb3BoeSBvZiB0aW1lIHRlZHg%3D" className='flex flex-row justify-center rounded-lg bg-red-700 px-10 py-2 text-white font-semibold no-underline transition hover:bg-red-600 '>The Philosophy of Time Management</Link>
+                    </div>
+                    <p className="text-center font-bold font-sans pt-2 pb-5">Hadirilah Day 1, 15 Agustus 2024, 07.30</p>
+                    <div className="flex flex-row justify-center gap-10">
+                        <Link href="https://drive.google.com/file/d/1qzkg5dDU5fUdXsCyKK8QGWYYXk1JQonw/view?usp=sharing" className='rounded-full bg-violet-800 px-10 py-3 text-white font-semibold no-underline transition hover:bg-violet-700'>Buku ungu</Link>
+                        <Link href="https://drive.google.com/file/d/1zRHCbBsZu3rkIOC3BdQQBy4JI1z9md69/view?usp=drive_link" className='rounded-full bg-red-700 px-10 py-3 text-white font-semibold no-underline transition hover:bg-red-600'>Buku merah</Link>
+                    </div>
                 </div>
                 
                 {//posts are unused at day 0
