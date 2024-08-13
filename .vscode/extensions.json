@@ -1,0 +1,14 @@
+{
+    "recommendations": [
+        "steoates.autoimport",
+        "formulahendry.auto-rename-tag",
+        "aaron-bond.better-comments",
+        "codeium.codeium",
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "prisma.prisma",
+        "bradlc.vscode-tailwindcss",
+        "yoavbls.pretty-ts-errors"
+    ]
+}
