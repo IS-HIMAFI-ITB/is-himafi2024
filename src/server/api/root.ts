@@ -5,6 +5,7 @@ import { postAdminRouter } from "~/server/api/routers/post-admin";
 import { userRouter } from "~/server/api/routers/user";
 import { submitPesertaRouter } from "./routers/submit-peserta";
 import { backendRouter } from "./routers/backend";
+import { perizinanRouter } from "./routers/perizinan";
 
 /**
  * This is the primary router for your server.
@@ -16,7 +17,8 @@ export const appRouter = createTRPCRouter({
   postAdmin: postAdminRouter,
   user: userRouter,
   submitPeserta: submitPesertaRouter,
-  backend: backendRouter
+  backend: backendRouter,
+  perizinan: perizinanRouter,
 });
 
 // export type definition of API
