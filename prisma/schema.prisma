@@ -84,6 +84,12 @@ enum fisikType {
     BARU_PULIH
 }
 
+enum statusIzinType {
+    PENDING
+    DITERIMA
+    DITOLAK
+}
+
 model User {
     id               String  @id @default(cuid())
     name             String? @unique
@@ -106,10 +112,14 @@ model User {
 }
 
 model Day {
-    id           Int            @id @default(autoincrement())
-    name         String?
-    perizinan    Perizinan[]
-    kondisiMassa KondisiMassa[]
+    id                   Int            @id @default(autoincrement())
+    name                 String?
+    sheetsCMSId          String?
+    passwordAbsensi      String?
+    isCurrent            Boolean        @default(true)
+    isAcceptingPerizinan Boolean        @default(true)
+    perizinan            Perizinan[]
+    kondisiMassa         KondisiMassa[]
 }
 
 model Perizinan {
@@ -122,10 +132,14 @@ model Perizinan {
     kapanMeninggalkan DateTime?
     buktiIzin         String?
 
+    statusIzin     statusIzinType @default(PENDING)
+    isHadirAbsensi Boolean        @default(false)
+    hadirAbsensiAt DateTime?
+
     createdAt   DateTime @default(now())
     createdBy   User     @relation(fields: [createdById], references: [id])
     createdById String
-    Day         Day?     @relation(fields: [dayId], references: [id])
+    day         Day?     @relation(fields: [dayId], references: [id])
     dayId       Int?
 }
 
@@ -139,7 +153,7 @@ model KondisiMassa {
     createdAt   DateTime @default(now())
     createdBy   User     @relation(fields: [createdById], references: [id])
     createdById String
-    Day         Day?     @relation(fields: [dayId], references: [id])
+    day         Day?     @relation(fields: [dayId], references: [id])
     dayId       Int?
 }
 
