@@ -34,7 +34,6 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.2",
     "react-resizable-panels": "^2.0.23",
-    "react-responsive": "^10.0.0",
     "recharts": "^2.12.7",
     "server-only": "^0.0.1",
     "superjson": "^2.2.1",
