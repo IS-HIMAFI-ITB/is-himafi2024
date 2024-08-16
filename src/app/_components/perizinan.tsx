@@ -80,9 +80,9 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
 
   const [formcontent, setFormcontent] = useState({
     kehadiran: "",
-    jenis: undefined,
-    alasan: undefined,
-    bukti: undefined,
+    jenis: undefined as undefined | string,
+    alasan: "",
+    bukti: "",
   });
   const [timeMenyusul, setTimeMenyusul] = useState<Date | undefined>(undefined);
   const [timeMeninggalkan, setTimeMeninggalkan] = useState<Date | undefined>(undefined);
@@ -104,7 +104,7 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
         title: "Success",
         description: "form submitted",
       });
-      setFormcontent({ kehadiran: "", jenis: "", alasan: "", bukti: "" });
+      setFormcontent({ kehadiran: "", jenis: undefined, alasan: "", bukti: "" });
       setTimeMenyusul(undefined);
       setTimeMeninggalkan(undefined);
     } catch (error) {
