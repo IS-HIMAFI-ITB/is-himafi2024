@@ -27,6 +27,7 @@ import { jenisIzinType } from "@prisma/client";
 import { fisikType } from "@prisma/client";
 import { skipToken } from "@tanstack/react-query";
 import { date } from "zod";
+import { Badge } from "~/components/ui/badge";
 
 export function PerizinanInput() {
   const [open, setOpen] = React.useState(false);
@@ -44,7 +45,7 @@ export function PerizinanInput() {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline">Kehadiran & Perizinan</Button>
+          <Button variant="default">Kehadiran & Perizinan</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -62,7 +63,7 @@ export function PerizinanInput() {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline">Kehadiran & Perizinan</Button>
+        <Button variant="default">Kehadiran & Perizinan</Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
@@ -264,6 +265,12 @@ export function PerizinanStatus() {
   const statusIzin = getStatusIzin.data;
   const perizinan = getPerizinan.data;
   if (!getPerizinan || perizinan?.kehadiran === "HADIR") return;
-  return <div>{statusIzin}</div>;
-  //make this use shadcnui badge
+  switch (statusIzin) {
+    case "DITOLAK":
+      return <Badge variant="destructive">{statusIzin}</Badge>;
+    case "DITERIMA":
+      return <Badge>{statusIzin}</Badge>;
+    case "PENDING":
+      return <Badge variant="secondary">{statusIzin}</Badge>;
+  }
 }

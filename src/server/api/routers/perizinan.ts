@@ -85,6 +85,22 @@ export const perizinanRouter = createTRPCRouter({
       },
     });
   }),
+  getKondisiMassa: publicProcedure.query(async ({ ctx }) => {
+    const currentDay = await ctx.db.day.findFirst({
+      where: {
+        isCurrent: true,
+      },
+    });
+    const dayId = currentDay?.id;
+    if (ctx.session && ctx.session.user) {
+      return ctx.db.kondisiMassa.findFirst({
+        where: {
+          createdBy: { id: ctx.session.user.id },
+          day: { id: dayId },
+        },
+      });
+    }
+  }),
   getPerizinan: publicProcedure.input(z.object({ dayId: z.number() })).query(({ ctx, input }) => {
     if (ctx.session && ctx.session.user) {
       return ctx.db.perizinan.findFirst({
@@ -157,6 +173,70 @@ export const perizinanRouter = createTRPCRouter({
       },
       data: {
         isAcceptingPerizinan: false,
+      },
+    });
+  }),
+  hadirAktual: publicProcedure.input(z.object({ password: z.string() })).mutation(async ({ ctx, input }) => {
+    const currentDayId = await ctx.db.day.findFirst({
+      where: {
+        isCurrent: true,
+      },
+      select: {
+        id: true,
+      },
+    });
+    const currentDayPassword = await ctx.db.day.findFirst({
+      where: {
+        id: currentDayId?.id,
+      },
+      select: {
+        passwordAbsensi: true,
+      },
+    });
+    if (input.password === currentDayPassword?.passwordAbsensi) {
+      const perizinanExist = await ctx.db.perizinan.findFirst({
+        where: {
+          createdById: ctx.session!.user.id,
+          dayId: currentDayId!.id,
+        },
+      });
+      if (!perizinanExist) {
+        await ctx.db.perizinan.create({
+          data: {
+            kehadiran: kehadiranType.HADIR,
+            createdBy: { connect: { id: ctx.session!.user.id } },
+            day: { connect: { id: currentDayId!.id } },
+          },
+        });
+      }
+      await ctx.db.perizinan.updateMany({
+        where: {
+          createdById: ctx.session?.user.id,
+          dayId: currentDayId?.id,
+        },
+        data: {
+          isHadirAbsensi: true,
+          hadirAbsensiAt: new Date(),
+        },
+      });
+    }
+  }),
+  getStatusHadirAbsensi: publicProcedure.query(async ({ ctx }) => {
+    const currentDayId = await ctx.db.day.findFirst({
+      where: {
+        isCurrent: true,
+      },
+      select: {
+        id: true,
+      },
+    });
+    return await ctx.db.perizinan.findFirst({
+      where: {
+        createdById: ctx.session?.user.id,
+        dayId: currentDayId?.id,
+      },
+      select: {
+        isHadirAbsensi: true,
       },
     });
   }),
