@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PerizinanInput, PerizinanStatus } from "./perizinan";
 import { KondisiPraDayInput } from "./kondisi-massa";
+import { HadirAktualStatus, KehadiranInput } from "./kehadiran-aktual";
 export function News() {
   return (
     <div
@@ -74,6 +75,8 @@ export function News() {
           <PerizinanStatus />
           <PerizinanInput />
           <KondisiPraDayInput />
+          <KehadiranInput />
+          <HadirAktualStatus />
         </div>
       </div>
       {

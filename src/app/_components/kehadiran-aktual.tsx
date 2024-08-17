@@ -19,31 +19,41 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import { TimePicker } from "@/components/ui/datetime-picker";
 import { useToast } from "@/components/ui/use-toast";
-import { Slider } from "@/components/ui/slider";
-import { fisikType } from "@prisma/client";
 
-export function KondisiPraDayInput() {
-  const kondisiMassa = api.perizinan.getKondisiMassa.useQuery().data;
+import { kehadiranType } from "@prisma/client";
+import { jenisIzinType } from "@prisma/client";
+import { fisikType } from "@prisma/client";
+import { skipToken } from "@tanstack/react-query";
+import { date } from "zod";
+import { Badge } from "~/components/ui/badge";
+
+export function KehadiranInput() {
+  const isHadirAbsensi = api.perizinan.getStatusHadirAbsensi.useQuery().data?.isHadirAbsensi;
   const [open, setOpen] = React.useState(false);
-  const isDesktop = useMediaQuery({ query: "(min-width: 768px)" });
-  if (kondisiMassa) {
+  const getIsAcceptingPerizinan = api.perizinan.getIsAcceptingPerizinan.useQuery();
+  const isAcceptingPerizinan = getIsAcceptingPerizinan.data;
+  const isDesktop = useMediaQuery({
+    query: "(min-width: 768px)",
+  });
+  if (isHadirAbsensi) {
     return;
   }
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="default">Kondisi pra-day</Button>
+          <Button variant="default">Kehadiran aktual</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Kondisi pra-day</DialogTitle>
+            <DialogTitle>Kehadiran aktual</DialogTitle>
             <DialogDescription>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </DialogDescription>
           </DialogHeader>
-          <KondisiForm />
+          <KehadiranForm />
         </DialogContent>
       </Dialog>
     );
@@ -52,16 +62,16 @@ export function KondisiPraDayInput() {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="default">Kondisi pra-day</Button>
+        <Button variant="default">Kehadiran aktual</Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Kondisi pra-day</DrawerTitle>
+          <DrawerTitle>Kehadiran aktual</DrawerTitle>
           <DrawerDescription>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </DrawerDescription>
         </DrawerHeader>
-        <KondisiForm className="px-4" />
+        <KehadiranForm className="px-4" />
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
@@ -72,32 +82,22 @@ export function KondisiPraDayInput() {
   );
 }
 
-function KondisiForm({ className }: React.ComponentProps<"form">) {
-  const createKondisiMassa = api.perizinan.createKondisiMassa.useMutation();
-  const getCurrentDayId = api.perizinan.getCurrentDayId.useQuery();
+function KehadiranForm({ className }: React.ComponentProps<"form">) {
   const { toast } = useToast();
+  const hadirAktual = api.perizinan.hadirAktual.useMutation();
 
   const [formcontent, setFormcontent] = useState({
-    fisik: "",
-    deskripsi: "",
-    kesiapan: 50,
+    password: "",
   });
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(formcontent);
     try {
-      const dayId = getCurrentDayId.data!;
-      await createKondisiMassa.mutateAsync({
-        dayId: dayId,
-        fisik: formcontent.fisik as fisikType,
-        deskripsi: formcontent.deskripsi,
-        kesiapan: formcontent.kesiapan,
+      await hadirAktual.mutateAsync({
+        password: formcontent.password,
       });
       toast({
-        title: "Success",
-        description: "form submitted",
+        title: "Submitted",
       });
-      setFormcontent({ fisik: "", deskripsi: "", kesiapan: formcontent.kesiapan });
     } catch (error) {
       console.log(error);
       toast({
@@ -110,49 +110,32 @@ function KondisiForm({ className }: React.ComponentProps<"form">) {
   return (
     <form onSubmit={handleSubmit} className={cn("grid items-start gap-4", className)}>
       <div className="grid gap-2">
-        <Select onValueChange={(value) => setFormcontent({ ...formcontent, fisik: value })}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Kondisi Fisik" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Kondisi Fisik</SelectLabel>
-              <SelectItem value="SEHAT">Sehat</SelectItem>
-              <SelectItem value="KURANG_SEHAT">Kurang Sehat</SelectItem>
-              <SelectItem value="SAKIT">Sakit</SelectItem>
-              <SelectItem value="BARU_PULIH">Baru Pulih</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
-      {!["SEHAT", ""].includes(formcontent.fisik) && (
-        <div className="grid gap-2">
-          <Label htmlFor="deskripsi">Deskripsi Kondisi</Label>
-          <Input
-            type="text"
-            id="deskripsi"
-            placeholder="Deskripsikan Kondisimu"
-            value={formcontent.deskripsi}
-            onChange={({ target }) => setFormcontent({ ...formcontent, deskripsi: target.value })}
-          />
-        </div>
-      )}
-      <div className="grid gap-2">
-        <Label>Seberapa siap kamu menghadapi day?</Label>
-        <Slider
-          value={[formcontent.kesiapan]}
-          max={100}
-          step={1}
-          onValueChange={(value) =>
+        <Label htmlFor="pass">Masukkan Password</Label>
+        <Input
+          type="text"
+          id="pass"
+          placeholder="Password"
+          value={formcontent.password}
+          onChange={({ target }) =>
             setFormcontent({
               ...formcontent,
-
-              kesiapan: value[0]!,
+              password: target.value,
             })
           }
+          required={true}
         />
       </div>
-      <Button type="submit">Submit</Button>
+      {<Button type="submit">Submit</Button>}
     </form>
   );
+}
+
+export function HadirAktualStatus() {
+  const isHadirAbsensi = api.perizinan.getStatusHadirAbsensi.useQuery().data?.isHadirAbsensi;
+
+  if (isHadirAbsensi) {
+    return <Badge>Kehadiran aktual tercatat</Badge>;
+  } else {
+    return <Badge variant="destructive">Kehadiran aktual belum tercatat</Badge>;
+  }
 }
