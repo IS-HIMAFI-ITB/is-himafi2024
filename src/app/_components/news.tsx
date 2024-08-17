@@ -10,7 +10,7 @@ export function News() {
       }}
     >
       <h1 className="pb-10 pt-10 text-center font-bluecashews text-3xl font-extrabold tracking-widest md:text-6xl">
-        You have found your soul, but...
+        Physics is a Part of Your Soul
       </h1>
       <div className="flex flex-col justify-between gap-20 pb-4 text-justify lg:flex-row">
         <div>
@@ -33,31 +33,39 @@ export function News() {
             bagaimana ilmu ini membentuk dunia kita, dan mengapresiasi kearifan
             saintifik yang muncul dari eksplorasi kita terhadap alam semesta.
           </p>
-          {/* <div className="py-3">
+          <div className="py-3">
             <Link
-              href="https://www.youtube.com/watch?v=WXBA4eWskrc&pp=ygUXcGhpbG9zb3BoeSBvZiB0aW1lIHRlZHg%3D"
+              href="https://youtube.com/shorts/DqvpS9QJk3M?si=11iY_urm1ecIvMUU"
               className="flex flex-row justify-center rounded-lg bg-red-700 px-10 py-2 font-semibold text-white no-underline transition hover:bg-red-600"
             >
-              The Philosophy of Time Management
+              Physics: The World's Best Analytical Framework
             </Link>
-          </div> */}
+          </div>
+          <div className="py-3">
+            <Link
+              href="https://youtu.be/4HrweW4IqJc?si=YacA-Un4IuXZc_xs"
+              className="flex flex-row justify-center rounded-lg bg-red-700 px-10 py-2 font-semibold text-white no-underline transition hover:bg-red-600"
+            >
+              If You Are a Physics Major...
+            </Link>
+          </div>
           <p className="pb-5 pt-2 text-center font-sans font-bold">
             Hadirilah Day 2, 20 Agustus 2024, 07.30
           </p>
-          {/* <div className="flex flex-row justify-center gap-10">
+          <div className="flex flex-row justify-center gap-10">
             <Link
-              href="https://drive.google.com/file/d/1ELOjJhzWJ4OKUIm7QeNcrqNwD-Drr_i1/view?usp=sharing"
+              href="https://drive.google.com/file/d/1TMbjJ8HHUj-zbVBy2GG54fSmU1vZ9aAU/view?usp=drive_link"
               className="rounded-full bg-violet-800 px-10 py-3 font-semibold text-white no-underline transition hover:bg-violet-700"
             >
               Buku ungu
             </Link>
             <Link
-              href="https://drive.google.com/file/d/1vIzKRpgyMxzS_HKShQsSBkEDWLCQ9-7I/view?usp=sharing"
+              href="https://drive.google.com/file/d/1SDQEFZvUwIdABSBlphSfxGT_sC8WuWLv/view?usp=drive_link"
               className="rounded-full bg-red-700 px-10 py-3 font-semibold text-white no-underline transition hover:bg-red-600"
             >
               Buku merah
             </Link>
-          </div> */}
+          </div>
         </div>
 
         {
