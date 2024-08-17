@@ -38,7 +38,7 @@ export function News() {
               href="https://youtube.com/shorts/DqvpS9QJk3M?si=11iY_urm1ecIvMUU"
               className="flex flex-row justify-center rounded-lg bg-red-700 px-10 py-2 font-semibold text-white no-underline transition hover:bg-red-600"
             >
-              Physics: The World's Best Analytical Framework
+              Physics: The World&apos;s Best Analytical Framework
             </Link>
           </div>
           <div className="py-3">
