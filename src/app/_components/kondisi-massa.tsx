@@ -40,7 +40,7 @@ export function KondisiPraDayInput() {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </DialogDescription>
           </DialogHeader>
-          <PerizinanForm />
+          <KondisiForm />
         </DialogContent>
       </Dialog>
     );
@@ -58,7 +58,7 @@ export function KondisiPraDayInput() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </DrawerDescription>
         </DrawerHeader>
-        <PerizinanForm className="px-4" />
+        <KondisiForm className="px-4" />
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
@@ -69,8 +69,9 @@ export function KondisiPraDayInput() {
   );
 }
 
-function PerizinanForm({ className }: React.ComponentProps<"form">) {
+function KondisiForm({ className }: React.ComponentProps<"form">) {
   const createKondisiMassa = api.perizinan.createKondisiMassa.useMutation();
+  const getCurrentDayId = api.perizinan.getCurrentDayId.useQuery();
   const { toast } = useToast();
 
   const [formcontent, setFormcontent] = useState({
@@ -82,7 +83,7 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
     event.preventDefault();
     console.log(formcontent);
     try {
-      const dayId = 0;
+      const dayId = getCurrentDayId.data!;
       await createKondisiMassa.mutateAsync({
         dayId: dayId,
         fisik: formcontent.fisik as fisikType,

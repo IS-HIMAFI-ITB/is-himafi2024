@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PerizinanInput } from "./perizinan";
+import { PerizinanInput, PerizinanStatus } from "./perizinan";
 import { KondisiPraDayInput } from "./kondisi-massa";
 export function News() {
   return (
@@ -71,6 +71,7 @@ export function News() {
             popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
             publishing software like Aldus PageMaker including versions of Lorem Ipsum.
           </p>
+          <PerizinanStatus />
           <PerizinanInput />
           <KondisiPraDayInput />
         </div>

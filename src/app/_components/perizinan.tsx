@@ -25,12 +25,20 @@ import { useToast } from "@/components/ui/use-toast";
 import { kehadiranType } from "@prisma/client";
 import { jenisIzinType } from "@prisma/client";
 import { fisikType } from "@prisma/client";
+import { skipToken } from "@tanstack/react-query";
+import { date } from "zod";
 
 export function PerizinanInput() {
   const [open, setOpen] = React.useState(false);
+  const getIsAcceptingPerizinan = api.perizinan.getIsAcceptingPerizinan.useQuery();
+  const isAcceptingPerizinan = getIsAcceptingPerizinan.data;
   const isDesktop = useMediaQuery({
     query: "(min-width: 768px)",
   });
+
+  if (!isAcceptingPerizinan) {
+    return;
+  }
 
   if (isDesktop) {
     return (
@@ -77,36 +85,60 @@ export function PerizinanInput() {
 function PerizinanForm({ className }: React.ComponentProps<"form">) {
   const { toast } = useToast();
   const createPerizinan = api.perizinan.createPerizinan.useMutation();
+  const getCurrentDayId = api.perizinan.getCurrentDayId.useQuery();
+  const dayId = getCurrentDayId.data!;
+  const getPerizinan = api.perizinan.getPerizinan.useQuery({ dayId: dayId });
+  const perizinan = getPerizinan.data;
 
   const [formcontent, setFormcontent] = useState({
-    kehadiran: "",
-    jenis: undefined as undefined | string,
-    alasan: "",
-    bukti: "",
+    kehadiran: perizinan?.kehadiran ? perizinan.kehadiran : undefined,
+    jenis: perizinan?.jenisIzin ? perizinan.jenisIzin : undefined,
+    alasan: perizinan?.alasanIzin ? perizinan.alasanIzin : "",
+    bukti: perizinan?.buktiIzin ? perizinan.buktiIzin : "",
   });
-  const [timeMenyusul, setTimeMenyusul] = useState<Date | undefined>(undefined);
-  const [timeMeninggalkan, setTimeMeninggalkan] = useState<Date | undefined>(undefined);
+  const [timeMenyusul, setTimeMenyusul] = useState(perizinan?.kapanMenyusul ? new Date(perizinan.kapanMenyusul) : undefined);
+  const [timeMeninggalkan, setTimeMeninggalkan] = useState(
+    perizinan?.kapanMeninggalkan ? new Date(perizinan.kapanMeninggalkan) : undefined,
+  );
+
+  // const [formcontent, setFormcontent] = useState({
+  //   kehadiran: "",
+  //   jenis: undefined as undefined | string,
+  //   alasan: "",
+  //   bukti: "",
+  // });
+  // const [timeMenyusul, setTimeMenyusul] = useState<Date | undefined>(undefined);
+  // const [timeMeninggalkan, setTimeMeninggalkan] = useState<Date | undefined>(undefined);
+
+  // if (perizinan) {
+  //   setFormcontent({
+  //     kehadiran: perizinan.kehadiran ? perizinan.kehadiran : "",
+  //     jenis: perizinan.jenisIzin ? perizinan.jenisIzin : undefined,
+  //     alasan: perizinan.alasanIzin ? perizinan.alasanIzin : "",
+  //     bukti: perizinan.buktiIzin ? perizinan.buktiIzin : "",
+  //   });
+  //   setTimeMenyusul(perizinan.kapanMenyusul ? new Date(perizinan.kapanMenyusul) : undefined);
+  //   setTimeMeninggalkan(perizinan.kapanMeninggalkan ? new Date(perizinan.kapanMeninggalkan) : undefined);
+  // }
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(formcontent, timeMenyusul, timeMeninggalkan);
     try {
-      const dayId = 0;
       await createPerizinan.mutateAsync({
         dayId: dayId,
-        kehadiran: formcontent.kehadiran as kehadiranType,
-        jenisIzin: formcontent.jenis as jenisIzinType | undefined,
+        kehadiran: formcontent.kehadiran!,
+        jenisIzin: formcontent.jenis,
         alasanIzin: formcontent.alasan,
         buktiIzin: formcontent.bukti,
-        kapanMenyusul: timeMenyusul,
-        kapanMeninggalkan: timeMeninggalkan,
+        kapanMenyusul: ["MENYUSUL", "MENYUSUL_DAN_MENINGGALKAN"].includes(formcontent.kehadiran!) ? timeMenyusul : undefined,
+        kapanMeninggalkan: ["MENINGGALKAN", "MENYUSUL_DAN_MENINGGALKAN"].includes(formcontent.kehadiran!) ? timeMeninggalkan : undefined,
       });
       toast({
         title: "Success",
         description: "form submitted",
       });
-      setFormcontent({ kehadiran: "", jenis: undefined, alasan: "", bukti: "" });
-      setTimeMenyusul(undefined);
-      setTimeMeninggalkan(undefined);
+      // setFormcontent({ kehadiran: undefined, jenis: undefined, alasan: "", bukti: "" });
+      // setTimeMenyusul(undefined);
+      // setTimeMeninggalkan(undefined);
     } catch (error) {
       console.log(error);
       toast({
@@ -123,9 +155,11 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
           onValueChange={(value) =>
             setFormcontent({
               ...formcontent,
-              kehadiran: value,
+              kehadiran: value as kehadiranType,
             })
           }
+          required={true}
+          defaultValue={formcontent.kehadiran}
         >
           <SelectTrigger className="w-[full]">
             <SelectValue placeholder="Kehadiran" />
@@ -133,28 +167,30 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Kehadiran</SelectLabel>
-              <SelectItem value="HADIR">Hadir</SelectItem>
-              <SelectItem value="MENYUSUL">Menyusul</SelectItem>
-              <SelectItem value="MENINGGALKAN">Meninggalkan</SelectItem>
-              <SelectItem value="MENYUSUL_DAN_MENINGGALKAN">Menyusul dan Meninggalkan</SelectItem>
-              <SelectItem value="TIDAK_HADIR">Tidak Hadir</SelectItem>
+              <SelectItem value={kehadiranType.HADIR}>Hadir</SelectItem>
+              <SelectItem value={kehadiranType.MENYUSUL}>Menyusul</SelectItem>
+              <SelectItem value={kehadiranType.MENINGGALKAN}>Meninggalkan</SelectItem>
+              <SelectItem value={kehadiranType.MENYUSUL_DAN_MENINGGALKAN}>Menyusul dan Meninggalkan</SelectItem>
+              <SelectItem value={kehadiranType.TIDAK_HADIR}>Tidak Hadir</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
       </div>
-      {!["HADIR", ""].includes(formcontent.kehadiran) && (
+      {!["HADIR", undefined].includes(formcontent.kehadiran) && (
         <React.Fragment>
           <div className="grid gap-2">
             <Select
               onValueChange={(value) =>
                 setFormcontent({
                   ...formcontent,
-                  jenis: value,
+                  jenis: value as jenisIzinType,
                 })
               }
+              required={true}
+              defaultValue={formcontent.jenis}
             >
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Jenis Izin" />
+                <SelectValue placeholder="Jenis izin" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
@@ -181,16 +217,17 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
                   alasan: target.value,
                 })
               }
+              required={true}
             />
           </div>
-          {["MENYUSUL_DAN_MENINGGALKAN", "MENYUSUL"].includes(formcontent.kehadiran) && (
+          {["MENYUSUL_DAN_MENINGGALKAN", "MENYUSUL"].includes(formcontent.kehadiran!) && (
             <div className="grid gap-2">
               <Label>Kapan Menyusul</Label>
               <TimePicker date={timeMenyusul} onChange={setTimeMenyusul} />
             </div>
           )}
 
-          {["MENYUSUL_DAN_MENINGGALKAN", "MENINGGALKAN"].includes(formcontent.kehadiran) && (
+          {["MENYUSUL_DAN_MENINGGALKAN", "MENINGGALKAN"].includes(formcontent.kehadiran!) && (
             <div className="grid gap-2">
               <Label>Kapan Meninggalkan</Label>
               <TimePicker date={timeMeninggalkan} onChange={setTimeMeninggalkan} />
@@ -210,11 +247,23 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
                   bukti: target.value,
                 })
               }
+              required={true}
             />
           </div>
         </React.Fragment>
       )}
-      <Button type="submit">Submit</Button>
+      {perizinan ? <Button type="submit">Resubmit</Button> : <Button type="submit">Submit</Button>}
     </form>
   );
+}
+export function PerizinanStatus() {
+  const getCurrentDayId = api.perizinan.getCurrentDayId.useQuery();
+  const dayId = getCurrentDayId.data;
+  const getPerizinan = api.perizinan.getPerizinan.useQuery(dayId ? { dayId: dayId } : skipToken);
+  const getStatusIzin = api.perizinan.getStatusIzin.useQuery(dayId ? { dayId: dayId } : skipToken);
+  const statusIzin = getStatusIzin.data;
+  const perizinan = getPerizinan.data;
+  if (!getPerizinan || perizinan?.kehadiran === "HADIR") return;
+  return <div>{statusIzin}</div>;
+  //make this use shadcnui badge
 }
