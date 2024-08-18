@@ -8,6 +8,7 @@ import { PostList } from "~/app/_components/postList";
 import { TugasListAdmin } from "~/app/_components/tugasList";
 import { MarkOrphanedSubmissions } from "~/app/_components-for-backend/renameOrphanedSubmissions";
 import { ChooseDay, CreateDayForm } from "../_components/day";
+import { SynchronizeSheetsCMS } from "~/app/_components-for-backend/synchronizeSheetsCMS";
 
 export default async function AdminPage() {
   const session = await getServerAuthSession();
@@ -43,6 +44,7 @@ export default async function AdminPage() {
         </h1>
         <CreateDayForm />
         <ChooseDay />
+        <SynchronizeSheetsCMS />
         <PostCreateAdmin />
         <TugasCreateAdmin />
         <h1>start of postlist</h1>

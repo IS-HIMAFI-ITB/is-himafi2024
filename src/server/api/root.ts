@@ -6,6 +6,7 @@ import { userRouter } from "~/server/api/routers/user";
 import { submitPesertaRouter } from "./routers/submit-peserta";
 import { backendRouter } from "./routers/backend";
 import { perizinanRouter } from "./routers/perizinan";
+import { sheetsCMSRouter } from "./routers/sheetsCMS";
 
 /**
  * This is the primary router for your server.
@@ -13,6 +14,7 @@ import { perizinanRouter } from "./routers/perizinan";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
+  sheetsCMS: sheetsCMSRouter,
   tugasAdmin: tugasAdminRouter,
   postAdmin: postAdminRouter,
   user: userRouter,
