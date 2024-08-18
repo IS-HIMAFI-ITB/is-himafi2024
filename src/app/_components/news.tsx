@@ -60,7 +60,7 @@ export function News() {
               Buku ungu
             </Link>
             <Link
-              href="https://drive.google.com/file/d/1SDQEFZvUwIdABSBlphSfxGT_sC8WuWLv/view?usp=drive_link"
+              href="https://drive.google.com/file/d/1pdvGVsUYZJXSvpxoyBV1X-8Ckh_AGUFp/view?usp=drive_link"
               className="rounded-full bg-red-700 px-10 py-3 font-semibold text-white no-underline transition hover:bg-red-600"
             >
               Buku merah
