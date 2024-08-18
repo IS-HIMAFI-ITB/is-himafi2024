@@ -141,6 +141,7 @@ export function ChooseDay() {
 
         <Button type="submit">update day</Button>
       </form>
+      <div className="grid gap-2">id: {days?.find((day) => day.isCurrent)?.id}</div>
       <div className="grid gap-2">current day: {days?.find((day) => day.isCurrent)?.name}</div>
       <div className="grid gap-2">sheetsCMSId: {days?.find((day) => day.isCurrent)?.sheetsCMSId}</div>
       <div className="grid gap-2">passwordAbsensi: {days?.find((day) => day.isCurrent)?.passwordAbsensi}</div>
