@@ -267,10 +267,25 @@ export function PerizinanStatus() {
   if (!getPerizinan || perizinan?.kehadiran === "HADIR") return;
   switch (statusIzin) {
     case "DITOLAK":
-      return <Badge variant="destructive">{statusIzin}</Badge>;
+      return (
+        <div className="flex flex-row">
+          <p className="font-bluecashews pb-1 text-l font-black">Status perizinan: </p>
+          <Badge variant="destructive">{statusIzin}</Badge>
+        </div>
+      );
     case "DITERIMA":
-      return <Badge>{statusIzin}</Badge>;
+      return (
+        <div className="flex flex-row">
+          <p className="font-bluecashews pb-1  text-l font-black">Status perizinan: </p>
+          <Badge>{statusIzin}</Badge>
+        </div>
+      );
     case "PENDING":
-      return <Badge variant="secondary">{statusIzin}</Badge>;
+      return (
+        <div className="flex flex-row">
+          <p className="font-bluecashews pb-1  text-l font-black">Status perizinan: </p>
+          <Badge variant="secondary">{statusIzin}</Badge>
+        </div>
+      );
   }
 }

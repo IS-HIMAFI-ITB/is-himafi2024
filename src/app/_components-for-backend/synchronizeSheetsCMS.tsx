@@ -1,10 +1,11 @@
 "use client";
+import { Button } from "~/components/ui/button";
 import { toast } from "~/components/ui/use-toast";
 import { api } from "~/trpc/react";
 export const SynchronizeSheetsCMS = () => {
   const synchronizeSheetsData = api.sheetsCMS.synchronizeSheetsData.useMutation();
   return (
-    <button
+    <Button
       onClick={async () => {
         try {
           await synchronizeSheetsData.mutateAsync();
@@ -22,6 +23,6 @@ export const SynchronizeSheetsCMS = () => {
       }}
     >
       synchronize sheets with database
-    </button>
+    </Button>
   );
 };
