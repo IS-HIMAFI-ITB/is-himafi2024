@@ -1,3 +1,4 @@
+import { kehadiranType } from "@prisma/client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "~/server/api/trpc";
 import { z } from "zod";
@@ -16,6 +17,31 @@ const newsRange = {
 };
 const perizinanRange = {
   sheetName: "Perizinan & presensi",
+  start: "A2",
+  end: "Z",
+};
+const hadirRange = {
+  sheetName: "Hadir",
+  start: "A2",
+  end: "Z",
+};
+const izinMenyusulRange = {
+  sheetName: "Izin menyusul",
+  start: "A2",
+  end: "Z",
+};
+const izinMeninggalkanRange = {
+  sheetName: "Izin Meninggalkan",
+  start: "A2",
+  end: "Z",
+};
+const izinMenyusulDanMeninggalkanRange = {
+  sheetName: "Izin menyusul dan meninggalkan",
+  start: "A2",
+  end: "Z",
+};
+const izinTidakHadirRange = {
+  sheetName: "Izin tidak hadir",
   start: "A2",
   end: "Z",
 };
@@ -110,7 +136,16 @@ const clearSheetsData = async (r: sheetRangeType) => {
   //   const range = `${r.sheetName}!${r.start}:${r.end}`;
   const range = r.start ? `${r.sheetName}!${r.start}:${r.end}` : `${r.sheetName}`;
   try {
-    const response = await sheets.spreadsheets.values.clear({
+    //make sure no column is empty before clearing to prevent clearing dataValidation
+    await sheets.spreadsheets.values.update({
+      spreadsheetId: (await getCurrentDay())!.sheetsCMSId!,
+      range: range,
+      valueInputOption: "USER_ENTERED",
+      requestBody: {
+        values: [Array(15).fill(0)], //fill "0" to 15 columns
+      },
+    });
+    await sheets.spreadsheets.values.clear({
       spreadsheetId: (await getCurrentDay())!.sheetsCMSId!,
       range: range,
     });
@@ -151,10 +186,29 @@ const extractNews = async () => {
   return news;
 };
 
-async function writePerizinan_FromDB() {
+async function writePerizinan_FromDB(r: sheetRangeType) {
+  let kehadiran: kehadiranType = "HADIR";
+  switch (r.sheetName) {
+    case "Hadir":
+      kehadiran = "HADIR";
+      break;
+    case "Izin meninggalkan":
+      kehadiran = "MENINGGALKAN";
+      break;
+    case "Izin menyusul":
+      kehadiran = "MENYUSUL";
+      break;
+    case "Izin menyusul dan meninggalkan":
+      kehadiran = "MENYUSUL_DAN_MENINGGALKAN";
+      break;
+    case "Izin tidak hadir":
+      kehadiran = "TIDAK_HADIR";
+      break;
+  }
   const datas = await db.perizinan.findMany({
     where: {
       dayId: (await getCurrentDay())!.id,
+      kehadiran: kehadiran,
     },
     include: {
       createdBy: true,
@@ -213,9 +267,11 @@ async function writePerizinan_FromDB() {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return Object.values(processedData);
   });
+  console.log(processedDatas);
   const dataList = processedDatas;
+
   // eslint-disable-next-line @typescript-eslint/no-floating-promises
-  updateSheetsData(perizinanRange, dataList);
+  updateSheetsData(r, dataList);
 }
 // async function writeKondisiMassa_FromDB() {}
 
@@ -266,10 +322,19 @@ export const sheetsCMSRouter = createTRPCRouter({
     try {
       await extractStatusIzin_UpdateDB();
       console.log("INFO: extractStatusIzin_UpdateDB done");
-      await clearSheetsData(perizinanRange);
-      console.log("INFO: clearSheetsData(perizinanRange) done");
-      await writePerizinan_FromDB();
-      console.log("INFO: writePerizinan_FromDB done");
+      const writePerizinan_FromDBRange = [
+        hadirRange,
+        izinMenyusulRange,
+        izinMeninggalkanRange,
+        izinMenyusulDanMeninggalkanRange,
+        izinTidakHadirRange,
+      ];
+      for (const r of writePerizinan_FromDBRange) {
+        await clearSheetsData(r);
+        console.log("INFO: clearSheetsData done for ", r.sheetName);
+        await writePerizinan_FromDB(r);
+        console.log("INFO: writePerizinan_FromDB done for ", r.sheetName);
+      }
     } catch (e) {
       console.log("ERROR: synchronizeSheetsData: ", e);
     }
