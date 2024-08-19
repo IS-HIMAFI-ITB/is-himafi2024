@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 import Link from "next/link";
 import { PerizinanInput, PerizinanStatus } from "./perizinan";
 import { KondisiPraDayInput } from "./kondisi-massa";
@@ -8,7 +10,6 @@ import { HadirAktualStatus, KehadiranInput } from "./kehadiran-aktual";
 import { api } from "~/trpc/server";
 export async function News() {
   const news: any = (await api.sheetsCMS.extractNews())[0];
-
   return (
     <div
       className="font-roman flex w-[100vw] flex-col bg-local px-10 py-20 font-bold text-amber-900 md:w-[90vw] md:px-28"
@@ -25,14 +26,18 @@ export async function News() {
           <p className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
             {news.body}
           </p>
-          <div className="py-3">
-            <Link
-              href="https://www.youtube.com/watch?v=WXBA4eWskrc&pp=ygUXcGhpbG9zb3BoeSBvZiB0aW1lIHRlZHg%3D"
-              className="flex flex-row justify-center rounded-lg bg-red-700 px-10 py-2 font-semibold text-white no-underline transition hover:bg-red-600"
-            >
-              The Philosophy of Time Management
-            </Link>
-          </div>
+          {news.linkAttachments?.map((linkAttachment: any) =>
+            linkAttachment[0] ? (
+              <div className="py-3" key={linkAttachment}>
+                <Link
+                  href={linkAttachment[1]}
+                  className="flex flex-row justify-center rounded-lg bg-red-700 px-10 py-2 font-semibold text-white no-underline transition hover:bg-red-600"
+                >
+                  {linkAttachment[0]}
+                </Link>
+              </div>
+            ) : null,
+          )}
           <p className="pb-5 pt-2 text-center font-sans font-bold">{news.instruksi}</p>
           <div className="flex flex-row justify-center gap-10">
             <Link
@@ -79,19 +84,17 @@ export async function News() {
           </div>
         </div>
       </div>
-      {
-        //Recheck-day form is unused at day 0
-        /* <div className="flex flex-col justify-center items-center mt-10">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSci9nK1b70C5Ju7AcoxrCYQ_R8Lngc7JgbhZYuau4nHQLa9TQ/formResponse">
-                    <button className="text-center inline-block rounded-full bg-black/90 px-10 py-3 no-underline transition hover:bg-black/60 text-white text-center font-bluecashews">
-                        Form Konfirmasi Kehadiran
-                    </button>
-                </a>
-                <p className="text-center font-black font-roman pt-2">
-                    Form ini wajib diisi oleh seluruh peserta pada saat Day. Bagi yang belum mengisi, silakan mengisi form.
-                </p>
-            </div> */
-      }
+      {/* Recheck-day form is unused at day 0
+      <div className="flex flex-col justify-center items-center mt-10">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSci9nK1b70C5Ju7AcoxrCYQ_R8Lngc7JgbhZYuau4nHQLa9TQ/formResponse">
+          <button className="text-center inline-block rounded-full bg-black/90 px-10 py-3 no-underline transition hover:bg-black/60 text-white text-center font-bluecashews">
+            Form Konfirmasi Kehadiran
+          </button>
+        </a>
+        <p className="text-center font-black font-roman pt-2">
+          Form ini wajib diisi oleh seluruh peserta pada saat Day. Bagi yang belum mengisi, silakan mengisi form.
+        </p>
+      </div>{" "} */}
     </div>
   );
 }
