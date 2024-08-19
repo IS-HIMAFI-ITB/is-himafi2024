@@ -32,7 +32,7 @@ export default async function PesertaPage() {
         }}
       >
         <div className="flex h-full flex-col items-center justify-center gap-2 pb-12 pt-20">
-          <p className="px-20 text-center font-bluecashews font-extrabold text-purple-50">
+          <p className="px-20 text-center font-bluecashews font-extrabold text-orange-50">
             {session && (
               <span>
                 {session.user?.name}
@@ -45,14 +45,14 @@ export default async function PesertaPage() {
 
           <Link
             href={"/authpage/resetpassword"}
-            className="rounded bg-purple-900/80 px-10 font-roman font-semibold text-purple-200 no-underline transition hover:bg-white/20"
+            className="rounded bg-orange-700/80 px-10 font-roman font-semibold text-white no-underline transition hover:bg-white/20"
           >
             Ganti password
           </Link>
 
           <Link
             href={"/api/auth/signout"}
-            className="rounded bg-purple-900/80 px-10 font-roman font-semibold text-purple-200 no-underline transition hover:bg-white/20"
+            className="rounded bg-orange-700/80 px-10 font-roman font-semibold text-white no-underline transition hover:bg-white/20"
           >
             Signout
           </Link>
