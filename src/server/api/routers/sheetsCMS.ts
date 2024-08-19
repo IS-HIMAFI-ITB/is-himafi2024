@@ -31,7 +31,7 @@ const izinMenyusulRange = {
   end: "Z",
 };
 const izinMeninggalkanRange = {
-  sheetName: "Izin Meninggalkan",
+  sheetName: "Izin meninggalkan",
   start: "A2",
   end: "Z",
 };
@@ -48,7 +48,12 @@ const izinTidakHadirRange = {
 const statusIzinRange = {
   sheetName: "Perizinan & presensi",
   start: "J2",
-  end: "N",
+  end: "Z",
+};
+const kondisiMassaRange = {
+  sheetName: "Kondisi massa",
+  start: "A2",
+  end: "Z",
 };
 
 async function getCurrentDay() {
@@ -58,12 +63,6 @@ async function getCurrentDay() {
     },
   });
 }
-// const currentDay = await db.day.findFirst({
-//   where: {
-//     isCurrent: true,
-//   },
-// });
-
 const getSheetsData = async (r: sheetRangeType) => {
   const auth = new google.auth.GoogleAuth({
     credentials: {
@@ -91,8 +90,8 @@ const getSheetsData = async (r: sheetRangeType) => {
     throw new Error("error reading sheet", { cause: e });
   }
 };
-
 const updateSheetsData = async (r: sheetRangeType, data: any) => {
+  console.log("INFO: updateSheetsData started");
   const auth = new google.auth.GoogleAuth({
     credentials: {
       client_email: process.env.GOOGLE_CLIENT_EMAIL,
@@ -107,7 +106,7 @@ const updateSheetsData = async (r: sheetRangeType, data: any) => {
   //   const range = `${r.sheetName}!${r.start}:${r.end}`;
   const range = r.start ? `${r.sheetName}!${r.start}:${r.end}` : `${r.sheetName}`;
   try {
-    const response = await sheets.spreadsheets.values.update({
+    await sheets.spreadsheets.values.update({
       spreadsheetId: (await getCurrentDay())!.sheetsCMSId!,
       range: range,
       valueInputOption: "USER_ENTERED",
@@ -116,11 +115,11 @@ const updateSheetsData = async (r: sheetRangeType, data: any) => {
         values: data,
       },
     });
+    console.log("INFO: updateSheetsData done");
   } catch (e) {
-    console.error("error updating sheet: ", e);
+    console.error("ERROR: updateSheetsData: ", e);
   }
 };
-
 const clearSheetsData = async (r: sheetRangeType) => {
   const auth = new google.auth.GoogleAuth({
     credentials: {
@@ -153,13 +152,12 @@ const clearSheetsData = async (r: sheetRangeType) => {
     console.error("error clearing sheet: ", e);
   }
 };
-
 const extractNews = async () => {
   const data: any = await getSheetsData(newsRange);
   if (data === null || data === undefined) {
     throw new Error("extractNews: Data is null or undefined");
   }
-  let newsStart, newsEnd;
+  // let newsStart, newsEnd;
   // eslint-disable-next-line prefer-const
   let news = [];
   //   let i = 0;
@@ -180,12 +178,17 @@ const extractNews = async () => {
     body: data[3][3], // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     instruksi: data[4][3], // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     bukuUngu: data[5][3], // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    bukuMerah: data[6][3],
+    bukuMerah: data[6][3], // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+    linkAttachments: [
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      [data[7][2], data[7][3]], // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      [data[8][2], data[8][3]], // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      [data[9][2], data[9][3]], // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      [data[10][2], data[10][3]],
+    ],
   });
-  console.log(news);
   return news;
 };
-
 async function writePerizinan_FromDB(r: sheetRangeType) {
   let kehadiran: kehadiranType = "HADIR";
   switch (r.sheetName) {
@@ -214,7 +217,6 @@ async function writePerizinan_FromDB(r: sheetRangeType) {
       createdBy: true,
     },
   });
-  console.log(datas);
   const processedDatas = datas.map((data) => {
     const processedData: any = {
       nim: data.createdBy.nim,
@@ -267,13 +269,44 @@ async function writePerizinan_FromDB(r: sheetRangeType) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return Object.values(processedData);
   });
-  console.log(processedDatas);
   const dataList = processedDatas;
-
   // eslint-disable-next-line @typescript-eslint/no-floating-promises
   updateSheetsData(r, dataList);
 }
-// async function writeKondisiMassa_FromDB() {}
+async function writeKondisiMassa_FromDB() {
+  const datas = await db.kondisiMassa.findMany({
+    where: {
+      dayId: (await getCurrentDay())!.id,
+    },
+    include: {
+      createdBy: true,
+    },
+  });
+  const processedDatas = datas.map((data) => {
+    const processedData: any = {
+      nim: data.createdBy.nim,
+      nama: data.createdBy.name,
+      ...data,
+      createdAt: data.createdAt
+        ? data.createdAt.toLocaleString("en-GB", {
+            timeZone: "Asia/Jakarta",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+          })
+        : undefined,
+    };
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    delete processedData.createdBy;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    return Object.values(processedData);
+  });
+  console.log(processedDatas);
+  // eslint-disable-next-line @typescript-eslint/no-floating-promises
+  updateSheetsData(kondisiMassaRange, processedDatas);
+}
 
 async function extractStatusIzin_UpdateDB() {
   const datas: any = await getSheetsData(statusIzinRange);
@@ -320,6 +353,7 @@ export const sheetsCMSRouter = createTRPCRouter({
   }),
   synchronizeSheetsData: publicProcedure.mutation(async ({ ctx }) => {
     try {
+      console.log("INFO: extractStatusIzin_UpdateDB started");
       await extractStatusIzin_UpdateDB();
       console.log("INFO: extractStatusIzin_UpdateDB done");
       const writePerizinan_FromDBRange = [
@@ -330,11 +364,19 @@ export const sheetsCMSRouter = createTRPCRouter({
         izinTidakHadirRange,
       ];
       for (const r of writePerizinan_FromDBRange) {
+        console.log("INFO: clearSheetsData started for ", r.sheetName);
         await clearSheetsData(r);
         console.log("INFO: clearSheetsData done for ", r.sheetName);
+        console.log("INFO: writePerizinan_FromDB started for ", r.sheetName);
         await writePerizinan_FromDB(r);
         console.log("INFO: writePerizinan_FromDB done for ", r.sheetName);
       }
+      console.log("INFO: clearSheetsData started for kondisiMassa");
+      await clearSheetsData(kondisiMassaRange);
+      console.log("INFO: clearSheetsData done for kondisiMassa");
+      console.log("INFO: writeKondisiMassa_FromDB started");
+      await writeKondisiMassa_FromDB();
+      console.log("INFO: writeKondisiMassa_FromDB done");
     } catch (e) {
       console.log("ERROR: synchronizeSheetsData: ", e);
     }

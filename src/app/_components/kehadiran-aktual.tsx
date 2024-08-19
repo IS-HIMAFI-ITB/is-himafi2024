@@ -32,8 +32,6 @@ import { Badge } from "~/components/ui/badge";
 export function KehadiranInput() {
   const isHadirAbsensi = api.perizinan.getStatusHadirAbsensi.useQuery().data?.isHadirAbsensi;
   const [open, setOpen] = React.useState(false);
-  const getIsAcceptingPerizinan = api.perizinan.getIsAcceptingPerizinan.useQuery();
-  const isAcceptingPerizinan = getIsAcceptingPerizinan.data;
   const isDesktop = useMediaQuery({
     query: "(min-width: 768px)",
   });
@@ -85,6 +83,8 @@ export function KehadiranInput() {
 function KehadiranForm({ className }: React.ComponentProps<"form">) {
   const { toast } = useToast();
   const hadirAktual = api.perizinan.hadirAktual.useMutation();
+  const { data: statusHadirAbsensi, refetch: refetchStatusHadirAbsensi } = api.perizinan.getStatusHadirAbsensi.useQuery();
+  const isHadirAbsensi = statusHadirAbsensi?.isHadirAbsensi;
 
   const [formcontent, setFormcontent] = useState({
     password: "",
@@ -95,9 +95,8 @@ function KehadiranForm({ className }: React.ComponentProps<"form">) {
       await hadirAktual.mutateAsync({
         password: formcontent.password,
       });
-      toast({
-        title: "Submitted",
-      });
+
+      await refetchStatusHadirAbsensi();
     } catch (error) {
       console.log(error);
       toast({
