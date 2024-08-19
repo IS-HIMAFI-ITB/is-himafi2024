@@ -18,7 +18,7 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[url('/background.png')] bg-cover text-white">
       <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-        Log<span className="text-[#8222ff]">in</span>
+        Log<span className="text-[#ffdc90]">in</span>
       </h1>
       <div>
         <form

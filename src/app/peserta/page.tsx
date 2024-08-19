@@ -60,9 +60,9 @@ export default async function PesertaPage() {
       </div>
       <div className="flex min-h-screen flex-col items-center justify-center pt-60">
         <h1 className="font-bluecashews text-3xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-          Intellektuelle<span className="text-[hsl(280,36%,51%)]">schule</span>
+          Intellektuelle<span className="text-[#ffdc90]">schule</span>
         </h1>
-        <p className="w-9/12 pt-10 text-center text-base font-extrabold tracking-widest text-[hsl(280,100%,94%)] md:text-xl">
+        <p className="w-9/12 pt-10 text-center text-base font-extrabold tracking-widest text-[#fff8e8] md:text-xl">
           Selamat datang, para kurcaci pengembara cahaya. Hutan yang lebat
           mungkin telah menutup pandanganmu, namun penduduk istana selalu
           menunggumu untuk menemuinya, tapi kapankah datangnya kesempatan itu?
