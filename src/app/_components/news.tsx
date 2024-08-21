@@ -4,10 +4,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 import Link from "next/link";
-import { PerizinanInput, PerizinanStatus } from "./perizinan";
+import { PerizinanInput, PerizinanStatus, PerizinanBuktiMenyusulInput } from "./perizinan";
 import { KondisiPraDayInput } from "./kondisi-massa";
 import { HadirAktualStatus, KehadiranInput } from "./kehadiran-aktual";
 import { api } from "~/trpc/server";
+
 export async function News() {
   const news: any = (await api.sheetsCMS.extractNews())[0];
   return (
@@ -71,6 +72,7 @@ export async function News() {
           </p>
           <div className="flex flex-row justify-around pt-3 pb-5">
             <PerizinanInput />
+            <PerizinanBuktiMenyusulInput />
             <KondisiPraDayInput />
           </div>
           <p className="font-bluecashews pb-2 text-center text-2xl font-black">absensi heading</p>

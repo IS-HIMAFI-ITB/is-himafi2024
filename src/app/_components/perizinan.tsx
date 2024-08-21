@@ -28,6 +28,7 @@ import { fisikType } from "@prisma/client";
 import { skipToken } from "@tanstack/react-query";
 import { date } from "zod";
 import { Badge } from "~/components/ui/badge";
+import { Checkbox } from "~/components/ui/checkbox";
 
 export function PerizinanInput() {
   const [open, setOpen] = React.useState(false);
@@ -96,11 +97,15 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
     jenis: perizinan?.jenisIzin ? perizinan.jenisIzin : undefined,
     alasan: perizinan?.alasanIzin ? perizinan.alasanIzin : "",
     bukti: perizinan?.buktiIzin ? perizinan.buktiIzin : "",
+    isBuktiNyusul: perizinan?.isBuktiNyusul ? perizinan.isBuktiNyusul : false,
+    timeMenyusul: perizinan?.kapanMenyusul ? new Date(perizinan.kapanMenyusul) : undefined,
+    timeMeninggalkan: perizinan?.kapanMeninggalkan ? new Date(perizinan.kapanMeninggalkan) : undefined,
   });
-  const [timeMenyusul, setTimeMenyusul] = useState(perizinan?.kapanMenyusul ? new Date(perizinan.kapanMenyusul) : undefined);
-  const [timeMeninggalkan, setTimeMeninggalkan] = useState(
-    perizinan?.kapanMeninggalkan ? new Date(perizinan.kapanMeninggalkan) : undefined,
-  );
+  // const [timeMenyusul, setTimeMenyusul] = useState(perizinan?.kapanMenyusul ? new Date(perizinan.kapanMenyusul) : undefined);
+  // const [timeMeninggalkan, setTimeMeninggalkan] = useState(
+  //   perizinan?.kapanMeninggalkan ? new Date(perizinan.kapanMeninggalkan) : undefined,
+  // );
+  // const [isBuktiNyusul, setIsBuktiNyusul] = useState(perizinan?.isBuktiNyusul ? perizinan.isBuktiNyusul : false);
 
   // const [formcontent, setFormcontent] = useState({
   //   kehadiran: "",
@@ -123,6 +128,7 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
   // }
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(formcontent);
     try {
       (document.getElementById("btn-submit") as HTMLButtonElement).disabled = true;
       await createPerizinan.mutateAsync({
@@ -131,8 +137,11 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
         jenisIzin: formcontent.jenis,
         alasanIzin: formcontent.alasan,
         buktiIzin: formcontent.bukti,
-        kapanMenyusul: ["MENYUSUL", "MENYUSUL_DAN_MENINGGALKAN"].includes(formcontent.kehadiran!) ? timeMenyusul : undefined,
-        kapanMeninggalkan: ["MENINGGALKAN", "MENYUSUL_DAN_MENINGGALKAN"].includes(formcontent.kehadiran!) ? timeMeninggalkan : undefined,
+        kapanMenyusul: ["MENYUSUL", "MENYUSUL_DAN_MENINGGALKAN"].includes(formcontent.kehadiran!) ? formcontent.timeMenyusul : undefined,
+        kapanMeninggalkan: ["MENINGGALKAN", "MENYUSUL_DAN_MENINGGALKAN"].includes(formcontent.kehadiran!)
+          ? formcontent.timeMeninggalkan
+          : undefined,
+        isBuktiNyusul: formcontent.isBuktiNyusul,
       });
       (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
       toast({
@@ -227,32 +236,55 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
           {["MENYUSUL_DAN_MENINGGALKAN", "MENYUSUL"].includes(formcontent.kehadiran!) && (
             <div className="grid gap-2">
               <Label>Kapan Menyusul</Label>
-              <TimePicker date={timeMenyusul} onChange={setTimeMenyusul} />
+              <TimePicker date={formcontent.timeMenyusul} onChange={(target) => setFormcontent({ ...formcontent, timeMenyusul: target })} />
             </div>
           )}
 
           {["MENYUSUL_DAN_MENINGGALKAN", "MENINGGALKAN"].includes(formcontent.kehadiran!) && (
             <div className="grid gap-2">
               <Label>Kapan Meninggalkan</Label>
-              <TimePicker date={timeMeninggalkan} onChange={setTimeMeninggalkan} />
+              <TimePicker
+                date={formcontent.timeMeninggalkan}
+                onChange={(target) => setFormcontent({ ...formcontent, timeMeninggalkan: target })}
+              />
+            </div>
+          )}
+          {!formcontent.isBuktiNyusul && (
+            <div className="grid gap-2">
+              <Label htmlFor="buktiIzin">Bukti Izin</Label>
+              <Input
+                type="text"
+                id="bukti"
+                placeholder="Link bukti perizinan"
+                value={formcontent.bukti}
+                onChange={({ target }) =>
+                  setFormcontent({
+                    ...formcontent,
+                    bukti: target.value,
+                  })
+                }
+                required={true}
+              />
             </div>
           )}
 
           <div className="grid gap-2">
-            <Label htmlFor="buktiIzin">Bukti Izin</Label>
-            <Input
-              type="text"
-              id="bukti"
-              placeholder="Link bukti perizinan"
-              value={formcontent.bukti}
-              onChange={({ target }) =>
-                setFormcontent({
-                  ...formcontent,
-                  bukti: target.value,
-                })
-              }
-              required={true}
-            />
+            <div className="items-top flex space-x-2">
+              <Checkbox
+                id="terms1"
+                checked={formcontent.isBuktiNyusul}
+                onCheckedChange={(checked) => setFormcontent({ ...formcontent, isBuktiNyusul: checked === true })}
+              />
+              <div className="grid gap-1.5 leading-none">
+                <label
+                  htmlFor="terms1"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Bukti Menyusul
+                </label>
+                <p className="text-sm text-muted-foreground">Perizinan berstatus bersyarat apabila bukti menyusul</p>
+              </div>
+            </div>
           </div>
         </React.Fragment>
       )}
@@ -268,6 +300,82 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
     </form>
   );
 }
+
+export function PerizinanBuktiMenyusulInput() {
+  const dayId = api.perizinan.getCurrentDayId.useQuery().data!;
+  const perizinan = api.perizinan.getPerizinan.useQuery({ dayId: dayId }).data;
+  const isBuktiNyusul = perizinan?.isBuktiNyusul;
+  const [open, setOpen] = React.useState(false);
+  if (isBuktiNyusul) {
+    return (
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button variant="default">Bukti menyusul</Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Bukti perizinan</DialogTitle>
+          </DialogHeader>
+          <PerizinanBuktiMenyusulForm />
+        </DialogContent>
+      </Dialog>
+    );
+  } else return;
+}
+
+function PerizinanBuktiMenyusulForm({ className }: React.ComponentProps<"form">) {
+  const { toast } = useToast();
+  const updatePerizinanBuktiMenyusul = api.perizinan.updatePerizinanBuktiMenyusul.useMutation();
+  const getCurrentDayId = api.perizinan.getCurrentDayId.useQuery();
+  const dayId = getCurrentDayId.data!;
+
+  const [buktiIzin, setBuktiIzin] = useState("");
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(buktiIzin);
+    try {
+      (document.getElementById("btn-submit") as HTMLButtonElement).disabled = true;
+      await updatePerizinanBuktiMenyusul.mutateAsync({
+        dayId: dayId,
+        buktiIzin: buktiIzin,
+      });
+      (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
+      toast({
+        title: "Success",
+        description: "form submitted",
+      });
+    } catch (error) {
+      console.log(error);
+      (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
+      toast({
+        title: "Error",
+        description: "submission failed",
+      });
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className={cn("grid items-start gap-4", className)}>
+      <div className="grid gap-2">
+        <Label htmlFor="buktiIzin">Bukti Izin</Label>
+        <Input
+          type="text"
+          id="bukti"
+          placeholder="Link bukti perizinan"
+          value={buktiIzin}
+          onChange={({ target }) => setBuktiIzin(target.value)}
+          required={true}
+        />
+      </div>
+
+      <Button id="btn-submit" type="submit">
+        Submit
+      </Button>
+    </form>
+  );
+}
+
 export function PerizinanStatus() {
   const getCurrentDayId = api.perizinan.getCurrentDayId.useQuery();
   const dayId = getCurrentDayId.data;
@@ -288,7 +396,7 @@ export function PerizinanStatus() {
       return (
         <div className="flex flex-row">
           <p className="font-bluecashews pb-1  text-l font-black">Status perizinan: </p>
-          <Badge>{statusIzin}</Badge>
+          <Badge>{perizinan?.isBuktiNyusul ? "DITERIMA BERSYARAT" : statusIzin}</Badge>
         </div>
       );
     case "PENDING":

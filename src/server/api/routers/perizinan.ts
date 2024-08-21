@@ -14,6 +14,7 @@ export const perizinanRouter = createTRPCRouter({
         kapanMeninggalkan: z.date().optional(),
         buktiIzin: z.string().optional(),
         dayId: z.number(),
+        isBuktiNyusul: z.boolean().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -34,6 +35,7 @@ export const perizinanRouter = createTRPCRouter({
               buktiIzin: input.buktiIzin,
               createdBy: { connect: { id: ctx.session.user.id } },
               day: { connect: { id: input.dayId } },
+              isBuktiNyusul: input.isBuktiNyusul,
             },
           });
       }
@@ -148,6 +150,19 @@ export const perizinanRouter = createTRPCRouter({
       },
     });
   }),
+  updatePerizinanBuktiMenyusul: publicProcedure
+    .input(z.object({ dayId: z.number(), buktiIzin: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db.perizinan.updateMany({
+        where: {
+          dayId: input.dayId,
+          createdBy: { id: ctx.session!.user.id },
+        },
+        data: {
+          buktiIzin: input.buktiIzin,
+        },
+      });
+    }),
   getIsAcceptingPerizinan: publicProcedure.query(async ({ ctx }) => {
     const currentDay = await ctx.db.day.findFirst({
       where: {
