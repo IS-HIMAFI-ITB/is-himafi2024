@@ -124,6 +124,7 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
+      (document.getElementById("btn-submit") as HTMLButtonElement).disabled = true;
       await createPerizinan.mutateAsync({
         dayId: dayId,
         kehadiran: formcontent.kehadiran!,
@@ -133,6 +134,7 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
         kapanMenyusul: ["MENYUSUL", "MENYUSUL_DAN_MENINGGALKAN"].includes(formcontent.kehadiran!) ? timeMenyusul : undefined,
         kapanMeninggalkan: ["MENINGGALKAN", "MENYUSUL_DAN_MENINGGALKAN"].includes(formcontent.kehadiran!) ? timeMeninggalkan : undefined,
       });
+      (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
       toast({
         title: "Success",
         description: "form submitted",
@@ -142,6 +144,7 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
       // setTimeMeninggalkan(undefined);
     } catch (error) {
       console.log(error);
+      (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
       toast({
         title: "Error",
         description: "submission failed",
@@ -253,7 +256,15 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
           </div>
         </React.Fragment>
       )}
-      {perizinan ? <Button type="submit">Resubmit</Button> : <Button type="submit">Submit</Button>}
+      {perizinan ? (
+        <Button id="btn-submit" type="submit">
+          Resubmit
+        </Button>
+      ) : (
+        <Button id="btn-submit" type="submit">
+          Submit
+        </Button>
+      )}
     </form>
   );
 }

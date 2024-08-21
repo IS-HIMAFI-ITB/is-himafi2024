@@ -15,18 +15,10 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { TimePicker } from "@/components/ui/datetime-picker";
 import { useToast } from "@/components/ui/use-toast";
-
-import { kehadiranType } from "@prisma/client";
-import { jenisIzinType } from "@prisma/client";
-import { fisikType } from "@prisma/client";
-import { skipToken } from "@tanstack/react-query";
-import { date } from "zod";
 import { Badge } from "~/components/ui/badge";
 
 export function KehadiranInput() {
@@ -92,13 +84,16 @@ function KehadiranForm({ className }: React.ComponentProps<"form">) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
+      (document.getElementById("btn-submit") as HTMLButtonElement).disabled = true;
       await hadirAktual.mutateAsync({
         password: formcontent.password,
       });
 
       await refetchStatusHadirAbsensi();
+      (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
     } catch (error) {
       console.log(error);
+      (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
       toast({
         title: "Error",
         description: "submission failed",
@@ -124,7 +119,11 @@ function KehadiranForm({ className }: React.ComponentProps<"form">) {
           required={true}
         />
       </div>
-      {<Button type="submit">Submit</Button>}
+      {
+        <Button id="btn-submit" type="submit">
+          Submit
+        </Button>
+      }
     </form>
   );
 }
