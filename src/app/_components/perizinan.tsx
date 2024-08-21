@@ -393,8 +393,7 @@ export function PerizinanStatus() {
             <Badge variant="destructive">{statusIzin}</Badge>
           </div>
           <div>
-            <p>
-              {" "}
+            <p className="text-left">
               <span className="font-bluecashews pb-1 text-l font-bold">Alasan ditolak: </span>
               {perizinan?.alasanStatusDitolak}{" "}
             </p>
