@@ -47,7 +47,7 @@ export function News() {
           <p className="pb-5 pt-2 text-center font-sans font-bold">
             Hadirilah Day 3, 24 Agustus 2024 pukul 08.00 WIB
           </p>
-          <div className="flex flex-row justify-center gap-10">
+          <div className="flex flex-row justify-center gap-10 text-center">
             <Link
               href="https://drive.google.com/file/d/1cYYk0RszTgo4Oq1OKOZCsnFUdIkwFceO/view?usp=sharing"
               className="rounded-full bg-violet-800 px-10 py-3 font-semibold text-white no-underline transition hover:bg-violet-700"
@@ -58,7 +58,7 @@ export function News() {
               href="https://drive.google.com/file/d/1I60q6Q0zYZea4b6VMbJypwTUWChSjFE_/view?usp=drive_link"
               className="rounded-full bg-red-700 px-10 py-3 font-semibold text-white no-underline transition hover:bg-red-600"
             >
-              Buku merah
+              Buku merahs
             </Link>
           </div>
         </div>
