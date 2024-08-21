@@ -245,6 +245,7 @@ export function TugasListPeserta() {
                         >
                           <div className="flex flex-row justify-center self-center px-10 py-3">
                             <input
+                              required={true}
                               type="text"
                               name="link"
                               id="link"
@@ -253,9 +254,9 @@ export function TugasListPeserta() {
                             />
                             <button
                               type="submit"
-                              className="rounded bg-purple-900/100 px-4 font-semibold text-purple-200 no-underline transition hover:bg-purple-900/70"
+                              className="rounded bg-purple-900/100 px-4 py-1 font-semibold text-purple-200 no-underline transition hover:bg-purple-900/70"
                             >
-                              Submit
+                              Submit link
                             </button>
                           </div>
                         </form>

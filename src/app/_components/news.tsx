@@ -51,7 +51,7 @@ export async function News() {
               href={news.bukuMerah}
               className="rounded-full bg-red-700 px-10 py-3 font-semibold text-white no-underline transition hover:bg-red-600"
             >
-              Buku merah
+              Buku merahs
             </Link>
           </div>
         </div>
