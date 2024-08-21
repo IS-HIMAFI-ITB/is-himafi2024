@@ -387,9 +387,18 @@ export function PerizinanStatus() {
   switch (statusIzin) {
     case "DITOLAK":
       return (
-        <div className="flex flex-row">
-          <p className="font-bluecashews pb-1 text-l font-black">Status perizinan: </p>
-          <Badge variant="destructive">{statusIzin}</Badge>
+        <div>
+          <div className="flex flex-row">
+            <p className="font-bluecashews pb-1 text-l font-black">Status perizinan: </p>
+            <Badge variant="destructive">{statusIzin}</Badge>
+          </div>
+          <div>
+            <p>
+              {" "}
+              <span className="font-bluecashews pb-1 text-l font-bold">Alasan ditolak: </span>
+              {perizinan?.alasanStatusDitolak}{" "}
+            </p>
+          </div>
         </div>
       );
     case "DITERIMA":

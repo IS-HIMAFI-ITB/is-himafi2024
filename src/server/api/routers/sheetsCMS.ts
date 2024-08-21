@@ -322,6 +322,8 @@ async function extractStatusIzin_UpdateDB() {
       statusIzin: data[0] ?? undefined,
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
       createdById: data[4] ?? undefined,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      alasanStatusDitolak: data[7] ?? undefined,
     };
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return processedData;
@@ -337,10 +339,13 @@ async function extractStatusIzin_UpdateDB() {
         dayId: (await getCurrentDay())!.id,
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         createdById: data.createdById,
+        newPerizinan: false,
       },
       data: {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         statusIzin: data.statusIzin,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+        alasanStatusDitolak: data.alasanStatusDitolak,
       },
     });
   });
@@ -356,6 +361,16 @@ export const sheetsCMSRouter = createTRPCRouter({
       console.log("INFO: extractStatusIzin_UpdateDB started");
       await extractStatusIzin_UpdateDB();
       console.log("INFO: extractStatusIzin_UpdateDB done");
+      console.log("INFO: mark all newPerizinan to false started");
+      await db.perizinan.updateMany({
+        where: {
+          dayId: (await getCurrentDay())!.id,
+        },
+        data: {
+          newPerizinan: false,
+        },
+      });
+      console.log("INFO: mark all newPerizinan to false done");
       const writePerizinan_FromDBRange = [
         hadirRange,
         izinMenyusulRange,
