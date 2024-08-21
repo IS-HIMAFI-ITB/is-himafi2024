@@ -86,6 +86,7 @@ function KondisiForm({ className }: React.ComponentProps<"form">) {
     event.preventDefault();
     console.log(formcontent);
     try {
+      (document.getElementById("btn-submit") as HTMLButtonElement).disabled = true;
       const dayId = getCurrentDayId.data!;
       await createKondisiMassa.mutateAsync({
         dayId: dayId,
@@ -93,6 +94,7 @@ function KondisiForm({ className }: React.ComponentProps<"form">) {
         deskripsi: formcontent.deskripsi,
         kesiapan: formcontent.kesiapan,
       });
+      (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
       toast({
         title: "Success",
         description: "form submitted",
@@ -100,6 +102,7 @@ function KondisiForm({ className }: React.ComponentProps<"form">) {
       setFormcontent({ fisik: "", deskripsi: "", kesiapan: formcontent.kesiapan });
     } catch (error) {
       console.log(error);
+      (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
       toast({
         title: "Error",
         description: "submission failed",
@@ -152,7 +155,9 @@ function KondisiForm({ className }: React.ComponentProps<"form">) {
           }
         />
       </div>
-      <Button type="submit">Submit</Button>
+      <Button id="btn-submit" type="submit">
+        Submit
+      </Button>
     </form>
   );
 }
