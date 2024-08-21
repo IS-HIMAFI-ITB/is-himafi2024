@@ -10,57 +10,52 @@ export function News() {
       }}
     >
       <h1 className="pb-10 pt-10 text-center font-bluecashews text-3xl font-extrabold tracking-widest md:text-6xl">
-        Physics is a Part of Your Soul
+        Can Physics Lead You to a Good Career ?
       </h1>
       <div className="flex flex-col justify-between gap-20 pb-4 text-justify lg:flex-row">
         <div>
           <p className="pb-2 text-center font-bluecashews text-2xl font-black">
-            &quot;Pasca Big Bang: Dinamika Fisika sebagai Pilar Sains yang Abadi
-            dan Kearifan Saintifik&quot;
+            &quot;Transisi Fase Karir: Menemukan Jalan dari Akademis ke
+            Profesional dalam Dunia Fisika&quot;
           </p>
           <p className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
-            Sejak momen Big Bang, alam semesta kita telah mengalami transformasi
-            yang luar biasa, berkembang dan berubah dalam cara-cara yang
-            menakjubkan. Fisika, sebagai pilar utama sains, telah menjadi kunci
-            untuk memahami dinamika ini dan memberikan kita wawasan mendalam
-            tentang kosmos. Dalam perjalanan ini, kita tidak hanya belajar
-            tentang hukum-hukum alam yang mendasari segala sesuatu, tetapi juga
-            mengembangkan kearifan saintifik yang membimbing kita dalam mencari
-            kebenaran dan makna. Melalui kajian fisika, kita mampu merangkul
-            keabadian prinsip-prinsip ilmiah yang terus berkembang, serta
-            mengaplikasikan pengetahuan ini untuk memajukan peradaban manusia.
-            Mari kita telusuri bersama dinamika fisika pasca Big Bang, memahami
-            bagaimana ilmu ini membentuk dunia kita, dan mengapresiasi kearifan
-            saintifik yang muncul dari eksplorasi kita terhadap alam semesta.
+            Di dunia fisika, transisi fase menggambarkan perubahan mendalam
+            dalam sifat-sifat material ketika kondisi seperti suhu dan tekanan
+            berubah. Konsep ini relevan tidak hanya dalam konteks materi, tetapi
+            juga dalam perjalanan karir seseorang. Mahasiswa fisika sering kali
+            menghadapi tantangan dalam mengalihkan pengetahuan akademis mereka
+            ke dunia profesional. Dengan demikian, memahami dan mempersiapkan
+            diri untuk &quot;transisi fase&quot; dalam karir adalah langkah
+            penting untuk kesuksesan mereka di masa depan.
           </p>
           <div className="py-3">
             <Link
-              href="https://youtube.com/shorts/DqvpS9QJk3M?si=11iY_urm1ecIvMUU"
+              href="https://youtu.be/eJ7cAjhFTTg"
               className="flex flex-row justify-center rounded-lg bg-red-700 px-10 py-2 font-semibold text-white no-underline transition hover:bg-red-600"
             >
-              Physics: The World&apos;s Best Analytical Framework
+              Testimoni Alumni Fisika
             </Link>
           </div>
-          <div className="py-3">
+          {/* <div className="py-3">
             <Link
               href="https://youtu.be/4HrweW4IqJc?si=YacA-Un4IuXZc_xs"
               className="flex flex-row justify-center rounded-lg bg-red-700 px-10 py-2 font-semibold text-white no-underline transition hover:bg-red-600"
             >
               If You Are a Physics Major...
             </Link>
-          </div>
+          </div> */}
           <p className="pb-5 pt-2 text-center font-sans font-bold">
-            Hadirilah Day 2, 20 Agustus 2024, 07.30
+            Hadirilah Day 3, 24 Agustus 2024 pukul 08.00 WIB
           </p>
           <div className="flex flex-row justify-center gap-10">
             <Link
-              href="https://drive.google.com/file/d/1TMbjJ8HHUj-zbVBy2GG54fSmU1vZ9aAU/view?usp=drive_link"
+              href="https://drive.google.com/file/d/1cYYk0RszTgo4Oq1OKOZCsnFUdIkwFceO/view?usp=sharing"
               className="rounded-full bg-violet-800 px-10 py-3 font-semibold text-white no-underline transition hover:bg-violet-700"
             >
               Buku ungu
             </Link>
             <Link
-              href="https://drive.google.com/file/d/1pdvGVsUYZJXSvpxoyBV1X-8Ckh_AGUFp/view?usp=drive_link"
+              href="https://drive.google.com/file/d/1I60q6Q0zYZea4b6VMbJypwTUWChSjFE_/view?usp=drive_link"
               className="rounded-full bg-red-700 px-10 py-3 font-semibold text-white no-underline transition hover:bg-red-600"
             >
               Buku merah
