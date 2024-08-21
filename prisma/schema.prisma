@@ -132,10 +132,13 @@ model Perizinan {
     kapanMenyusul     DateTime?
     kapanMeninggalkan DateTime?
     buktiIzin         String?
+    isBuktiNyusul     Boolean        @default(false)
 
-    statusIzin     statusIzinType @default(PENDING)
-    isHadirAbsensi Boolean        @default(false)
-    hadirAbsensiAt DateTime?
+    alasanStatusDitolak String?
+    statusIzin          statusIzinType @default(PENDING)
+    isHadirAbsensi      Boolean        @default(false)
+    hadirAbsensiAt      DateTime?
+    newPerizinan        Boolean        @default(true)
 
     createdAt   DateTime @default(now())
     createdBy   User     @relation(fields: [createdById], references: [id])
