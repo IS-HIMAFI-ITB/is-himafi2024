@@ -55,7 +55,7 @@ export async function News() {
             </Link>
           </div>
         </div>
-        <div className="min-w-fit">
+        <div className="min-w-[20vw]">
           {/* <p className="font-bluecashews pb-2 text-center text-2xl font-black">PLACEHOLDER</p>
           <p className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy
@@ -66,10 +66,10 @@ export async function News() {
           </p> */}
           <p className="font-bluecashews pb-2 text-center text-2xl font-black">Perizinan</p>
           <PerizinanStatus />
-          {/* <p className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy
-            text ever since the 1500s,
-          </p> */}
+          <p className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
+            <p>“You sometimes think you want to disappear, but all you really want is to be found.”</p>
+            <p className="text-right">-unknown</p>
+          </p>
           <div className="flex flex-row justify-around pt-3 gap-3 pb-5">
             <PerizinanInput />
             <PerizinanBuktiMenyusulInput />
@@ -77,10 +77,15 @@ export async function News() {
           </div>
           <p className="font-bluecashews pb-2 text-center text-2xl font-black">Kehadiran aktual</p>
           <HadirAktualStatus />
-          {/* <p className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy
-            text ever since the 1500s,
-          </p> */}
+          <p className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
+            <p>
+              “I must assume behind this force the existence of a conscious and intelligent mind. This mind is the matrix of all matter”
+            </p>
+            <p className="text-right">
+              - Max Planck, <br />
+              founder of quantum theory
+            </p>
+          </p>
           <div className="flex flex-row justify-around pt-3 pb-5">
             <KehadiranInput />
           </div>
