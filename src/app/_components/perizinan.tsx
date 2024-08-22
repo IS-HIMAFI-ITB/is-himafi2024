@@ -388,8 +388,8 @@ export function PerizinanStatus() {
     case "DITOLAK":
       return (
         <div>
-          <div className="flex flex-row">
-            <p className="font-bluecashews pb-1 text-l font-black">Status perizinan: </p>
+          <div className="flex flex-row items-middle">
+            <p className="font-bluecashews  px-2 text-l font-black">Status perizinan: </p>
             <Badge variant="destructive">{statusIzin}</Badge>
           </div>
           <div>
@@ -402,15 +402,15 @@ export function PerizinanStatus() {
       );
     case "DITERIMA":
       return (
-        <div className="flex flex-row">
-          <p className="font-bluecashews pb-1  text-l font-black">Status perizinan: </p>
+        <div className="flex flex-row items-middle">
+          <p className="font-bluecashews px-2  text-l font-black">Status perizinan: </p>
           <Badge>{perizinan?.isBuktiNyusul ? "DITERIMA BERSYARAT" : statusIzin}</Badge>
         </div>
       );
     case "PENDING":
       return (
-        <div className="flex flex-row">
-          <p className="font-bluecashews pb-1  text-l font-black">Status perizinan: </p>
+        <div className="flex flex-row items-middle">
+          <p className="font-bluecashews px-2  text-l font-black">Status perizinan: </p>
           <Badge variant="secondary">{statusIzin}</Badge>
         </div>
       );
