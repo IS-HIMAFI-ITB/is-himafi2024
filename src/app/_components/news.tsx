@@ -66,10 +66,10 @@ export async function News() {
           </p> */}
           <p className="font-bluecashews pb-2 text-center text-2xl font-black">Perizinan</p>
           <PerizinanStatus />
-          <p className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
+          <div className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
             <p>“You sometimes think you want to disappear, but all you really want is to be found.”</p>
             <p className="text-right">-unknown</p>
-          </p>
+          </div>
           <div className="flex flex-row justify-around pt-3 gap-3 pb-5">
             <PerizinanInput />
             <PerizinanBuktiMenyusulInput />
@@ -77,7 +77,7 @@ export async function News() {
           </div>
           <p className="font-bluecashews pb-2 text-center text-2xl font-black">Kehadiran aktual</p>
           <HadirAktualStatus />
-          <p className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
+          <div className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
             <p>
               “I must assume behind this force the existence of a conscious and intelligent mind. This mind is the matrix of all matter”
             </p>
@@ -85,7 +85,7 @@ export async function News() {
               - Max Planck, <br />
               founder of quantum theory
             </p>
-          </p>
+          </div>
           <div className="flex flex-row justify-around pt-3 pb-5">
             <KehadiranInput />
           </div>
