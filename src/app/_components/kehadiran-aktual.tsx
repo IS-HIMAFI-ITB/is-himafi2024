@@ -39,9 +39,9 @@ export function KehadiranInput() {
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Kehadiran aktual</DialogTitle>
-            <DialogDescription>
+            {/* <DialogDescription>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </DialogDescription>
+            </DialogDescription> */}
           </DialogHeader>
           <KehadiranForm />
         </DialogContent>
@@ -57,9 +57,9 @@ export function KehadiranInput() {
       <DrawerContent>
         <DrawerHeader className="text-left">
           <DrawerTitle>Kehadiran aktual</DrawerTitle>
-          <DrawerDescription>
+          {/* <DrawerDescription>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </DrawerDescription>
+          </DrawerDescription> */}
         </DrawerHeader>
         <KehadiranForm className="px-4" />
         <DrawerFooter className="pt-2">
