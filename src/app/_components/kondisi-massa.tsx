@@ -39,9 +39,9 @@ export function KondisiPraDayInput() {
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Kondisi pra-day</DialogTitle>
-            {/* <DialogDescription>
+            <DialogDescription>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </DialogDescription> */}
+            </DialogDescription>
           </DialogHeader>
           <KondisiForm />
         </DialogContent>
@@ -57,9 +57,9 @@ export function KondisiPraDayInput() {
       <DrawerContent>
         <DrawerHeader className="text-left">
           <DrawerTitle>Kondisi pra-day</DrawerTitle>
-          {/* <DrawerDescription>
+          <DrawerDescription>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </DrawerDescription> */}
+          </DrawerDescription>
         </DrawerHeader>
         <KondisiForm className="px-4" />
         <DrawerFooter className="pt-2">
