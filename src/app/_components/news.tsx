@@ -55,32 +55,32 @@ export async function News() {
             </Link>
           </div>
         </div>
-        <div>
-          <p className="font-bluecashews pb-2 text-center text-2xl font-black">PLACEHOLDER</p>
+        <div className="min-w-fit">
+          {/* <p className="font-bluecashews pb-2 text-center text-2xl font-black">PLACEHOLDER</p>
           <p className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy
             text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
             survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was
             popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
             publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-          </p>
-          <p className="font-bluecashews pb-2 text-center text-2xl font-black">perizinan heading</p>
+          </p> */}
+          <p className="font-bluecashews pb-2 text-center text-2xl font-black">Perizinan</p>
           <PerizinanStatus />
-          <p className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
+          {/* <p className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy
             text ever since the 1500s,
-          </p>
-          <div className="flex flex-row justify-around pt-3 pb-5">
+          </p> */}
+          <div className="flex flex-row justify-around pt-3 gap-3 pb-5">
             <PerizinanInput />
             <PerizinanBuktiMenyusulInput />
             <KondisiPraDayInput />
           </div>
-          <p className="font-bluecashews pb-2 text-center text-2xl font-black">absensi heading</p>
+          <p className="font-bluecashews pb-2 text-center text-2xl font-black">Kehadiran aktual</p>
           <HadirAktualStatus />
-          <p className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
+          {/* <p className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy
             text ever since the 1500s,
-          </p>
+          </p> */}
           <div className="flex flex-row justify-around pt-3 pb-5">
             <KehadiranInput />
           </div>
