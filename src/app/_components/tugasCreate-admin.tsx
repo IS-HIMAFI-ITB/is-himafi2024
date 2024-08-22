@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { api } from "~/trpc/react";
 import { FormEvent } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 
 export function TugasCreateAdmin() {
@@ -23,46 +25,51 @@ export function TugasCreateAdmin() {
     };
 
     return (
-        <div className="w-full max-w-xs">
-            <h1>Create tugas</h1>
+        <div className="bg-violet-100 py-5 content-center container w-full max-w-xs border border-violet-400 rounded-lg drop-shadow-md">
+            <h1 className="relative text-4xl font-extrabold text-violet-700 z-20">Create Tugas</h1>
+            <div className="absolute -inset-2 z-0">
+            <div
+                className="w-full h-full max-w-sm mx-auto lg:mx-0 opacity-30 blur-lg bg-gradient-to-r from-violet-400 via-pink-500 to-violet-600">
+            </div>
+            </div>
             <form 
                 onSubmit={handleSubmit}
-                className='flex flex-col gap-4 mt-10 items-center justify-center text-[hsl(0,0,0)]'
+                className='relative flex flex-col gap-4 mt-10 items-center justify-center text-[hsl(0,0,0)]'
             >
-                <input 
+                <Input 
                     value={formcontent.judul} 
                     onChange={({ target }) => setFormcontent({ ...formcontent, judul: target.value })}
-                    type="text" placeholder='judul' />
-                <input 
+                    type="text" placeholder='Judul' />
+                <Input 
                     value={formcontent.body} 
                     onChange={({ target }) => setFormcontent({ ...formcontent, body: target.value })}
-                    type="text" placeholder='body' />
-                <input 
+                    type="text" placeholder='Body' />
+                <Input 
                     value={formcontent.perintahMisi} 
                     onChange={({ target }) => setFormcontent({ ...formcontent, perintahMisi: target.value })}
-                    type="text" placeholder='perintah misi' />
-                <input 
+                    type="text" placeholder='Perintah misi' />
+                <Input 
                     value={formcontent.attachment} 
                     onChange={({ target }) => setFormcontent({ ...formcontent, attachment: target.value })}
-                    type="text" placeholder='link attachment' />
-                <input 
+                    type="text" placeholder='Link attachment' />
+                <Input 
                     value={formcontent.deadline} 
                     onChange={({ target }) => setFormcontent({ ...formcontent, deadline: target.value })}
                     type="date" />
-                <input 
+                <Input 
                     value={formcontent.targetNimPesertaString} 
                     onChange={({ target }) => setFormcontent({ ...formcontent, targetNimPesertaString: target.value })}
-                    type="text" placeholder='targetNimPeserta (comma separated no whitespace)' />
-                <label className="text-[#FFFFFF]">
+                    type="text" placeholder='TargetNimPeserta (comma separated no whitespace)' />
+                <label className="z-10 text-violet-700 font-bold flex items-center gap-2">
                     <input
                         type="checkbox"
                         onChange={() => {setFormcontent({ ...formcontent, tugasSpesial: !formcontent.tugasSpesial });
                             }}
-                    />Misi spesial
+                    />Misi Spesial
                 </label>
-                <button className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20 text-white"
+                <Button className="z-10 text-violet-100 text-xl bg-black rounded-xl px-5 py-auto hover:cursor-pointer hover:bg-slate-700 transition duration-300 ease-in-out"
                     type="submit"> Submit
-                </button>
+                </Button>
             </form>
         </div>
     );

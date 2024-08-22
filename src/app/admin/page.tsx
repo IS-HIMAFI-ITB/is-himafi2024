@@ -20,7 +20,7 @@ export default async function AdminPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+    <div className="flex min-h-screen bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <div className="absolute top-0 right-0 h-16">
         <div className="flex h-full flex-row items-center justify-center gap-2">
           <p className="text-center text-m text-white">
@@ -38,23 +38,30 @@ export default async function AdminPage() {
           </Link>
         </div>
       </div>
-      <div className="flex min-h-screen flex-col items-center justify-center">
+      <div className="container flex min-h-screen flex-col items-center justify-center">
         <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
           Admin <span className="text-[hsl(280,100%,70%)]">Page</span>
         </h1>
-        <CreateDayForm />
-        <ChooseDay />
-        <SynchronizeSheetsCMS />
-        <PostCreateAdmin />
-        <TugasCreateAdmin />
-        <h1>start of postlist</h1>
-        <PostList />
-        <h1>end of postlist</h1>
-        <h1>start of tugaslist</h1>
-        <TugasListAdmin />
-        <h1>end of tugaslist</h1>
-        <h1>backend stuff:</h1>
-        <MarkOrphanedSubmissions />
+        <div className="container flex mt-10">
+          <CreateDayForm />
+          <ChooseDay />
+        </div>
+        <div className="container flex mt-10">
+          <PostCreateAdmin />
+          <TugasCreateAdmin />
+        </div>
+        <div className="mt-10">
+          <h1>List Post</h1>
+          <PostList />
+        </div>
+        <div className="border rounded-lg p-5 t-10">
+          <h1>List Tugas</h1>
+          <TugasListAdmin />
+        </div>
+        <div className="mt-10">
+          <h1>Data</h1>
+          <MarkOrphanedSubmissions />
+        </div>
       </div>
     </div>
   );
