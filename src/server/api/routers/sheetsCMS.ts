@@ -16,7 +16,7 @@ const newsRange = {
   end: "D",
 };
 const perizinanRange = {
-  sheetName: "Perizinan & presensi",
+  sheetName: "ngisiperizinan",
   start: "A2",
   end: "Z",
 };
@@ -46,7 +46,7 @@ const izinTidakHadirRange = {
   end: "Z",
 };
 const statusIzinRange = {
-  sheetName: "Perizinan & presensi",
+  sheetName: "ngisiperizinan",
   start: "J2",
   end: "Z",
 };
