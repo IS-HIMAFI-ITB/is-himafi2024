@@ -49,7 +49,7 @@ export async function News() {
             </Link>
             <Link
               href={news.bukuMerah}
-              className="rounded-full bg-red-700 px-10 py-3 font-semibold text-white no-underline transition hover:bg-red-600"
+              className="rounded-full bg-red-500 px-10 py-3 font-semibold text-white no-underline transition hover:bg-red-400"
             >
               Buku merah
             </Link>
