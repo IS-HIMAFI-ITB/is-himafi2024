@@ -22,7 +22,7 @@ export default async function PesertaPage() {
   });
 
   return (
-    <div className="flex min-h-screen flex-col bg-[url('/background.png')] bg-cover text-white">
+    <div className="flex min-h-screen flex-col bg-[url('/day3-background.png')] bg-cover text-white">
       <div
         className="absolute right-0 top-0 max-h-[20rem] max-w-[25rem] bg-local" // session status bar
         style={{
@@ -60,7 +60,7 @@ export default async function PesertaPage() {
       </div>
       <div className="flex min-h-screen flex-col items-center justify-center pt-60">
         <h1 className="font-bluecashews text-3xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-          Intellektuelle<span className="text-[#ffdc90]">schule</span>
+          Intellektuelle<span className="text-[#d04e34]">schule</span>
         </h1>
         <p className="w-9/12 pt-10 text-center text-base font-extrabold tracking-widest text-[#fff8e8] md:text-xl">
           Selamat datang, para kurcaci pengembara cahaya. Hutan yang lebat
@@ -76,7 +76,7 @@ export default async function PesertaPage() {
           <TugasListPeserta />
         </div>
         <div className="flex flex-col items-center justify-center pb-20 pt-10">
-          <p className="text-center font-bluecashews text-base font-extrabold tracking-widest text-[#772da8] md:text-2xl">
+          <p className="text-center font-bluecashews text-base font-extrabold tracking-widest text-[#fff8e8] md:text-2xl">
             Teman adalah saudara <br />
             Saudara adalah keluarga <br />
             Kebersamaan adalah segalanya <br />

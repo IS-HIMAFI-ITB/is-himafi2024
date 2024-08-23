@@ -152,7 +152,7 @@ export function TugasListPeserta() {
       <div
         className="bg-local"
         style={{
-          backgroundImage: `url('/billboard-desktop-top.png')`,
+          backgroundImage: `url('/day 3 - billboard_top.png')`,
           backgroundSize: "100% ",
         }}
       >
@@ -161,7 +161,7 @@ export function TugasListPeserta() {
       <div
         className="bg-local bg-repeat-y"
         style={{
-          backgroundImage: `url('/billboard-desktop-body.png')`,
+          backgroundImage: `url('/day 3 - billboard_body.png')`,
           backgroundSize: "100% ",
         }}
       >
@@ -178,7 +178,7 @@ export function TugasListPeserta() {
                     key={tugas.id}
                     className="relative bg-local"
                     style={{
-                      backgroundImage: `url('/Picsart_24-08-10_09-41-13-852.png')`,
+                      backgroundImage: `url('day 3 - paper.png')`,
                       backgroundRepeat: "no-repeat",
                       backgroundSize: "100% 100%",
                     }}
@@ -192,7 +192,7 @@ export function TugasListPeserta() {
                         height={400}
                       ></Image>
                     )}
-                    <div className="relative z-10 m-[4rem] pt-20 text-center font-bold text-purple-900 sm:m-[7rem]">
+                    <div className="relative z-10 m-[4rem] pt-20 text-center font-bold text-amber-900 sm:m-[7rem]">
                       <h1 className="text-[2rem] font-extrabold tracking-tight">
                         {tugas.judul}
                       </h1>
@@ -217,7 +217,7 @@ export function TugasListPeserta() {
                         {" "}
                         {tugas.attachment && (
                           <Link
-                            className="rounded bg-purple-900/100 px-10 py-3 font-roman font-semibold text-purple-200 no-underline transition hover:bg-purple-900/70"
+                            className="rounded bg-orange-950 px-10 py-3 font-roman font-semibold text-yellow-50 no-underline transition hover:bg-orange-700"
                             href={tugas.attachment ? tugas.attachment : "#"}
                           >
                             Attachment
@@ -254,7 +254,7 @@ export function TugasListPeserta() {
                             />
                             <button
                               type="submit"
-                              className="rounded bg-purple-900/100 px-4 py-1 font-semibold text-purple-200 no-underline transition hover:bg-purple-900/70"
+                              className="rounded bg-orange-800 px-4 py-1 font-semibold text-yellow-50 no-underline transition hover:bg-orange-700"
                             >
                               Submit link
                             </button>
@@ -262,7 +262,7 @@ export function TugasListPeserta() {
                         </form>
                       </div>
                       <UploadButton
-                        className="ut-label:'ese' ut-button:bg-purple-900/100"
+                        className="ut-label:'ese' ut-button:bg-orange-900"
                         endpoint="blobUploader"
                         onClientUploadComplete={async (res) => {
                           console.log("Files: ", res[0]!.url);
@@ -311,7 +311,7 @@ export function TugasListPeserta() {
       <div
         className="bg-local"
         style={{
-          backgroundImage: `url('/billboard-desktop-bottom.png')`,
+          backgroundImage: `url('day 3 - billboard_bottom.png')`,
           backgroundSize: "100% ",
         }}
       >
