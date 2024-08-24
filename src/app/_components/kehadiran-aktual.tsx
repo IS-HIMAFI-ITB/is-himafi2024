@@ -104,7 +104,7 @@ function KehadiranForm({ className }: React.ComponentProps<"form">) {
   return (
     <form onSubmit={handleSubmit} className={cn("grid items-start gap-4", className)}>
       <div className="grid gap-2">
-        <Label htmlFor="pass">Masukkan Password</Label>
+        <Label htmlFor="pass">Password akan diberikan oleh panitia</Label>
         <Input
           type="text"
           id="pass"
