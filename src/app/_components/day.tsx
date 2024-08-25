@@ -26,6 +26,9 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { Slider } from "@/components/ui/slider";
 import { fisikType } from "@prisma/client";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { redirect } from "next/navigation";
 
 export function CreateDayForm() {
   const [formcontent, setFormcontent] = useState({ name: "", sheetsCMSId: "", passwordAbsensi: "" });
@@ -165,6 +168,12 @@ export function ChooseDay() {
       >
         open perizinan
       </button>
+      <br />
+      <div className="my-4 justify-center items-center flex flex-auto rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20">
+        <Link href={`https://docs.google.com/spreadsheets/d/${days?.find((day) => day.isCurrent)?.sheetsCMSId}`}>
+          Sheets news & perizinan
+        </Link>
+      </div>
     </div>
   );
 }
