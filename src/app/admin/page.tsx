@@ -38,15 +38,15 @@ export default async function AdminPage() {
           </Link>
         </div>
       </div>
-      <div className="container flex min-h-screen flex-col items-center justify-center">
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
+      <div className="container grid grid-cols-2 min-h-screen items-center justify-center">
+        <h1 className="text-5xl font-extrabold tracking-tight col-span-2 text-center sm:text-[5rem]">
           Admin <span className="text-[hsl(280,100%,70%)]">Page</span>
         </h1>
-        <div className="container flex mt-10">
+        <div className="container flex mt-10 gap-6 col-span-2">
           <CreateDayForm />
           <ChooseDay />
         </div>
-        <div className="container flex mt-10">
+        <div className="container flex mt-10 gap-6 col-span-2">
           <PostCreateAdmin />
           <TugasCreateAdmin />
         </div>
@@ -54,11 +54,11 @@ export default async function AdminPage() {
           <h1>List Post</h1>
           <PostList />
         </div>
-        <div className="border rounded-lg p-5 t-10">
+        <div className="border rounded-lg p-5 t-10 col-span-2">
           <h1>List Tugas</h1>
           <TugasListAdmin />
         </div>
-        <div className="mt-10">
+        <div className="mt-10 col-span-2">
           <h1>Data</h1>
           <MarkOrphanedSubmissions />
         </div>
