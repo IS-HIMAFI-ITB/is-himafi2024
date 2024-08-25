@@ -11,12 +11,11 @@ import { UploadButton } from "~/utils/uploadthing";
 import Image from "next/image";
 import { url } from "inspector";
 import { Url } from "next/dist/shared/lib/router/router";
+import { Badge } from "~/components/ui/badge";
 
 export function TugasListAdmin() {
-  const { data: tugass, refetch: refetchTugass } =
-    api.tugasAdmin.getAll.useQuery();
-  const { data: submissions, refetch: refetchSubmissions } =
-    api.tugasAdmin.getTugasSubmissions.useQuery();
+  const { data: tugass, refetch: refetchTugass } = api.tugasAdmin.getAll.useQuery();
+  const { data: submissions, refetch: refetchSubmissions } = api.tugasAdmin.getTugasSubmissions.useQuery();
   const hideTugas = api.tugasAdmin.hideTugas.useMutation();
   const unhideTugas = api.tugasAdmin.unhideTugas.useMutation();
 
@@ -47,9 +46,7 @@ export function TugasListAdmin() {
             </p>
             <p>{tugas.body}</p>
             <p>{tugas.perintahMisi}</p>
-            <Link href={tugas.attachment ? tugas.attachment : "#"}>
-              Attachments
-            </Link>
+            <Link href={tugas.attachment ? tugas.attachment : "#"}>Attachments</Link>
             <p>deadline: {tugas.deadline?.toString()}</p>
             <p>isTugasSpesial: {tugas.isTugasSpesial ? "true" : "false"}</p>
             <p>hidden: {tugas.hidden ? "true" : "false"}</p>
@@ -71,9 +68,7 @@ export function TugasListAdmin() {
               unhide tugas
             </button>
             <p>targetNimPeserta:</p>
-            {tugas.targetNimPeserta?.map((targetNim) => (
-              <p key={targetNim}>{targetNim}</p>
-            ))}
+            {tugas.targetNimPeserta?.map((targetNim) => <p key={targetNim}>{targetNim}</p>)}
             <ul className="grid grid-cols-1 gap-4">
               <p>Submissions: </p>
               {submissions?.map(
@@ -107,9 +102,7 @@ export function TugasListAdmin() {
                           }
                         </b>
                       </p>
-                      <Link href={submission.submissionUrl as Url}>
-                        {submission.filename}
-                      </Link>
+                      <Link href={submission.submissionUrl as Url}>{submission.filename}</Link>
                     </li>
                   ),
               )}
@@ -123,10 +116,8 @@ export function TugasListAdmin() {
 
 export function TugasListPeserta() {
   const userSession = api.user.getUserSession.useQuery();
-  const { data: tugass, refetch: refetchTugass } =
-    api.tugasAdmin.getAll.useQuery();
-  const { data: tugasSubmits, refetch: refetchTugasSubmits } =
-    api.submitPeserta.getAll.useQuery();
+  const { data: tugass, refetch: refetchTugass } = api.tugasAdmin.getAll.useQuery();
+  const { data: tugasSubmits, refetch: refetchTugasSubmits } = api.submitPeserta.getAll.useQuery();
   const createSubmission = api.submitPeserta.submitPesertaCreate.useMutation();
   const hideSubmission = api.submitPeserta.hideSubmission.useMutation();
 
@@ -170,10 +161,7 @@ export function TugasListPeserta() {
             {tugass?.map(
               (tugas) =>
                 tugas.hidden === false &&
-                (tugas.targetNimPeserta.length === 0 ||
-                tugas.targetNimPeserta.includes(userSession.data!.nim)
-                  ? true
-                  : false) && (
+                (tugas.targetNimPeserta.length === 0 || tugas.targetNimPeserta.includes(userSession.data!.nim) ? true : false) && (
                   <li
                     key={tugas.id}
                     className="relative bg-local"
@@ -193,9 +181,11 @@ export function TugasListPeserta() {
                       ></Image>
                     )}
                     <div className="relative z-10 m-[4rem] pt-20 text-center font-bold text-amber-900 sm:m-[7rem]">
-                      <h1 className="text-[2rem] font-extrabold tracking-tight">
-                        {tugas.judul}
-                      </h1>
+                      <h1 className="text-[2rem] font-extrabold tracking-tight">{tugas.judul}</h1>
+
+                      <p className="items-center justify-center flex">
+                        {tugas.isTugasSpesial && <Badge>Misi spesial: tidak wajib dikerjakan</Badge>}
+                      </p>
                       <p className="font-black">
                         Deadline:{" "}
                         {tugas.deadline?.toLocaleString("en-GB", {
@@ -206,12 +196,8 @@ export function TugasListPeserta() {
                           minute: "numeric",
                         })}
                       </p>
-                      <p className="whitespace-pre-wrap text-justify">
-                        {tugas.body}
-                      </p>
-                      <p className="whitespace-pre-wrap pt-6 text-center font-serif font-black">
-                        {tugas.perintahMisi}
-                      </p>
+                      <p className="whitespace-pre-wrap text-justify">{tugas.body}</p>
+                      <p className="whitespace-pre-wrap pt-6 text-center font-serif font-black">{tugas.perintahMisi}</p>
                       {/* <h1 className="text-center font-black">{tugas.perintahMisi}</h1> */}
                       <div className="pt-4">
                         {" "}
@@ -229,9 +215,7 @@ export function TugasListPeserta() {
                         <form
                           onSubmit={async (e) => {
                             e.preventDefault();
-                            const formData = new FormData(
-                              e.target as HTMLFormElement,
-                            );
+                            const formData = new FormData(e.target as HTMLFormElement);
                             const link = formData.get("link") as string;
                             await createSubmission.mutateAsync({
                               tugasId: tugas.id,
@@ -283,20 +267,9 @@ export function TugasListPeserta() {
                         {tugasSubmits?.map(
                           (submission) =>
                             submission.submissionTugasId === tugas.id && (
-                              <div
-                                className="flex justify-between px-10"
-                                key={submission.id}
-                              >
-                                <Link href={submission.submissionUrl as Url}>
-                                  {submission.filename
-                                    ? submission.filename
-                                    : "file"}
-                                </Link>
-                                <button
-                                  onClick={() => hideTugas(submission.id)}
-                                >
-                                  Delete
-                                </button>
+                              <div className="flex justify-between px-10" key={submission.id}>
+                                <Link href={submission.submissionUrl as Url}>{submission.filename ? submission.filename : "file"}</Link>
+                                <button onClick={() => hideTugas(submission.id)}>Delete</button>
                               </div>
                             ),
                         )}
