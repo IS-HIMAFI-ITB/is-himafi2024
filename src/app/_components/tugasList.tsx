@@ -173,7 +173,7 @@ export function TugasListPeserta() {
                   >
                     {tugas.isTugasSpesial && (
                       <Image
-                        className="absolute bottom-0 left-0 right-0 top-0 m-auto opacity-40"
+                        className="absolute bottom-0 left-0 right-0 top-0 m-auto opacity-20"
                         src="/logo-himafi-old-stamp.png"
                         alt=""
                         width={400}
