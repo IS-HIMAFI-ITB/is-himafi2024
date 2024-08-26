@@ -186,7 +186,7 @@ export function TugasListPeserta() {
                       <p className="items-center justify-center flex">
                         {tugas.isTugasSpesial && <Badge>Misi spesial: tidak wajib dikerjakan</Badge>}
                       </p>
-                      <p className="font-black">
+                      <p className="font-bold font-sans">
                         Deadline:{" "}
                         {tugas.deadline?.toLocaleString("en-GB", {
                           year: "numeric",
