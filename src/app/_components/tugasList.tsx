@@ -183,9 +183,9 @@ export function TugasListPeserta() {
                     <div className="relative z-10 m-[4rem] pt-20 text-center font-bold text-amber-900 sm:m-[7rem]">
                       <h1 className="text-[2rem] font-extrabold tracking-tight">{tugas.judul}</h1>
 
-                      <p className="items-center justify-center flex">
+                      <div className="items-center justify-center flex">
                         {tugas.isTugasSpesial && <Badge>Misi spesial: tidak wajib dikerjakan</Badge>}
-                      </p>
+                      </div>
                       <p className="font-bold font-sans">
                         Deadline:{" "}
                         {tugas.deadline?.toLocaleString("en-GB", {
