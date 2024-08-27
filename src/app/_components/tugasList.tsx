@@ -39,7 +39,7 @@ export function TugasListAdmin() {
       >
         Refetch
       </button>
-      <ul className="grid grid-cols-1 gap-4">
+      <ul className="grid grid-cols-1 gap-4 text-sm overflow-auto md:overflow-hidden md:text-lg">
         {tugass?.map((tugas) => (
           <li key={tugas.id}>
             <p>

@@ -20,8 +20,8 @@ export default async function AdminPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="absolute top-0 right-0 h-16">
+    <div className="min-h-screen bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+      <div className="absolute top-0 right-0 h-16 max-h-16">
         <div className="flex h-full flex-row items-center justify-center gap-2">
           <p className="text-center text-m text-white">
             {session && (
@@ -38,15 +38,17 @@ export default async function AdminPage() {
           </Link>
         </div>
       </div>
-      <div className="container grid grid-cols-2 min-h-screen items-center justify-center">
-        <h1 className="text-5xl font-extrabold tracking-tight col-span-2 text-center sm:text-[5rem]">
+      <div className="container min-h-screen items-center justify-center">
+        <h1 className="text-sm font-extrabold tracking-tight text-center md:text-5xl">
           Admin <span className="text-[hsl(280,100%,70%)]">Page</span>
         </h1>
-        <div className="container flex mt-10 gap-6 col-span-2">
+        <div className="container grid grid-cols-1 gap-6 mt-10 md:grid-cols-2">
           <CreateDayForm />
-          <ChooseDay />
+          <div className="">
+            <ChooseDay />
+            </div>
         </div>
-        <div className="container flex mt-10 gap-6 col-span-2">
+        <div className="container grid grid-cols-1 gap-6 mt-10 md:grid-cols-2">
           <PostCreateAdmin />
           <TugasCreateAdmin />
         </div>
@@ -54,11 +56,11 @@ export default async function AdminPage() {
           <h1>List Post</h1>
           <PostList />
         </div>
-        <div className="border rounded-lg p-5 t-10 col-span-2">
+        <div className="border rounded-lg p-5 t-10 grid grid-cols-1 mt-10">
           <h1>List Tugas</h1>
           <TugasListAdmin />
         </div>
-        <div className="mt-10 col-span-2">
+        <div className="mt-10 col-span-2 text-sm">
           <h1>Data</h1>
           <MarkOrphanedSubmissions />
         </div>

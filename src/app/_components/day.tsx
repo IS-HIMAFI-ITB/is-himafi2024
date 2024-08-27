@@ -57,7 +57,7 @@ export function CreateDayForm() {
   };
 
   return (
-    <div className="bg-violet-100 py-5 content-center container w-full max-w-xs border border-violet-400 rounded-lg drop-shadow-md">
+    <div className="bg-violet-100 py-5 content-center container w-full max-w-xs border border-violet-400 rounded-lg drop-shadow-md size-full">
       <h1 className="relative text-5xl font-extrabold text-violet-700 z-20">Create Day</h1>
       <div className="absolute -inset-2 z-0">
             <div
