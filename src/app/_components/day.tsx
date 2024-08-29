@@ -194,7 +194,7 @@ export function ChooseDay() {
         </Button>
       </div>
       <br />
-      <div className="relative flex flex-row gap-4">
+      <div className="relative flex flex-col lg:flex-row gap-4">
         <div className=" relative justify-center items-center flex flex-auto rounded-full bg-black px-10 py-3 font-semibold no-underline transition hover:bg-slate-700">
           <Link href={`https://docs.google.com/spreadsheets/d/${days?.find((day) => day.isCurrent)?.sheetsCMSId}`}>
             Sheets news & perizinan
