@@ -38,30 +38,27 @@ export default async function AdminPage() {
           </Link>
         </div>
       </div>
-      <div className="container min-h-screen items-center justify-center">
-        <h1 className="text-sm font-extrabold tracking-tight text-center md:text-5xl">
+      <div className="min-h-screen items-center justify-center">
+        <h1 className="text-5xl font-extrabold tracking-tight text-center py-20">
           Admin <span className="text-[hsl(280,100%,70%)]">Page</span>
         </h1>
-        <div className="container grid grid-cols-1 gap-6 mt-10 md:grid-cols-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:p-20">
           <CreateDayForm />
-          <div className="">
-            <ChooseDay />
-            </div>
-        </div>
-        <div className="container grid grid-cols-1 gap-6 mt-10 md:grid-cols-2">
-          <PostCreateAdmin />
           <TugasCreateAdmin />
-        </div>
-        <div className="mt-10">
+          <div className="lg:col-span-2 ">
+            <ChooseDay />
+          </div>
+          {/* <div className="mt-10">
           <h1>List Post</h1>
           <PostList />
+        </div> */}
         </div>
-        <div className="border rounded-lg p-5 t-10 grid grid-cols-1 mt-10">
+        <div className="border rounded-lg p-5 t-10 mt-10">
           <h1>List Tugas</h1>
           <TugasListAdmin />
         </div>
-        <div className="mt-10 col-span-2 text-sm">
-          <h1>Data</h1>
+        <div className="mt-10  text-sm">
+          <h1>Backend operations:</h1>
           <MarkOrphanedSubmissions />
         </div>
       </div>

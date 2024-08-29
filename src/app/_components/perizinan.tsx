@@ -51,9 +51,9 @@ export function PerizinanInput() {
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Kehadiran & Perizinan</DialogTitle>
-            <DialogDescription>
+            {/* <DialogDescription>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </DialogDescription>
+            </DialogDescription> */}
           </DialogHeader>
           <PerizinanForm />
         </DialogContent>
@@ -69,9 +69,9 @@ export function PerizinanInput() {
       <DrawerContent>
         <DrawerHeader className="text-left">
           <DrawerTitle>Kehadiran & Perizinan</DrawerTitle>
-          <DrawerDescription>
+          {/* <DrawerDescription>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </DrawerDescription>
+          </DrawerDescription> */}
         </DrawerHeader>
         <PerizinanForm className="px-4" />
         <DrawerFooter className="pt-2">

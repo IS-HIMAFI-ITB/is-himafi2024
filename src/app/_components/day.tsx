@@ -60,10 +60,10 @@ export function CreateDayForm() {
   };
 
   return (
-    <div className="bg-violet-100 py-5 content-center container w-full max-w-xs border border-violet-400 rounded-lg drop-shadow-md size-full">
-      <h1 className="relative text-5xl font-extrabold text-violet-700 z-20">Create Day</h1>
+    <div className="bg-violet-100 p-10 content-center w-full  border border-violet-400 rounded-lg drop-shadow-md size-full">
+      <h1 className="relative text-5xl font-extrabold text-violet-700 z-20 text-center">Create Day</h1>
       <div className="absolute -inset-2 z-0">
-        <div className="w-full h-full max-w-sm mx-auto lg:mx-0 opacity-30 blur-lg bg-gradient-to-r from-violet-400 via-pink-500 to-violet-600"></div>
+        <div className="w-full h-full  mx-auto lg:mx-0 opacity-30 blur-lg bg-gradient-to-r from-violet-400 via-pink-500 to-violet-600"></div>
       </div>
       <form onSubmit={handleSubmit} className="z-10 relative flex flex-col gap-4 mt-10 items-center justify-center text-[hsl(0,0,0)]">
         <Input
@@ -129,11 +129,11 @@ export function ChooseDay() {
     }
   };
   return (
-    <div className="bg-violet-100 container w-full max-w-xs py-5 bg-blend-screen border border-violet-400 rounded-lg drop-shadow-md">
+    <div className="bg-violet-100 w-full p-10 bg-blend-screen border border-violet-400 rounded-lg drop-shadow-md">
       <div className="absolute -inset-2 z-0">
-        <div className="z-0 w-full h-full max-w-sm mx-auto lg:mx-0 opacity-30 blur-lg bg-gradient-to-r from-violet-400 via-pink-500 to-violet-600"></div>
+        <div className="z-0 w-full h-full  mx-auto lg:mx-0 opacity-30 blur-lg bg-gradient-to-r from-violet-400 via-pink-500 to-violet-600"></div>
       </div>
-      <h1 className="relative text-5xl font-extrabold text-violet-700 z-20">Update Day</h1>
+      <h1 className="relative text-5xl font-extrabold text-violet-700 z-20 text-center">Update Day</h1>
       <form onSubmit={handleSubmit} className={cn("mt-5 z-10 grid items-start gap-4")}>
         <div className="z-20 grid gap-2">
           <Select onValueChange={(value) => setCurrentDayId(parseInt(value))}>
@@ -161,16 +161,16 @@ export function ChooseDay() {
         </Button>
       </form>
       <div className="z-10 grid relative gap-2 mt-5 text-pretty">
-        <div className="text-violet-800 grid gap-2">id: {days?.find((day) => day.isCurrent)?.id}</div>
-        <div className="text-violet-800 grid gap-2">current day: {days?.find((day) => day.isCurrent)?.name}</div>
+        <div className="text-violet-800 grid gap-2">Day yang ditampilkan: {days?.find((day) => day.isCurrent)?.name}</div>
+        <div className="text-violet-800 grid gap-2">dayId: {days?.find((day) => day.isCurrent)?.id}</div>
         <div className="text-violet-800 grid gap-2">sheetsCMSId: {days?.find((day) => day.isCurrent)?.sheetsCMSId}</div>
-        <div className="text-violet-800 grid gap-2">passwordAbsensi: {days?.find((day) => day.isCurrent)?.passwordAbsensi}</div>
+        <div className="text-violet-800 grid gap-2">Password absensi aktual: {days?.find((day) => day.isCurrent)?.passwordAbsensi}</div>
         <div className="text-violet-800 grid gap-2">
-          isAcceptingPerizinan: {days?.find((day) => day.isCurrent)?.isAcceptingPerizinan ? "true" : "false"}
+          Menerima perizinan: {days?.find((day) => day.isCurrent)?.isAcceptingPerizinan ? "ya" : "tidak"}
         </div>
       </div>
       <div className="relative z-20 flex gap-4 mt-5">
-        <button
+        <Button
           className="text-violet-100  bg-black rounded-xl px-5 py-auto hover:cursor-pointer hover:bg-slate-700 transition duration-300 ease-in-out"
           onClick={async () => {
             // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
@@ -179,9 +179,9 @@ export function ChooseDay() {
           }}
         >
           Close Perizinan
-        </button>
+        </Button>
         <br />
-        <button
+        <Button
           className="text-violet-100 bg-black rounded-xl px-5 py-auto hover:cursor-pointer hover:bg-slate-700 transition duration-300 ease-in-out"
           onClick={async () => {
             // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
@@ -190,10 +190,10 @@ export function ChooseDay() {
           }}
         >
           Open Perizinan
-        </button>
+        </Button>
       </div>
       <br />
-      <div className="my-4 justify-center items-center flex flex-auto rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20">
+      <div className=" relative justify-center items-center flex flex-auto rounded-full bg-black px-10 py-3 font-semibold no-underline transition hover:bg-slate-700">
         <Link href={`https://docs.google.com/spreadsheets/d/${days?.find((day) => day.isCurrent)?.sheetsCMSId}`}>
           Sheets news & perizinan
         </Link>
