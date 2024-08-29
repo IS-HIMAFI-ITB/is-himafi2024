@@ -20,8 +20,8 @@ export default async function AdminPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="absolute top-0 right-0 h-16">
+    <div className="min-h-screen bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+      <div className="absolute top-0 right-0 h-16 max-h-16">
         <div className="flex h-full flex-row items-center justify-center gap-2">
           <p className="text-center text-m text-white">
             {session && (
@@ -38,23 +38,29 @@ export default async function AdminPage() {
           </Link>
         </div>
       </div>
-      <div className="flex min-h-screen flex-col items-center justify-center">
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
+      <div className="min-h-screen items-center justify-center">
+        <h1 className="text-5xl font-extrabold tracking-tight text-center py-20">
           Admin <span className="text-[hsl(280,100%,70%)]">Page</span>
         </h1>
-        <CreateDayForm />
-        <ChooseDay />
-        <SynchronizeSheetsCMS />
-        <PostCreateAdmin />
-        <TugasCreateAdmin />
-        <h1>start of postlist</h1>
-        <PostList />
-        <h1>end of postlist</h1>
-        <h1>start of tugaslist</h1>
-        <TugasListAdmin />
-        <h1>end of tugaslist</h1>
-        <h1>backend stuff:</h1>
-        <MarkOrphanedSubmissions />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:p-20">
+          <CreateDayForm />
+          <TugasCreateAdmin />
+          <div className="lg:col-span-2 ">
+            <ChooseDay />
+          </div>
+          {/* <div className="mt-10">
+          <h1>List Post</h1>
+          <PostList />
+        </div> */}
+        </div>
+        <div className="border rounded-lg p-5 t-10 mt-10">
+          <h1>List Tugas</h1>
+          <TugasListAdmin />
+        </div>
+        <div className="mt-10  text-sm">
+          <h1>Backend operations:</h1>
+          <MarkOrphanedSubmissions />
+        </div>
       </div>
     </div>
   );

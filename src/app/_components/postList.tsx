@@ -15,7 +15,7 @@ export function PostList() {
         >
             Refetch 
         </button>
-        <ul className="grid gap-4 grid-cols-1">
+        <ul className="grid gap-4 grid-cols-1 max-w-screen-sm">
             {posts?.map((post) => (
                 <li key={post.id} >
                     <p><b>{post.judul}</b></p>
