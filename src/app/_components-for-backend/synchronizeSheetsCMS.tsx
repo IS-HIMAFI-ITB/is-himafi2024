@@ -6,6 +6,7 @@ export const SynchronizeSheetsCMS = () => {
   const synchronizeSheetsData = api.sheetsCMS.synchronizeSheetsData.useMutation();
   return (
     <Button
+      className="relative justify-center items-center flex flex-auto rounded-full bg-black px-10 py-7 font-semibold no-underline transition hover:bg-slate-700 text-md"
       id="btn-synchronize"
       onClick={async () => {
         try {

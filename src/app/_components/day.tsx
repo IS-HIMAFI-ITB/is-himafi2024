@@ -29,6 +29,7 @@ import { fisikType } from "@prisma/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { redirect } from "next/navigation";
+import { SynchronizeSheetsCMS } from "../_components-for-backend/synchronizeSheetsCMS";
 
 export function CreateDayForm() {
   const [formcontent, setFormcontent] = useState({ name: "", sheetsCMSId: "", passwordAbsensi: "" });
@@ -193,10 +194,15 @@ export function ChooseDay() {
         </Button>
       </div>
       <br />
-      <div className=" relative justify-center items-center flex flex-auto rounded-full bg-black px-10 py-3 font-semibold no-underline transition hover:bg-slate-700">
-        <Link href={`https://docs.google.com/spreadsheets/d/${days?.find((day) => day.isCurrent)?.sheetsCMSId}`}>
-          Sheets news & perizinan
-        </Link>
+      <div className="relative flex flex-row gap-4">
+        <div className=" relative justify-center items-center flex flex-auto rounded-full bg-black px-10 py-3 font-semibold no-underline transition hover:bg-slate-700">
+          <Link href={`https://docs.google.com/spreadsheets/d/${days?.find((day) => day.isCurrent)?.sheetsCMSId}`}>
+            Sheets news & perizinan
+          </Link>
+        </div>
+        {/* <div className=" relative justify-center items-center flex flex-auto "> */}
+        <SynchronizeSheetsCMS />
+        {/* </div> */}
       </div>
     </div>
   );
