@@ -11,6 +11,12 @@ import { api } from "~/trpc/server";
 
 export async function News() {
   const news: any = (await api.sheetsCMS.extractNews())[0];
+  if (news.body == null) {
+    news.body = "";
+  }
+  if (news.instruksi == null) {
+    news.instruksi = "";
+  }
   return (
     <div
       className="font-roman flex w-[100vw] flex-col bg-local px-10 py-20 font-bold text-amber-900 md:w-[90vw] md:px-28"
@@ -24,9 +30,10 @@ export async function News() {
       <div className="flex flex-col justify-between gap-20 pb-4 text-justify lg:flex-row">
         <div>
           <p className="font-bluecashews pb-2 text-center text-2xl font-black">{news.headline}</p>
-          <p className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]">
-            {news.body}
-          </p>
+          <p
+            className="first-letter:float-left first-letter:text-[5rem] first-letter:font-black first-letter:uppercase first-letter:leading-[4.5rem]"
+            dangerouslySetInnerHTML={{ __html: news.body }}
+          ></p>
           {news.linkAttachments?.map((linkAttachment: any) =>
             linkAttachment[0] ? (
               <div className="py-3" key={linkAttachment}>
@@ -39,20 +46,24 @@ export async function News() {
               </div>
             ) : null,
           )}
-          <p className="pb-5 pt-2 text-center font-sans font-bold">{news.instruksi}</p>
+          <p className="pb-5 pt-2 text-center font-sans font-bold" dangerouslySetInnerHTML={{ __html: news.instruksi }}></p>
           <div className="flex flex-row justify-center gap-10">
-            <Link
-              href={news.bukuUngu}
-              className="rounded-full bg-violet-800 px-10 py-3 font-semibold text-white no-underline transition hover:bg-violet-700"
-            >
-              Buku ungu
-            </Link>
-            <Link
-              href={news.bukuMerah}
-              className="rounded-full bg-red-700 px-10 py-3 font-semibold text-white no-underline transition hover:bg-red-600"
-            >
-              Buku merah
-            </Link>
+            {news.bukuUngu && (
+              <Link
+                href={news.bukuUngu}
+                className="rounded-full bg-violet-800 px-10 py-3 font-semibold text-white no-underline transition hover:bg-violet-700"
+              >
+                Buku ungu
+              </Link>
+            )}
+            {news.bukuMerah && (
+              <Link
+                href={news.bukuMerah}
+                className="rounded-full bg-red-500 px-10 py-3 font-semibold text-white no-underline transition hover:bg-red-400"
+              >
+                Buku merah
+              </Link>
+            )}
           </div>
         </div>
         <div className="min-w-[20vw]">

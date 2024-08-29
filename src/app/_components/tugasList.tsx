@@ -11,12 +11,11 @@ import { UploadButton } from "~/utils/uploadthing";
 import Image from "next/image";
 import { url } from "inspector";
 import { Url } from "next/dist/shared/lib/router/router";
+import { Badge } from "~/components/ui/badge";
 
 export function TugasListAdmin() {
-  const { data: tugass, refetch: refetchTugass } =
-    api.tugasAdmin.getAll.useQuery();
-  const { data: submissions, refetch: refetchSubmissions } =
-    api.tugasAdmin.getTugasSubmissions.useQuery();
+  const { data: tugass, refetch: refetchTugass } = api.tugasAdmin.getAll.useQuery();
+  const { data: submissions, refetch: refetchSubmissions } = api.tugasAdmin.getTugasSubmissions.useQuery();
   const hideTugas = api.tugasAdmin.hideTugas.useMutation();
   const unhideTugas = api.tugasAdmin.unhideTugas.useMutation();
 
@@ -47,9 +46,7 @@ export function TugasListAdmin() {
             </p>
             <p>{tugas.body}</p>
             <p>{tugas.perintahMisi}</p>
-            <Link href={tugas.attachment ? tugas.attachment : "#"}>
-              Attachments
-            </Link>
+            <Link href={tugas.attachment ? tugas.attachment : "#"}>Attachments</Link>
             <p>deadline: {tugas.deadline?.toString()}</p>
             <p>isTugasSpesial: {tugas.isTugasSpesial ? "true" : "false"}</p>
             <p>hidden: {tugas.hidden ? "true" : "false"}</p>
@@ -71,9 +68,7 @@ export function TugasListAdmin() {
               unhide tugas
             </button>
             <p>targetNimPeserta:</p>
-            {tugas.targetNimPeserta?.map((targetNim) => (
-              <p key={targetNim}>{targetNim}</p>
-            ))}
+            {tugas.targetNimPeserta?.map((targetNim) => <p key={targetNim}>{targetNim}</p>)}
             <ul className="grid grid-cols-1 gap-4">
               <p>Submissions: </p>
               {submissions?.map(
@@ -107,9 +102,7 @@ export function TugasListAdmin() {
                           }
                         </b>
                       </p>
-                      <Link href={submission.submissionUrl as Url}>
-                        {submission.filename}
-                      </Link>
+                      <Link href={submission.submissionUrl as Url}>{submission.filename}</Link>
                     </li>
                   ),
               )}
@@ -123,10 +116,8 @@ export function TugasListAdmin() {
 
 export function TugasListPeserta() {
   const userSession = api.user.getUserSession.useQuery();
-  const { data: tugass, refetch: refetchTugass } =
-    api.tugasAdmin.getAll.useQuery();
-  const { data: tugasSubmits, refetch: refetchTugasSubmits } =
-    api.submitPeserta.getAll.useQuery();
+  const { data: tugass, refetch: refetchTugass } = api.tugasAdmin.getAll.useQuery();
+  const { data: tugasSubmits, refetch: refetchTugasSubmits } = api.submitPeserta.getAll.useQuery();
   const createSubmission = api.submitPeserta.submitPesertaCreate.useMutation();
   const hideSubmission = api.submitPeserta.hideSubmission.useMutation();
 
@@ -152,7 +143,7 @@ export function TugasListPeserta() {
       <div
         className="bg-local"
         style={{
-          backgroundImage: `url('/billboard-desktop-top.png')`,
+          backgroundImage: `url('/day 3 - billboard_top.png')`,
           backgroundSize: "100% ",
         }}
       >
@@ -161,7 +152,7 @@ export function TugasListPeserta() {
       <div
         className="bg-local bg-repeat-y"
         style={{
-          backgroundImage: `url('/billboard-desktop-body.png')`,
+          backgroundImage: `url('/day 3 - billboard_body.png')`,
           backgroundSize: "100% ",
         }}
       >
@@ -170,33 +161,32 @@ export function TugasListPeserta() {
             {tugass?.map(
               (tugas) =>
                 tugas.hidden === false &&
-                (tugas.targetNimPeserta.length === 0 ||
-                tugas.targetNimPeserta.includes(userSession.data!.nim)
-                  ? true
-                  : false) && (
+                (tugas.targetNimPeserta.length === 0 || tugas.targetNimPeserta.includes(userSession.data!.nim) ? true : false) && (
                   <li
                     key={tugas.id}
                     className="relative bg-local"
                     style={{
-                      backgroundImage: `url('/Picsart_24-08-10_09-41-13-852.png')`,
+                      backgroundImage: `url('day 3 - paper.png')`,
                       backgroundRepeat: "no-repeat",
                       backgroundSize: "100% 100%",
                     }}
                   >
                     {tugas.isTugasSpesial && (
                       <Image
-                        className="absolute bottom-0 left-0 right-0 top-0 m-auto opacity-40"
+                        className="absolute bottom-0 left-0 right-0 top-0 m-auto opacity-20"
                         src="/logo-himafi-old-stamp.png"
                         alt=""
                         width={400}
                         height={400}
                       ></Image>
                     )}
-                    <div className="relative z-10 m-[4rem] pt-20 text-center font-bold text-purple-900 sm:m-[7rem]">
-                      <h1 className="text-[2rem] font-extrabold tracking-tight">
-                        {tugas.judul}
-                      </h1>
-                      <p className="font-black">
+                    <div className="relative z-10 m-[4rem] pt-20 text-center font-bold text-amber-900 sm:m-[7rem]">
+                      <h1 className="text-[2rem] font-extrabold tracking-tight">{tugas.judul}</h1>
+
+                      <div className="items-center justify-center flex">
+                        {tugas.isTugasSpesial && <Badge>Misi spesial: tidak wajib dikerjakan</Badge>}
+                      </div>
+                      <p className="font-bold font-sans">
                         Deadline:{" "}
                         {tugas.deadline?.toLocaleString("en-GB", {
                           year: "numeric",
@@ -206,18 +196,14 @@ export function TugasListPeserta() {
                           minute: "numeric",
                         })}
                       </p>
-                      <p className="whitespace-pre-wrap text-justify">
-                        {tugas.body}
-                      </p>
-                      <p className="whitespace-pre-wrap pt-6 text-center font-serif font-black">
-                        {tugas.perintahMisi}
-                      </p>
+                      <p className="whitespace-pre-wrap text-justify">{tugas.body}</p>
+                      <p className="whitespace-pre-wrap pt-6 text-center font-serif font-black">{tugas.perintahMisi}</p>
                       {/* <h1 className="text-center font-black">{tugas.perintahMisi}</h1> */}
                       <div className="pt-4">
                         {" "}
                         {tugas.attachment && (
                           <Link
-                            className="rounded bg-purple-900/100 px-10 py-3 font-roman font-semibold text-purple-200 no-underline transition hover:bg-purple-900/70"
+                            className="rounded bg-orange-950 px-10 py-3 font-roman font-semibold text-yellow-50 no-underline transition hover:bg-orange-700"
                             href={tugas.attachment ? tugas.attachment : "#"}
                           >
                             Attachment
@@ -229,9 +215,7 @@ export function TugasListPeserta() {
                         <form
                           onSubmit={async (e) => {
                             e.preventDefault();
-                            const formData = new FormData(
-                              e.target as HTMLFormElement,
-                            );
+                            const formData = new FormData(e.target as HTMLFormElement);
                             const link = formData.get("link") as string;
                             await createSubmission.mutateAsync({
                               tugasId: tugas.id,
@@ -254,7 +238,7 @@ export function TugasListPeserta() {
                             />
                             <button
                               type="submit"
-                              className="rounded bg-purple-900/100 px-4 py-1 font-semibold text-purple-200 no-underline transition hover:bg-purple-900/70"
+                              className="rounded bg-orange-800 px-4 py-1 font-semibold text-yellow-50 no-underline transition hover:bg-orange-700"
                             >
                               Submit link
                             </button>
@@ -262,7 +246,7 @@ export function TugasListPeserta() {
                         </form>
                       </div>
                       <UploadButton
-                        className="ut-label:'ese' ut-button:bg-purple-900/100"
+                        className="ut-label:'ese' ut-button:bg-orange-900"
                         endpoint="blobUploader"
                         onClientUploadComplete={async (res) => {
                           console.log("Files: ", res[0]!.url);
@@ -283,20 +267,9 @@ export function TugasListPeserta() {
                         {tugasSubmits?.map(
                           (submission) =>
                             submission.submissionTugasId === tugas.id && (
-                              <div
-                                className="flex justify-between px-10"
-                                key={submission.id}
-                              >
-                                <Link href={submission.submissionUrl as Url}>
-                                  {submission.filename
-                                    ? submission.filename
-                                    : "file"}
-                                </Link>
-                                <button
-                                  onClick={() => hideTugas(submission.id)}
-                                >
-                                  Delete
-                                </button>
+                              <div className="flex justify-between px-10" key={submission.id}>
+                                <Link href={submission.submissionUrl as Url}>{submission.filename ? submission.filename : "file"}</Link>
+                                <button onClick={() => hideTugas(submission.id)}>Delete</button>
                               </div>
                             ),
                         )}
@@ -311,7 +284,7 @@ export function TugasListPeserta() {
       <div
         className="bg-local"
         style={{
-          backgroundImage: `url('/billboard-desktop-bottom.png')`,
+          backgroundImage: `url('day 3 - billboard_bottom.png')`,
           backgroundSize: "100% ",
         }}
       >
