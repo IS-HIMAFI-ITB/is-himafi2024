@@ -61,7 +61,7 @@ export function CreateDayForm() {
   };
 
   return (
-    <div className="bg-violet-100 p-10 content-center w-full  border border-violet-400 rounded-lg drop-shadow-md size-full">
+    <div className="bg-violet-100 p-10 content-center w-full  border border-violet-400 rounded-lg drop-shadow-md size-full relative">
       <h1 className="relative text-5xl font-extrabold text-violet-700 z-20 text-center">Create Day</h1>
       <div className="absolute -inset-2 z-0">
         <div className="w-full h-full  mx-auto lg:mx-0 opacity-30 blur-lg bg-gradient-to-r from-violet-400 via-pink-500 to-violet-600"></div>
@@ -130,7 +130,7 @@ export function ChooseDay() {
     }
   };
   return (
-    <div className="bg-violet-100 w-full p-10 bg-blend-screen border border-violet-400 rounded-lg drop-shadow-md">
+    <div className="bg-violet-100 w-full p-10 bg-blend-screen border border-violet-400 rounded-lg drop-shadow-md relative">
       <div className="absolute -inset-2 z-0">
         <div className="z-0 w-full h-full  mx-auto lg:mx-0 opacity-30 blur-lg bg-gradient-to-r from-violet-400 via-pink-500 to-violet-600"></div>
       </div>
