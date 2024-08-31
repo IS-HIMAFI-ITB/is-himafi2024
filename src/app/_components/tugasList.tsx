@@ -143,7 +143,7 @@ export function TugasListPeserta() {
       <div
         className="bg-local"
         style={{
-          backgroundImage: `url('/day 3 - billboard_top.png')`,
+          backgroundImage: `url('/day5_board(top).png')`,
           backgroundSize: "100% ",
         }}
       >
@@ -152,7 +152,7 @@ export function TugasListPeserta() {
       <div
         className="bg-local bg-repeat-y"
         style={{
-          backgroundImage: `url('/day 3 - billboard_body.png')`,
+          backgroundImage: `url('/day5_board(body).png')`,
           backgroundSize: "100% ",
         }}
       >
@@ -166,7 +166,7 @@ export function TugasListPeserta() {
                     key={tugas.id}
                     className="relative bg-local"
                     style={{
-                      backgroundImage: `url('day 3 - paper.png')`,
+                      backgroundImage: `url('/day5_paper.png')`,
                       backgroundRepeat: "no-repeat",
                       backgroundSize: "100% 100%",
                     }}
@@ -284,7 +284,7 @@ export function TugasListPeserta() {
       <div
         className="bg-local"
         style={{
-          backgroundImage: `url('day 3 - billboard_bottom.png')`,
+          backgroundImage: `url('/day5_board(bottom).png')`,
           backgroundSize: "100% ",
         }}
       >
