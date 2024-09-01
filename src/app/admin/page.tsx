@@ -9,6 +9,7 @@ import { TugasListAdmin } from "~/app/_components/tugasList";
 import { MarkOrphanedSubmissions } from "~/app/_components-for-backend/renameOrphanedSubmissions";
 import { ChooseDay, CreateDayForm } from "../_components/day";
 import { SynchronizeSheetsCMS } from "~/app/_components-for-backend/synchronizeSheetsCMS";
+import { TestBtn } from "~/app/_components-for-backend/testBtn";
 
 export default async function AdminPage() {
   const session = await getServerAuthSession();
@@ -60,6 +61,7 @@ export default async function AdminPage() {
         <div className="mt-10  text-sm">
           <h1>Backend operations:</h1>
           <MarkOrphanedSubmissions />
+          <TestBtn />
         </div>
       </div>
     </div>
