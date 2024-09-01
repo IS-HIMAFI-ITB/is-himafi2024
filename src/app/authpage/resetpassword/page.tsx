@@ -14,7 +14,7 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[url('/background.png')] bg-cover text-white">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[url('/day5_background.png')] bg-cover text-white">
       <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
         Change <span className="text-[#ffdc90]">Password</span>
       </h1>
