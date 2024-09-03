@@ -37,30 +37,17 @@ async function googleAuth() {
 }
 
 async function getSheetTitleAndId() {
-  const auth = new google.auth.GoogleAuth({
-    credentials: {
-      client_email: process.env.GOOGLE_CLIENT_EMAIL,
-      private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-    },
-    scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
-  });
-  const sheets = google.sheets({ version: "v4", auth });
+  const { sheets } = await googleAuth();
   const sheetDatas = (await sheets.spreadsheets.get({ spreadsheetId: sheetsCMSId })).data.sheets;
   const sheetTitles = sheetDatas?.map((sheet) => sheet.properties!.title);
   const sheetIds = sheetDatas?.map((sheet) => sheet.properties!.sheetId);
   return { sheetTitles, sheetIds };
 }
 
-async function getSheetsData() {
-  const auth = new google.auth.GoogleAuth({
-    credentials: {
-      client_email: process.env.GOOGLE_CLIENT_EMAIL,
-      private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-    },
-    scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
-  });
-  const sheets = google.sheets({ version: "v4", auth });
-  const { sheetTitles } = await getSheetTitleAndId();
+async function getSheetsData(sheetTitles: any) {
+  console.log("INFO: Reading sheets...");
+  const { sheets } = await googleAuth();
+  // const { sheetTitles } = await getSheetTitleAndId();
   const ranges = [];
   for (const sheetTitle of sheetTitles!) {
     ranges.push(`${sheetTitle}!A10:Z`);
@@ -78,19 +65,13 @@ async function getSheetsData() {
   }
 }
 
-async function createSheets() {
-  const auth = new google.auth.GoogleAuth({
-    credentials: {
-      client_email: process.env.GOOGLE_CLIENT_EMAIL,
-      private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-    },
-    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-  });
-  const sheets = google.sheets({ version: "v4", auth });
+async function createSheets(tugases: any, sheetTitles: any) {
+  console.log("INFO: creating sheets");
+  const { sheets } = await googleAuth();
 
-  const tugases = await getTugasFromDB();
+  // const tugases = await getTugasFromDB();
   const req = [];
-  const { sheetTitles } = await getSheetTitleAndId();
+  // const { sheetTitles } = await getSheetTitleAndId();
 
   const infoHeaderRows = ["Perintah Misi:", "Attachment:", "Deadline:", "Tugas Spesial:", "Hidden:"].map((value) => ({
     values: [
@@ -134,7 +115,7 @@ async function createSheets() {
       (value) => ({
         values: [
           {
-            userEnteredValue: { stringValue: "value?.toString()" },
+            userEnteredValue: { stringValue: value?.toString() },
             userEnteredFormat: {
               horizontalAlignment: "LEFT",
             },
@@ -201,6 +182,28 @@ async function createSheets() {
             },
           ],
           fields: "*",
+        },
+      },
+      {
+        setDataValidation: {
+          range: {
+            sheetId: sheet_id,
+            startRowIndex: 9,
+            startColumnIndex: 6,
+            endColumnIndex: 7,
+          },
+          rule: {
+            condition: {
+              type: "NUMBER_GREATER",
+              values: [
+                {
+                  userEnteredValue: "0",
+                },
+              ],
+            },
+            inputMessage: "Score must be > 0",
+            strict: true,
+          },
         },
       },
       // hide sheets
@@ -300,14 +303,18 @@ async function createSheets() {
   }
 
   try {
-    console.log("INFO: creating sheets");
-    await sheets.spreadsheets.batchUpdate({
-      spreadsheetId: sheetsCMSId,
-      requestBody: {
-        requests: req,
-      },
-    });
-    console.log("INFO: sheets created");
+    if (req.length > 0) {
+      await sheets.spreadsheets.batchUpdate({
+        spreadsheetId: sheetsCMSId,
+        requestBody: {
+          requests: req,
+        },
+      });
+      console.log("INFO: sheets created");
+    } else {
+      console.log("INFO: no new sheets are created because all sheets created already");
+    }
+
     return;
   } catch (e) {
     console.error("ERROR: error creating sheet: ", e);
@@ -362,18 +369,11 @@ async function processSubmissionsFromDB(datas: Array<any>) {
   return processedDatas;
 }
 
-async function writeSubmissionsToSheets() {
-  console.log("INFO: Writing submissions to sheets...");
-  const auth = new google.auth.GoogleAuth({
-    credentials: {
-      client_email: process.env.GOOGLE_CLIENT_EMAIL,
-      private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-    },
-    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-  });
-  const sheets = google.sheets({ version: "v4", auth });
+async function writeSubmissionsToSheets(tugases: any) {
+  console.log("INFO: Writing submissions to sheet...");
+  const { sheets } = await googleAuth();
 
-  const tugases = await getTugasFromDB();
+  // const tugases = await getTugasFromDB();
   const datas = [];
 
   for (const tugas of tugases) {
@@ -385,9 +385,7 @@ async function writeSubmissionsToSheets() {
       values: processedSubmissions,
     });
   }
-  console.log(JSON.stringify(datas));
   try {
-    console.log("INFO: Writing submissions to sheet...");
     await sheets.spreadsheets.values.batchUpdate({
       spreadsheetId: sheetsCMSId,
       requestBody: {
@@ -397,18 +395,17 @@ async function writeSubmissionsToSheets() {
     });
     console.log("INFO: submissions written to sheet");
   } catch (e) {
-    console.log(e);
+    console.log("ERROR: error writing submissions to sheet: ", e);
   }
 }
 
-async function clearSheets() {
+async function clearSheets(sheetTitles: any) {
   console.log("INFO: Clearing sheets...");
-  const { sheetTitles } = await getSheetTitleAndId();
 
-  const ranges = sheetTitles!.map((sheetTitle) => `${sheetTitle}!A10:Z`);
+  const ranges = sheetTitles!.map((sheetTitle: any) => `${sheetTitle}!A10:Z`);
 
   const { sheets } = await googleAuth();
-  const datas = ranges.map((range) => {
+  const datas = ranges.map((range: any) => {
     return {
       range: range,
       values: [Array(26).fill(0)], //fill 0 for A-Z columns on first row
@@ -433,17 +430,18 @@ async function clearSheets() {
   }
 }
 
-async function updateScoresToDB() {
-  const datas = await getSheetsData();
+async function updateScoresToDB(sheetTitles: any) {
+  console.log("INFO: Updating scores to DB...");
+  const datas = await getSheetsData(sheetTitles);
   // const tugases = await getTugasFromDB()
-  const payload: any[] = [];
+  const payload: any = [];
   for (const data of datas!) {
     data.values?.forEach((submission) => {
+      if (submission[2] === "" || submission[2] === undefined) return;
       payload.push(
-        dbParallel.submission.updateMany({
+        dbParallel.submission.update({
           where: {
-            submissionById: submission[9],
-            submissionTugasId: submission[10],
+            id: submission[2],
           },
           data: {
             score: parseInt(submission[6]) ?? undefined,
@@ -459,7 +457,6 @@ async function updateScoresToDB() {
   // }
   try {
     // console.log(payloadChunks);
-    console.log("INFO: Updating scores to DB...");
     // await dbParallel.$transaction(payload);
     // await Promise.all(payloadChunks.map((payloadChunk) => dbParallel.$transaction(payloadChunk)));
     await Promise.all(payload);
@@ -471,25 +468,30 @@ async function updateScoresToDB() {
 }
 
 export const sheetsCMSTugasRouter = createTRPCRouter({
-  getSheetsData: publicProcedure.mutation(async ({ ctx }) => {
-    await getSheetsData();
-  }),
-  clearSheets: publicProcedure.mutation(async ({ ctx }) => {
-    await clearSheets();
-  }),
-  createSheets: publicProcedure.mutation(async ({ ctx }) => {
-    await createSheets();
-  }),
-  writeSubmissionsToSheets: publicProcedure.mutation(async ({ ctx, input }) => {
-    await writeSubmissionsToSheets();
-  }),
-  updateScoresToDB: publicProcedure.mutation(async ({ ctx, input }) => {
-    await updateScoresToDB();
-  }),
+  // getSheetsData: publicProcedure.mutation(async ({ ctx }) => {
+  //   await getSheetsData();
+  // }),
+  // clearSheets: publicProcedure.mutation(async ({ ctx }) => {
+  //   await clearSheets();
+  // }),
+  // createSheets: publicProcedure.mutation(async ({ ctx }) => {
+  //   await createSheets();
+  // }),
+  // writeSubmissionsToSheets: publicProcedure.mutation(async ({ ctx, input }) => {
+  //   await writeSubmissionsToSheets();
+  // }),
+  // updateScoresToDB: publicProcedure.mutation(async ({ ctx, input }) => {
+  //   await updateScoresToDB();
+  // }),
   synchronizeSheetsData: publicProcedure.mutation(async () => {
-    await createSheets();
-    await updateScoresToDB();
-    await clearSheets();
-    await writeSubmissionsToSheets();
+    console.log("INFO: Synchronizing sheets data...");
+    const tugases = await getTugasFromDB();
+    const { sheetTitles } = await getSheetTitleAndId();
+    await createSheets(tugases, sheetTitles);
+    const { sheetTitles: newSheetTitles } = await getSheetTitleAndId();
+    await updateScoresToDB(newSheetTitles);
+    await clearSheets(newSheetTitles);
+    await writeSubmissionsToSheets(tugases);
+    console.log("INFO: sheets data synchronized...");
   }),
 });
