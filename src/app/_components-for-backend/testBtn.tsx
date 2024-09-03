@@ -3,9 +3,9 @@ import { Button } from "~/components/ui/button";
 import { toast } from "~/components/ui/use-toast";
 import { api } from "~/trpc/react";
 export const TestBtn = () => {
-  const action1 = api.sheetsCMSTugas.getSheetsData.useMutation();
+  const action1 = api.sheetsCMSTugas.clearSheets.useMutation();
   const action2 = api.sheetsCMSTugas.createSheets.useMutation();
-  const action3 = api.sheetsCMSTugas.writeSubmissionsToSheet.useMutation();
+  const action3 = api.sheetsCMSTugas.writeSubmissionsToSheets.useMutation();
   const action4 = api.sheetsCMSTugas.updateScoresToDB.useMutation();
   return (
     <div className="grid grid-cols-1 gap-10">
