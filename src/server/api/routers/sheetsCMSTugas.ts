@@ -22,7 +22,8 @@ const dbParallel = new PrismaClient({
   log: ["error"],
 });
 
-const sheetsCMSId = "1MwyVhChAU6OuXPBmW5a5QxxAZotbzgMQpDumQv6g6Wc";
+// const sheetsCMSId = "1MwyVhChAU6OuXPBmW5a5QxxAZotbzgMQpDumQv6g6Wc";
+const sheetsCMSId = process.env.TUGAS_CMS_SHEET_ID;
 
 async function googleAuth() {
   const auth = new google.auth.GoogleAuth({

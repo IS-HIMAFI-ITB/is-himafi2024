@@ -8,7 +8,7 @@ import { PostList } from "~/app/_components/postList";
 import { TugasListAdmin } from "~/app/_components/tugasList";
 import { MarkOrphanedSubmissions } from "~/app/_components-for-backend/renameOrphanedSubmissions";
 import { ChooseDay, CreateDayForm } from "../_components/day";
-import { SynchronizeSheetsCMS } from "~/app/_components-for-backend/synchronizeSheetsCMS";
+import { SynchronizeSheetsCMSTugas } from "~/app/_components-for-backend/synchronizeSheetsCMS";
 import { TestBtn } from "~/app/_components-for-backend/testBtn";
 
 export default async function AdminPage() {
@@ -44,11 +44,29 @@ export default async function AdminPage() {
           Admin <span className="text-[hsl(280,100%,70%)]">Page</span>
         </h1>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:p-20">
-          <CreateDayForm />
-          <TugasCreateAdmin />
           <div className="lg:col-span-2 ">
             <ChooseDay />
           </div>
+          <div className="lg:col-span-2 ">
+            <div className="bg-violet-100 text-violet-700 w-full p-10 bg-blend-screen border border-violet-400 rounded-lg drop-shadow-md relative">
+              <div className="absolute -inset-2 z-0">
+                <div className="z-0 w-full h-full  mx-auto lg:mx-0 opacity-30 blur-lg bg-gradient-to-r from-violet-400 via-pink-500 to-violet-600"></div>
+              </div>
+              <h1 className="relative text-5xl font-extrabold  z-20 text-center">Synchronize Tugas</h1>
+              <p className="relative z-20 text-center">synchronize database and google sheets for tugas & submissions</p>
+              <div className="pt-10 flex flex-col lg:flex-row gap-4">
+                <div className="text-white relative justify-center items-center flex flex-auto rounded-full bg-black px-10 py-3 font-semibold no-underline transition hover:bg-slate-700">
+                  <Link href={`https://docs.google.com/spreadsheets/d/${process.env.TUGAS_CMS_SHEET_ID}`}>
+                    Sheets Tugas, submisi, & penilaian
+                  </Link>
+                </div>
+                <SynchronizeSheetsCMSTugas />
+              </div>
+            </div>
+          </div>
+          <CreateDayForm />
+          <TugasCreateAdmin />
+
           {/* <div className="mt-10">
           <h1>List Post</h1>
           <PostList />

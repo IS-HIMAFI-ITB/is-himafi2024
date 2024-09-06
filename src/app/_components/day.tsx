@@ -29,7 +29,7 @@ import { fisikType } from "@prisma/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { redirect } from "next/navigation";
-import { SynchronizeSheetsCMS } from "../_components-for-backend/synchronizeSheetsCMS";
+import { SynchronizeSheetsCMSPerizinan } from "../_components-for-backend/synchronizeSheetsCMS";
 
 export function CreateDayForm() {
   const [formcontent, setFormcontent] = useState({ name: "", sheetsCMSId: "", passwordAbsensi: "" });
@@ -134,12 +134,12 @@ export function ChooseDay() {
       <div className="absolute -inset-2 z-0">
         <div className="z-0 w-full h-full  mx-auto lg:mx-0 opacity-30 blur-lg bg-gradient-to-r from-violet-400 via-pink-500 to-violet-600"></div>
       </div>
-      <h1 className="relative text-5xl font-extrabold text-violet-700 z-20 text-center">Update Day</h1>
+      <h1 className="relative text-5xl font-extrabold text-violet-700 z-20 text-center">Day, News, dan Perizinan</h1>
       <form onSubmit={handleSubmit} className={cn("mt-5 z-10 grid items-start gap-4")}>
         <div className="z-20 grid gap-2">
           <Select onValueChange={(value) => setCurrentDayId(parseInt(value))}>
             <SelectTrigger className="w-[180px] text-black">
-              <SelectValue placeholder="Set Current Day" />
+              <SelectValue placeholder="Pilih untuk ganti Day" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -162,7 +162,7 @@ export function ChooseDay() {
         </Button>
       </form>
       <div className="z-10 grid relative gap-2 mt-5 text-pretty">
-        <div className="text-violet-800 grid gap-2">Day yang ditampilkan: {days?.find((day) => day.isCurrent)?.name}</div>
+        <div className="text-violet-800 grid gap-2">Day yang ditampilkan sekarang: {days?.find((day) => day.isCurrent)?.name}</div>
         <div className="text-violet-800 grid gap-2">dayId: {days?.find((day) => day.isCurrent)?.id}</div>
         <div className="text-violet-800 grid gap-2">sheetsCMSId: {days?.find((day) => day.isCurrent)?.sheetsCMSId}</div>
         <div className="text-violet-800 grid gap-2">Password absensi aktual: {days?.find((day) => day.isCurrent)?.passwordAbsensi}</div>
@@ -201,7 +201,7 @@ export function ChooseDay() {
           </Link>
         </div>
         {/* <div className=" relative justify-center items-center flex flex-auto "> */}
-        <SynchronizeSheetsCMS />
+        <SynchronizeSheetsCMSPerizinan />
         {/* </div> */}
       </div>
     </div>
