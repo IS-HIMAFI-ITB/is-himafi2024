@@ -16,13 +16,14 @@ import { Prisma } from "@prisma/client";
 const dbParallel = new PrismaClient({
   datasources: {
     db: {
-      url: process.env.DATABASE_URL_NOPARAM + "?pgbouncer=true&connection_limit=100&pool_timeout=60",
+      url: process.env.DATABASE_URL_NOPARAM + "?pgbouncer=true&connection_limit=60&pool_timeout=60",
     },
   },
   log: ["error"],
 });
 
-const sheetsCMSId = "1MwyVhChAU6OuXPBmW5a5QxxAZotbzgMQpDumQv6g6Wc";
+// const sheetsCMSId = "1MwyVhChAU6OuXPBmW5a5QxxAZotbzgMQpDumQv6g6Wc";
+const sheetsCMSId = process.env.TUGAS_CMS_SHEET_ID;
 
 async function googleAuth() {
   const auth = new google.auth.GoogleAuth({

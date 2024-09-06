@@ -4,12 +4,7 @@ import { withUt } from "uploadthing/tw";
 
 export default withUt({
   darkMode: ["class"],
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx,mdx}",
-  ],
+  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx,mdx}"],
   prefix: "",
   theme: {
     container: {
@@ -24,6 +19,7 @@ export default withUt({
         sans: ["var(--font-geist-sans)", ...fontFamily.sans],
         bluecashews: ["var(--font-bluecashews)"],
         roman: ["var(--font-roman)"],
+        bBayanganPendekar: ["var(--font-bBayanganPendekar)"],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -133,6 +133,12 @@ export function TugasListPeserta() {
     void refetchTugasSubmits();
   }
 
+  function getTugasScore(tugasId: string) {
+    const submissionsForThisTugas = tugasSubmits?.filter((submission) => submission.submissionTugasId === tugasId);
+    const tugasScore = submissionsForThisTugas?.reduce((prev, current) => prev + (current.score ?? 0), 0) ?? 0;
+    return tugasScore;
+  }
+
   return (
     <div className="m-0 sm:m-5">
       {/* <div className="bg-local relative"
@@ -171,6 +177,9 @@ export function TugasListPeserta() {
                       backgroundSize: "100% 100%",
                     }}
                   >
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 -rotate-6 text-[16rem] md:text-[18rem] text-amber-700 font-bBayanganPendekar">
+                      {getTugasScore(tugas.id) > 0 && <div className="">{getTugasScore(tugas.id)}</div>}
+                    </div>
                     {tugas.isTugasSpesial && (
                       <Image
                         className="absolute bottom-0 left-0 right-0 top-0 m-auto opacity-20"
@@ -180,7 +189,7 @@ export function TugasListPeserta() {
                         height={400}
                       ></Image>
                     )}
-                    <div className="relative z-10 m-[4rem] pt-20 text-center font-bold text-amber-900 sm:m-[7rem]">
+                    <div className="relative z-10 m-[4rem] pt-20 text-center font-bold text-amber-900 sm:m-[7rem] ">
                       <h1 className="text-[2rem] font-extrabold tracking-tight">{tugas.judul}</h1>
 
                       <div className="items-center justify-center flex">
