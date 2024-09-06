@@ -93,10 +93,13 @@ export function TugasCreateAdmin() {
           onChange={({ target }) => setFormcontent({ ...formcontent, deadline: target.value })}
           type="date"
         /> */}
-        <DateTimePicker
-          value={formcontent.deadline}
-          onChange={(target) => setFormcontent({ ...formcontent, deadline: target ?? new Date() })}
-        />
+        <div className="flex-row flex align-center items-center gap-4">
+          <p className="text-violet-700 font-bold">Deadline:</p>
+          <DateTimePicker
+            value={formcontent.deadline}
+            onChange={(target) => setFormcontent({ ...formcontent, deadline: target ?? new Date() })}
+          />
+        </div>
         <Input
           value={formcontent.targetNimPesertaString}
           onChange={({ target }) => setFormcontent({ ...formcontent, targetNimPesertaString: target.value })}
