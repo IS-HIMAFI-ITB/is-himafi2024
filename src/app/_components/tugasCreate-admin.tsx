@@ -5,43 +5,54 @@ import { api } from "~/trpc/react";
 import { FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { DateTimePicker } from "@/components/ui/datetime-picker";
+import { toast } from "~/components/ui/use-toast";
 
 export function TugasCreateAdmin() {
   const [formcontent, setFormcontent] = useState({
     judul: "",
     body: "",
     attachment: "",
-    deadline: "",
     tugasSpesial: false,
     targetNimPesertaString: "",
     perintahMisi: "",
+    deadline: new Date("2024-09-11T08:46:40+07:00"),
   });
   const createTugas = api.tugasAdmin.tugasAdminCreate.useMutation();
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const targetNimPesertaList = formcontent.targetNimPesertaString ? formcontent.targetNimPesertaString.split(",") : [];
-    const deadline = new Date(new Date(formcontent.deadline).getTime() + 62 * 60 * 1000); //add 1 hour & 2 minutes to deadline
+    // const deadline = new Date(new Date(formcontent.deadline).getTime() + 62 * 60 * 1000); //add 1 hour & 2 minutes to deadline
+    // const deadline = new Date(new Date(formcontent.deadline.getTime() - 7 * 60 * 60 * 1000)); //convert GMT+7 time as utc
     try {
       createTugas.mutate({
         judul: formcontent.judul,
         body: formcontent.body,
         attachment: formcontent.attachment,
-        deadline: deadline,
+        deadline: formcontent.deadline,
         isTugasSpesial: formcontent.tugasSpesial,
         targetNimPeserta: targetNimPesertaList,
         perintahMisi: formcontent.perintahMisi,
       });
+      toast({
+        title: "Success",
+        description: `Tugas created`,
+      });
     } catch (error) {
       console.log(error);
+      toast({
+        title: "Error",
+        description: "check console for more info",
+      });
     } finally {
       setFormcontent({
         judul: "",
         body: "",
         attachment: "",
-        deadline: "",
         tugasSpesial: false,
         targetNimPesertaString: "",
         perintahMisi: "",
+        deadline: new Date("2001-09-11T08:46:40+07:00"),
       });
     }
   };
@@ -77,10 +88,14 @@ export function TugasCreateAdmin() {
           type="text"
           placeholder="Link attachment"
         />
-        <Input
+        {/* <Input
           value={formcontent.deadline}
           onChange={({ target }) => setFormcontent({ ...formcontent, deadline: target.value })}
           type="date"
+        /> */}
+        <DateTimePicker
+          value={formcontent.deadline}
+          onChange={(target) => setFormcontent({ ...formcontent, deadline: target ?? new Date() })}
         />
         <Input
           value={formcontent.targetNimPesertaString}
