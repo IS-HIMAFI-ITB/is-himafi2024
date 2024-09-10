@@ -108,6 +108,7 @@ const akunPesertas = [
     {nim: "10223102", name: "Nairaya Zaizafun",},
     {nim: "10223103", name: "Kaisa Nida Assafira",},
     {nim: "10223104", name: "Zharfan Aksa Khoiri",},
+    {nim: "10223105", name: "Yazidhariz Farghani Kesumajana",},
 
     {nim: "10222001", name: "Ahmad Haffiz Fildzah",},
     {nim: "10222002", name: "Kamilia Tazkia Rahma Andini",},
