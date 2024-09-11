@@ -198,11 +198,11 @@ async function createSheets(tugases: any, sheetTitles: any) {
               type: "NUMBER_GREATER",
               values: [
                 {
-                  userEnteredValue: "0",
+                  userEnteredValue: "-1000",
                 },
               ],
             },
-            inputMessage: "Score must be > 0",
+            inputMessage: "kasian coeg minimal kasih > -1000 lah :v",
             strict: true,
           },
         },

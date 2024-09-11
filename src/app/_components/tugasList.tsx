@@ -135,6 +135,17 @@ export function TugasListPeserta() {
 
   function getTugasScore(tugasId: string) {
     const submissionsForThisTugas = tugasSubmits?.filter((submission) => submission.submissionTugasId === tugasId);
+    //check if no submission
+    if (!submissionsForThisTugas) return null;
+
+    //check if ungraded
+    let isUngraded = true;
+    for (const submissionForThisTugas of submissionsForThisTugas) {
+      if (submissionForThisTugas.score !== null) isUngraded = false;
+    }
+    if (isUngraded) return null;
+
+    //cumulate tugasScore
     const tugasScore = submissionsForThisTugas?.reduce((prev, current) => prev + (current.score ?? 0), 0) ?? 0;
     return tugasScore;
   }
@@ -178,7 +189,7 @@ export function TugasListPeserta() {
                     }}
                   >
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 -rotate-6 text-[16rem] md:text-[18rem] text-amber-700 font-bBayanganPendekar">
-                      {getTugasScore(tugas.id) > 0 && <div className="">{getTugasScore(tugas.id)}</div>}
+                      {getTugasScore(tugas.id) !== null && <div className="">{getTugasScore(tugas.id)}</div>}
                     </div>
                     {tugas.isTugasSpesial && (
                       <Image
