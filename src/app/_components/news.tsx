@@ -81,7 +81,7 @@ export async function News() {
             <p>“You sometimes think you want to disappear, but all you really want is to be found.”</p>
             <p className="text-right">-unknown</p>
           </div>
-          <div className="flex flex-row justify-around pt-3 gap-3 pb-5">
+          <div className="flex flex-row flex-wrap justify-around pt-3 gap-3 pb-5">
             <PerizinanInput />
             <PerizinanBuktiMenyusulInput />
             <KondisiPraDayInput />
