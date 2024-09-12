@@ -10,6 +10,18 @@ import type { Url } from "next/dist/shared/lib/router/router";
 import { Badge } from "~/components/ui/badge";
 import Image from "next/image";
 import type { tugasDataExtend } from "~/server/api/routers/tugas-peserta";
+import { Button } from "~/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "~/components/ui/dialog";
+import { toast } from "sonner";
 
 function TugasListPeserta({ tugasDatas }: { tugasDatas: tugasDataExtend[] }) {
   // const userSession = api.user.getUserSession.useQuery();
@@ -24,7 +36,13 @@ function TugasListPeserta({ tugasDatas }: { tugasDatas: tugasDataExtend[] }) {
 
   // const tugasDatas = carouselTugasData?.[carouselIdx];
   async function hideSubmission(tugasId: string) {
-    await hideSubmissionMutation.mutateAsync({ tugasId: tugasId });
+    try {
+      await hideSubmissionMutation.mutateAsync({ tugasId: tugasId });
+      toast.success("Deletion successful", { description: "Your submission has been deleted" });
+    } catch (error) {
+      toast.error("Error ", { description: "Refer to console for details" });
+      console.log(error);
+    }
     void refetchCarouselTugasData();
   }
   async function createSubmission({
@@ -38,12 +56,13 @@ function TugasListPeserta({ tugasDatas }: { tugasDatas: tugasDataExtend[] }) {
     filename: string;
     key: string | undefined;
   }) {
-    await createSubmissionMutation.mutateAsync({
-      tugasId: tugasId,
-      url: url,
-      filename: filename,
-      key: key,
-    });
+    try {
+      await createSubmissionMutation.mutateAsync({ tugasId: tugasId, url: url, filename: filename, key: key });
+      toast.success("Submission successful", { description: "Your submission has been created" });
+    } catch (error) {
+      toast.error("Error ", { description: "Refer to console for details" });
+      console.log(error);
+    }
     void refetchCarouselTugasData();
   }
 
@@ -118,7 +137,7 @@ function TugasListPeserta({ tugasDatas }: { tugasDatas: tugasDataExtend[] }) {
                         await createSubmission({
                           tugasId: tugasData.id,
                           url: link,
-                          filename: link.substring(0, 32) + ".....",
+                          filename: link,
                           key: undefined,
                         });
                         (e.target as HTMLFormElement).reset();
@@ -161,9 +180,35 @@ function TugasListPeserta({ tugasDatas }: { tugasDatas: tugasDataExtend[] }) {
                   />
                   <div>
                     {tugasData.submissions?.map((submission) => (
-                      <div className="flex justify-between px-10" key={submission.id}>
-                        <Link href={submission.submissionUrl as Url}>{submission.filename ? submission.filename : "file"}</Link>
-                        <button onClick={() => hideSubmission(submission.id)}>Delete</button>
+                      <div className="flex flex-row justify-center self-center pb-2 gap-2" key={submission.id}>
+                        <Link className="grow overflow-auto misi-scrollbar text-nowrap" href={submission.submissionUrl as Url}>
+                          {submission.filename ? submission.filename : "file"}
+                        </Link>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <button className="self-center px-4 py-2 sm:py-0 rounded bg-orange-800 font-semibold text-yellow-50 no-underline transition hover:bg-orange-700">
+                              Delete
+                            </button>
+                          </DialogTrigger>
+                          <DialogContent className="sm:max-w-md">
+                            <DialogHeader>
+                              <DialogTitle>Delete submisi?</DialogTitle>
+                              <DialogDescription>{submission.filename}</DialogDescription>
+                            </DialogHeader>
+                            <DialogFooter className="sm:justify-start">
+                              <DialogClose asChild>
+                                <Button
+                                  variant={"destructive"}
+                                  onClick={async () => {
+                                    await hideSubmission(submission.id);
+                                  }}
+                                >
+                                  Delete
+                                </Button>
+                              </DialogClose>
+                            </DialogFooter>
+                          </DialogContent>
+                        </Dialog>
                       </div>
                     ))}
                   </div>
