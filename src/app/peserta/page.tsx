@@ -2,11 +2,12 @@ import { getServerAuthSession } from "~/server/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { PostList } from "../_components/postList";
-import { TugasListPeserta } from "../_components/tugasList";
+// import { TugasListPeserta } from "../_components/tugasList-peserta";
 import { ImageUpload } from "../_components/image-upload";
 import { News } from "../_components/news";
 
 import { api, HydrateClient } from "~/trpc/server";
+import { TugasListTabControlledCarousel } from "../_components/tugasList-tab-controlled-carousel";
 
 export default async function PesertaPage() {
   const session = await getServerAuthSession();
@@ -22,7 +23,7 @@ export default async function PesertaPage() {
   });
 
   return (
-    <div className="flex min-h-screen flex-col bg-[url('/day5_background.png')] bg-cover text-white">
+    <div className="flex flex-col bg-[url('/day5_background.png')] bg-cover bg-bottom text-white">
       <div
         className="absolute right-0 top-0 max-h-[20rem] max-w-[25rem] bg-local" // session status bar
         style={{
@@ -63,17 +64,15 @@ export default async function PesertaPage() {
           Intellektuelle<span className="text-[#731c1b]">schule</span>
         </h1>
         <p className="w-9/12 pt-10 text-center text-base font-extrabold tracking-widest text-[#fff8e8] md:text-xl">
-          Selamat datang, para kurcaci pengembara cahaya. Hutan yang lebat
-          mungkin telah menutup pandanganmu, namun penduduk istana selalu
-          menunggumu untuk menemuinya, tapi kapankah datangnya kesempatan itu?
-          Jalanilah proses ini, hingga kau menemukan celah terang...
+          Selamat datang, para kurcaci pengembara cahaya. Hutan yang lebat mungkin telah menutup pandanganmu, namun penduduk istana selalu
+          menunggumu untuk menemuinya, tapi kapankah datangnya kesempatan itu? Jalanilah proses ini, hingga kau menemukan celah terang...
         </p>
         {/* <PostList/> */}
         <div className="pt-24">
           <News />
         </div>
         <div className="pt-24">
-          <TugasListPeserta />
+          <TugasListTabControlledCarousel />
         </div>
         <div className="flex flex-col items-center justify-center pb-20 pt-10">
           <p className="text-center font-bluecashews text-base font-extrabold tracking-widest text-[#fff8e8] md:text-2xl">

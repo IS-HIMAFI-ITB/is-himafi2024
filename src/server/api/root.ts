@@ -8,6 +8,7 @@ import { backendRouter } from "./routers/backend";
 import { perizinanRouter } from "./routers/perizinan";
 import { sheetsCMSRouter } from "./routers/sheetsCMS";
 import { sheetsCMSTugasRouter } from "./routers/sheetsCMSTugas";
+import { tugasPesertaRouter } from "./routers/tugas-peserta";
 
 /**
  * This is the primary router for your server.
@@ -23,6 +24,7 @@ export const appRouter = createTRPCRouter({
   submitPeserta: submitPesertaRouter,
   backend: backendRouter,
   perizinan: perizinanRouter,
+  tugasPeserta: tugasPesertaRouter,
 });
 
 // export type definition of API
