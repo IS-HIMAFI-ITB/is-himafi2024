@@ -78,7 +78,7 @@ function TugasListPeserta({ tugasDatas }: { tugasDatas: tugasDataExtend[] }) {
                     height={400}
                   ></Image>
                 )}
-                <div className="relative z-10 m-[4rem] pt-14 text-center font-bold text-amber-900 sm:m-[7rem] ">
+                <div className="relative z-10 m-[4rem] pb-32 pt-20 md:py-14 text-center font-bold text-amber-900 sm:m-[7rem] ">
                   <h1 className="text-[2rem] font-extrabold tracking-tight">{tugasData.judul}</h1>
 
                   <div className="items-center justify-center flex">
@@ -94,8 +94,10 @@ function TugasListPeserta({ tugasDatas }: { tugasDatas: tugasDataExtend[] }) {
                       minute: "numeric",
                     })}
                   </p>
-                  <p className="whitespace-pre-wrap text-justify">{tugasData.body}</p>
-                  <p className="whitespace-pre-wrap pt-6 text-center font-serif font-black">{tugasData.perintahMisi}</p>
+                  <p className="whitespace-pre-wrap text-justify overflow-auto misi-scrollbar max-h-[30vh]">{tugasData.body}</p>
+                  <p className="whitespace-pre-wrap mt-6 text-center font-serif font-black overflow-auto misi-scrollbar max-h-[30vh]">
+                    {tugasData.perintahMisi}
+                  </p>
                   <div className="pt-4">
                     {tugasData.attachment && (
                       <Link
@@ -222,7 +224,7 @@ export function TugasListTabControlledCarousel() {
           {carouselTugasData?.map((tugasDatas, idx) => {
             return (
               <CarouselItem key={idx}>
-                <div className="px-5 overflow-auto no-scrollbar max-h-[200vh]">
+                <div className="sm:px-5 overflow-auto no-scrollbar max-h-[200vh]" style={{}}>
                   <TugasListPeserta tugasDatas={tugasDatas} />
                 </div>
               </CarouselItem>

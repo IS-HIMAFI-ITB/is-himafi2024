@@ -71,5 +71,18 @@
   .no-scrollbar {
       -ms-overflow-style: none;  /* IE and Edge */
       scrollbar-width: none;  /* Firefox */
-}
+  }
+  .misi-scrollbar::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+    margin: 10px;
+  }
+  .misi-scrollbar::-webkit-scrollbar-track {
+    display: none;
+  }
+  .misi-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(108, 40, 0, 0.235);
+    background-clip: content-box;
+  }
+  
 }
