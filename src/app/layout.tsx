@@ -1,5 +1,5 @@
 import "~/styles/globals.css";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/sonner";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
@@ -45,7 +45,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className={`${GeistSans.variable} ${bluecashews.variable} ${roman.variable} ${bBayanganPendekar.variable} font-roman `}>
       <body>
         <TRPCReactProvider>{children}</TRPCReactProvider>
-        <Toaster />
+        <Toaster richColors theme="light" />
       </body>
     </html>
   );

@@ -6,7 +6,7 @@ import { FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DateTimePicker } from "@/components/ui/datetime-picker";
-import { toast } from "~/components/ui/use-toast";
+import { toast } from "sonner";
 
 export function TugasCreateAdmin() {
   const [formcontent, setFormcontent] = useState({
@@ -34,16 +34,10 @@ export function TugasCreateAdmin() {
         targetNimPeserta: targetNimPesertaList,
         perintahMisi: formcontent.perintahMisi,
       });
-      toast({
-        title: "Success",
-        description: `Tugas created`,
-      });
+      toast.success("Tugas created");
     } catch (error) {
       console.log(error);
-      toast({
-        title: "Error",
-        description: "check console for more info",
-      });
+      toast.error("Error", { description: "Refer console for more info" });
     } finally {
       setFormcontent({
         judul: "",

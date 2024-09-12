@@ -3,33 +3,15 @@
 import * as React from "react";
 import { useState } from "react";
 import { api } from "~/trpc/react";
-import { FormEvent } from "react";
-import { toast } from "~/components/ui/use-toast";
+import { type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "~/components/ui/select";
 import { cn } from "~/lib/utils";
+import { toast } from "sonner";
 
-import { useMediaQuery } from "react-responsive";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import { Label } from "@/components/ui/label";
-import { useToast } from "@/components/ui/use-toast";
-import { Slider } from "@/components/ui/slider";
-import { fisikType } from "@prisma/client";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { redirect } from "next/navigation";
 import { SynchronizeSheetsCMSPerizinan } from "../_components-for-backend/synchronizeSheetsCMS";
+import Link from "next/link";
 
 export function CreateDayForm() {
   const [formcontent, setFormcontent] = useState({ name: "", sheetsCMSId: "", passwordAbsensi: "" });
@@ -42,10 +24,7 @@ export function CreateDayForm() {
         sheetsCMSId: formcontent.sheetsCMSId,
         passwordAbsensi: formcontent.passwordAbsensi,
       });
-      toast({
-        title: "Success",
-        description: "form submitted",
-      });
+      toast.success("Day created");
       setFormcontent({
         name: "",
         sheetsCMSId: "",
@@ -53,10 +32,7 @@ export function CreateDayForm() {
       });
     } catch (error) {
       console.log(error);
-      toast({
-        title: "Error",
-        description: "submission failed, check console for more info",
-      });
+      toast.error("Error", { description: "Refer console for more info" });
     }
   };
 
@@ -117,16 +93,10 @@ export function ChooseDay() {
       await updateCurrentDay.mutateAsync({ dayId: currentDayId! });
       await RefetchCurrentDay();
 
-      toast({
-        title: "Success",
-        description: "day updated",
-      });
+      toast.success("Day updated");
     } catch (error) {
       console.log(error);
-      toast({
-        title: "Error",
-        description: "check console for more info",
-      });
+      toast.error("Error", { description: "Refer console for more info" });
     }
   };
   return (
