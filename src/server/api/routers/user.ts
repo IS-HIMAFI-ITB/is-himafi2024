@@ -22,12 +22,12 @@ export const userRouter = createTRPCRouter({
       });
     }
   }),
-  getCumulativeScore: publicProcedure.input(z.object({ userId: z.string() })).query(async ({ ctx }) => {
+  getCumulativeScore: publicProcedure.input(z.object({ userId: z.string() })).query(async ({ ctx, input }) => {
     if (ctx.session && ctx.session.user) {
       const submissions = await ctx.db.submission.findMany({
         where: {
           submissionBy: {
-            id: ctx.session.user.id,
+            id: input.userId,
           },
           hidden: false,
         },

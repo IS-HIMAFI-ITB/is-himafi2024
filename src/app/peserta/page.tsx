@@ -5,7 +5,7 @@ import { PostList } from "../_components/postList";
 import { TugasListPeserta } from "../_components/tugasList";
 import { ImageUpload } from "../_components/image-upload";
 import { News } from "../_components/news";
-import Leaderboard from "../_components/leaderboard"
+import Leaderboard from "../_components/leaderboard";
 
 import { api, HydrateClient } from "~/trpc/server";
 
@@ -64,10 +64,8 @@ export default async function PesertaPage() {
           Intellektuelle<span className="text-[#731c1b]">schule</span>
         </h1>
         <p className="w-9/12 pt-10 text-center text-base font-extrabold tracking-widest text-[#fff8e8] md:text-xl">
-          Selamat datang, para kurcaci pengembara cahaya. Hutan yang lebat
-          mungkin telah menutup pandanganmu, namun penduduk istana selalu
-          menunggumu untuk menemuinya, tapi kapankah datangnya kesempatan itu?
-          Jalanilah proses ini, hingga kau menemukan celah terang...
+          Selamat datang, para kurcaci pengembara cahaya. Hutan yang lebat mungkin telah menutup pandanganmu, namun penduduk istana selalu
+          menunggumu untuk menemuinya, tapi kapankah datangnya kesempatan itu? Jalanilah proses ini, hingga kau menemukan celah terang...
         </p>
         {/* <PostList/> */}
         <div className="pt-24">
