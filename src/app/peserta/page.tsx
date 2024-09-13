@@ -5,7 +5,7 @@ import { PostList } from "../_components/postList";
 // import { TugasListPeserta } from "../_components/tugasList-peserta";
 import { ImageUpload } from "../_components/image-upload";
 import { News } from "../_components/news";
-import Leaderboard from "../_components/leaderboard"
+import Leaderboard from "../_components/leaderboard";
 
 import { api, HydrateClient } from "~/trpc/server";
 import { TugasListTabControlledCarousel } from "../_components/tugasList-tab-controlled-carousel";
