@@ -5,6 +5,7 @@ import { PostList } from "../_components/postList";
 import { TugasListPeserta } from "../_components/tugasList";
 import { ImageUpload } from "../_components/image-upload";
 import { News } from "../_components/news";
+import Leaderboard from "../_components/leaderboard"
 
 import { api, HydrateClient } from "~/trpc/server";
 
@@ -74,6 +75,9 @@ export default async function PesertaPage() {
         </div>
         <div className="pt-24">
           <TugasListPeserta />
+        </div>
+        <div className="pt-24">
+          <Leaderboard />
         </div>
         <div className="flex flex-col items-center justify-center pb-20 pt-10">
           <p className="text-center font-bluecashews text-base font-extrabold tracking-widest text-[#fff8e8] md:text-2xl">
