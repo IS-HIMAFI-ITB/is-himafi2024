@@ -68,7 +68,7 @@ function TugasListPeserta({ tugasDatas }: { tugasDatas: tugasDataExtend[] }) {
 
   return (
     <div className="m-0 sm:m-5">
-      <div className="-z-100 ">
+      <div className="">
         <Image src="/day5_board(top).png" width={0} height={0} sizes="100vw" style={{ width: "100%", height: "auto" }} alt={""} />
       </div>
       <div
@@ -82,7 +82,7 @@ function TugasListPeserta({ tugasDatas }: { tugasDatas: tugasDataExtend[] }) {
           <div className="grid grid-cols-1 items-start xl:grid-cols-2 2xl:grid-cols-3">
             {tugasDatas?.map((tugasData, idx) => (
               <div key={idx} className="relative bg-local">
-                <div className="absolute top-0 left-0 right-0 bottom-0 -z-90">
+                <div className="absolute top-0 left-0 right-0 bottom-0 ">
                   <Image src="/day5_paper.png" width={0} height={0} sizes="100vw" style={{ width: "100%", height: "100%" }} alt={""} />
                 </div>
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 -rotate-6 text-[16rem] md:text-[18rem] text-amber-700 font-bBayanganPendekar">
@@ -90,7 +90,7 @@ function TugasListPeserta({ tugasDatas }: { tugasDatas: tugasDataExtend[] }) {
                 </div>
                 {tugasData.isTugasSpesial && (
                   <Image
-                    className="absolute -z-80 bottom-0 left-0 right-0 top-0 m-auto opacity-20"
+                    className="absolute  bottom-0 left-0 right-0 top-0 m-auto opacity-20"
                     src="/logo-himafi-old-stamp.png"
                     alt=""
                     width={400}
@@ -221,7 +221,7 @@ function TugasListPeserta({ tugasDatas }: { tugasDatas: tugasDataExtend[] }) {
           </div>
         </div>
       </div>
-      <div className="-z-100 ">
+      <div>
         <Image src="/day5_board(bottom).png" width={0} height={0} sizes="100vw" style={{ width: "100%", height: "auto" }} alt={""} />
       </div>
     </div>

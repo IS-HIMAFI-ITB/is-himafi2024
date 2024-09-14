@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "~/trpc/react";
+import Image from "next/image";
 
 export default function ResetPasswordPage() {
   const [userInfo, setUserInfo] = useState({ nim: "", password: "" });
@@ -14,21 +15,17 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[url('/day5_background.png')] bg-cover text-white">
+    <div className="flex min-h-screen flex-col items-center justify-center relative text-white">
+      <Image src="/day6_background.png" alt="Cover Image" className="object-cover object-top absolute -z-50" fill />
       <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-        Change <span className="text-[#ffdc90]">Password</span>
+        Change <span className="text-[#39a2e2]">Password</span>
       </h1>
       <div>
-        <form
-          onSubmit={handleSubmit}
-          className="mt-10 flex flex-col items-center justify-center gap-4 text-black"
-        >
+        <form onSubmit={handleSubmit} className="mt-10 flex flex-col items-center justify-center gap-4 text-black">
           <input
             className="text-black"
             value={userInfo.password}
-            onChange={({ target }) =>
-              setUserInfo({ ...userInfo, password: target.value })
-            }
+            onChange={({ target }) => setUserInfo({ ...userInfo, password: target.value })}
             type="password"
             placeholder="password"
           />

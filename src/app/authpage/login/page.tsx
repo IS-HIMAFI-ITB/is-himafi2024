@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function LoginPage() {
   const [userInfo, setUserInfo] = useState({ nim: "", password: "" });
@@ -16,30 +17,26 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[url('/day5_background.png')] bg-cover text-white">
+    // <div className="flex min-h-screen flex-col items-center justify-center bg-[url('/day5_background.png')] bg-cover text-white">
+    <div className="flex min-h-screen flex-col items-center justify-center relative text-white">
+      <Image src="/day6_background.png" alt="Cover Image" className="object-cover object-top absolute -z-50" fill />
+
       <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-        Log<span className="text-[#ffdc90]">in</span>
+        Log<span className="text-[#39a2e2]">in</span>
       </h1>
       <div>
-        <form
-          onSubmit={handleSubmit}
-          className="mt-10 flex flex-col items-center justify-center gap-4 text-black"
-        >
+        <form onSubmit={handleSubmit} className="mt-10 flex flex-col items-center justify-center gap-4 text-black">
           <input
             className="text-black"
             value={userInfo.nim}
-            onChange={({ target }) =>
-              setUserInfo({ ...userInfo, nim: target.value })
-            }
+            onChange={({ target }) => setUserInfo({ ...userInfo, nim: target.value })}
             type="nim"
             placeholder="10223xxx"
           />
           <input
             className="text-black"
             value={userInfo.password}
-            onChange={({ target }) =>
-              setUserInfo({ ...userInfo, password: target.value })
-            }
+            onChange={({ target }) => setUserInfo({ ...userInfo, password: target.value })}
             type="password"
             placeholder="password"
           />
