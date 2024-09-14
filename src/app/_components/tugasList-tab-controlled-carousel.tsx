@@ -193,7 +193,7 @@ function TugasListPeserta({ tugasDatas }: { tugasDatas: tugasDataExtend[] }) {
                           <DialogContent className="sm:max-w-md">
                             <DialogHeader>
                               <DialogTitle>Delete submisi?</DialogTitle>
-                              <DialogDescription>{submission.filename}</DialogDescription>
+                              <DialogDescription className="hyphens-auto">{submission.filename}</DialogDescription>
                             </DialogHeader>
                             <DialogFooter className="sm:justify-start">
                               <DialogClose asChild>
