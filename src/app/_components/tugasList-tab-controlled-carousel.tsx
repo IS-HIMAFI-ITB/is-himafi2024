@@ -181,7 +181,10 @@ function TugasListPeserta({ tugasDatas }: { tugasDatas: tugasDataExtend[] }) {
                   <div>
                     {tugasData.submissions?.map((submission) => (
                       <div className="flex flex-row justify-center self-center pb-2 gap-2" key={submission.id}>
-                        <Link className="grow overflow-auto misi-scrollbar text-nowrap" href={submission.submissionUrl as Url}>
+                        <Link
+                          className="grow overflow-auto misi-scrollbar text-nowrap hover:underline"
+                          href={submission.submissionUrl as Url}
+                        >
                           {submission.filename ? submission.filename : "file"}
                         </Link>
                         <Dialog>

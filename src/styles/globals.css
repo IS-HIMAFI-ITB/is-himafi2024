@@ -75,7 +75,7 @@
   .misi-scrollbar::-webkit-scrollbar {
     background-color: transparent;
     width: 5px;
-    margin: 10px;
+    height: 10px;
   }
   .misi-scrollbar::-webkit-scrollbar-track {
     display: none;
