@@ -78,6 +78,9 @@ export default async function PesertaPage() {
         <div className="pt-24">
           <Leaderboard />
         </div>
+        <div className="pt-24">
+          <Leaderboard />
+        </div>
         <div className="flex flex-col items-center justify-center pb-20 pt-10">
           <p className="text-center font-bluecashews text-base font-extrabold tracking-widest text-[#fff8e8] md:text-2xl">
             Teman adalah saudara <br />
