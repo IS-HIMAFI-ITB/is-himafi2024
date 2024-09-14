@@ -11,6 +11,13 @@ export interface tugasDataExtend extends Prisma.TugasGetPayload<{ include: { sub
   tugasScore?: number | null;
 }
 
+interface TleaderboardData {
+  nim: string;
+  nama: string;
+  score: number;
+}
+export type TleaderboardDatas = Array<TleaderboardData>;
+
 async function getAllTugasData(opts: Topts) {
   const { ctx } = opts;
   return await ctx.db.tugas.findMany({
@@ -48,21 +55,18 @@ async function getAllSubmission(opts: Topts) {
     },
   });
 }
-async function getTugasScore(tugasId: string, allSubmission: Prisma.PromiseReturnType<typeof getAllSubmission>) {
-  const submissionsForThisTugas = allSubmission?.filter((submission) => submission.submissionTugasId === tugasId);
-  //check if no submission
-  if (!submissionsForThisTugas) return null;
 
-  //check if ungraded
-  let isUngraded = true;
-  for (const submissionForThisTugas of submissionsForThisTugas) {
-    if (submissionForThisTugas.score !== null) isUngraded = false;
-  }
-  if (isUngraded) return null;
-
-  //cumulate tugasScore
-  const tugasScore = submissionsForThisTugas?.reduce((prev, current) => prev + (current.score ?? 0), 0) ?? 0;
-  return tugasScore;
+async function getAllUserSubmission(opts: Topts) {
+  const { ctx } = opts;
+  return await ctx.db.user.findMany({
+    include: {
+      submissions: {
+        where: {
+          hidden: false,
+        },
+      },
+    },
+  });
 }
 
 async function getCumulatedSubmissionScore(submissions: Submission[]) {
@@ -81,9 +85,46 @@ async function getCumulatedSubmissionScore(submissions: Submission[]) {
   return cumulatedScore;
 }
 
+function quickSortLeaderboardDatas(datas: TleaderboardDatas): TleaderboardDatas {
+  if (datas.length <= 1) {
+    return datas;
+  }
+
+  const pivot: TleaderboardData = datas[0]!;
+  const leftArr: TleaderboardDatas = [];
+  const rightArr: TleaderboardDatas = [];
+
+  //exclude pivot in sorting
+  datas.slice(1).forEach((data) => {
+    // ">" operator for descending
+    if (data.score > pivot.score) {
+      leftArr.push(data);
+    } else {
+      rightArr.push(data);
+    }
+  });
+
+  return [...quickSortLeaderboardDatas(leftArr), pivot, ...quickSortLeaderboardDatas(rightArr)];
+}
+
 export const tugasPesertaRouter = createTRPCRouter({
   getAllSubmission: protectedProcedure.query((opts) => {
     return getAllSubmission(opts);
+  }),
+  getLeaderboardData: protectedProcedure.query(async (opts) => {
+    const leaderboardDatas: TleaderboardDatas = [];
+    const allUserSubmission = await getAllUserSubmission(opts);
+    const all23UserSubmission = allUserSubmission.filter((userSubmission) => parseInt(userSubmission.nim!) > 10223000);
+
+    //generate leaderboard data
+    for (const userSubmission of all23UserSubmission) {
+      const cumulatedScore = (await getCumulatedSubmissionScore(userSubmission.submissions)) ?? 0;
+      leaderboardDatas.push({ nim: userSubmission.nim!, nama: userSubmission.name!, score: cumulatedScore });
+    }
+
+    // descending sort by score using quicksort algorithm
+    const sortedLeaderboardDatas = quickSortLeaderboardDatas(leaderboardDatas);
+    return sortedLeaderboardDatas;
   }),
   getCarouselTugasData: protectedProcedure.query(async (opts) => {
     const { ctx } = opts;
