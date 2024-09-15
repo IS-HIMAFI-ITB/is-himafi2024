@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { TimePicker } from "@/components/ui/datetime-picker";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 
 import { kehadiranType } from "@prisma/client";
 import { jenisIzinType } from "@prisma/client";
@@ -85,7 +85,6 @@ export function PerizinanInput() {
 }
 
 function PerizinanForm({ className }: React.ComponentProps<"form">) {
-  const { toast } = useToast();
   const createPerizinan = api.perizinan.createPerizinan.useMutation();
   const getCurrentDayId = api.perizinan.getCurrentDayId.useQuery();
   const dayId = getCurrentDayId.data!;
@@ -144,20 +143,11 @@ function PerizinanForm({ className }: React.ComponentProps<"form">) {
         isBuktiNyusul: formcontent.isBuktiNyusul,
       });
       (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
-      toast({
-        title: "Success",
-        description: "form submitted",
-      });
-      // setFormcontent({ kehadiran: undefined, jenis: undefined, alasan: "", bukti: "" });
-      // setTimeMenyusul(undefined);
-      // setTimeMeninggalkan(undefined);
+      toast.success("Form submitted");
     } catch (error) {
       console.log(error);
       (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
-      toast({
-        title: "Error",
-        description: "submission failed",
-      });
+      toast.error("Error ", { description: "Refer to console for details" });
     }
   };
 
@@ -324,7 +314,6 @@ export function PerizinanBuktiMenyusulInput() {
 }
 
 function PerizinanBuktiMenyusulForm({ className }: React.ComponentProps<"form">) {
-  const { toast } = useToast();
   const updatePerizinanBuktiMenyusul = api.perizinan.updatePerizinanBuktiMenyusul.useMutation();
   const getCurrentDayId = api.perizinan.getCurrentDayId.useQuery();
   const dayId = getCurrentDayId.data!;
@@ -341,17 +330,11 @@ function PerizinanBuktiMenyusulForm({ className }: React.ComponentProps<"form">)
         buktiIzin: buktiIzin,
       });
       (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
-      toast({
-        title: "Success",
-        description: "form submitted",
-      });
+      toast.success("Form submitted");
     } catch (error) {
       console.log(error);
       (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
-      toast({
-        title: "Error",
-        description: "submission failed",
-      });
+      toast.error("Error ", { description: "Refer to console for details" });
     }
   };
 

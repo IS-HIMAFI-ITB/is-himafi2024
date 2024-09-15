@@ -19,7 +19,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { Slider } from "@/components/ui/slider";
 import { fisikType } from "@prisma/client";
 
@@ -75,7 +75,6 @@ export function KondisiPraDayInput() {
 function KondisiForm({ className }: React.ComponentProps<"form">) {
   const createKondisiMassa = api.perizinan.createKondisiMassa.useMutation();
   const getCurrentDayId = api.perizinan.getCurrentDayId.useQuery();
-  const { toast } = useToast();
 
   const [formcontent, setFormcontent] = useState({
     fisik: "",
@@ -95,18 +94,12 @@ function KondisiForm({ className }: React.ComponentProps<"form">) {
         kesiapan: formcontent.kesiapan,
       });
       (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
-      toast({
-        title: "Success",
-        description: "form submitted",
-      });
+      toast.success("Form submitted");
       setFormcontent({ fisik: "", deskripsi: "", kesiapan: formcontent.kesiapan });
     } catch (error) {
       console.log(error);
       (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
-      toast({
-        title: "Error",
-        description: "submission failed",
-      });
+      toast.error("Error ", { description: "Refer to console for details" });
     }
   };
 

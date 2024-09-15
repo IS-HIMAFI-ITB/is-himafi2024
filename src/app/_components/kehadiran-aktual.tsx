@@ -18,7 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { Badge } from "~/components/ui/badge";
 
 export function KehadiranInput() {
@@ -73,7 +73,6 @@ export function KehadiranInput() {
 }
 
 function KehadiranForm({ className }: React.ComponentProps<"form">) {
-  const { toast } = useToast();
   const hadirAktual = api.perizinan.hadirAktual.useMutation();
   const { data: statusHadirAbsensi, refetch: refetchStatusHadirAbsensi } = api.perizinan.getStatusHadirAbsensi.useQuery();
   const isHadirAbsensi = statusHadirAbsensi?.isHadirAbsensi;
@@ -91,13 +90,11 @@ function KehadiranForm({ className }: React.ComponentProps<"form">) {
 
       await refetchStatusHadirAbsensi();
       (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
+      toast.success("Form submitted");
     } catch (error) {
       console.log(error);
       (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
-      toast({
-        title: "Error",
-        description: "submission failed",
-      });
+      toast.error("Error ", { description: "Refer to console for details" });
     }
   };
 
