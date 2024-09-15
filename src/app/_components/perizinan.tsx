@@ -372,22 +372,25 @@ export function PerizinanStatus() {
       return (
         <div>
           <div className="flex flex-row items-middle">
-            <p className="font-bluecashews  px-2 text-l font-black">Status perizinan: </p>
+            <p className="font-bluecashews px-2 text-l font-black">Status perizinan: </p>
             <Badge variant="destructive">{statusIzin}</Badge>
           </div>
           <div>
             <p className="text-left">
-              <span className="font-bluecashews pb-1 text-l font-bold">Alasan ditolak: </span>
-              {perizinan?.alasanStatusDitolak}{" "}
+              <span className="font-bluecashews px-2 pb-1 text-l font-bold">Alasan ditolak: </span>
+              {perizinan?.alasanStatusDitolak}
             </p>
           </div>
         </div>
       );
     case "DITERIMA":
       return (
-        <div className="flex flex-row items-middle">
-          <p className="font-bluecashews px-2  text-l font-black">Status perizinan: </p>
-          <Badge>{perizinan?.isBuktiNyusul ? "DITERIMA BERSYARAT" : statusIzin}</Badge>
+        <div>
+          <div className="flex flex-row items-middle">
+            <p className="font-bluecashews px-2 text-l font-black">Status perizinan: </p>
+            <Badge>{perizinan?.isBuktiNyusul ? "DITERIMA BERSYARAT" : statusIzin}</Badge>
+          </div>
+          {perizinan?.isBuktiNyusul && <p className="text-left px-2 text-wrap">{perizinan?.alasanStatusDitolak}</p>}
         </div>
       );
     case "PENDING":
