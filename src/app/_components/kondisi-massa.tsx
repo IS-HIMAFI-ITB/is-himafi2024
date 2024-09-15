@@ -93,7 +93,6 @@ function KondisiForm({ className }: React.ComponentProps<"form">) {
         deskripsi: formcontent.deskripsi,
         kesiapan: formcontent.kesiapan,
       });
-      (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
       toast.success("Form submitted");
       setFormcontent({ fisik: "", deskripsi: "", kesiapan: formcontent.kesiapan });
     } catch (error) {

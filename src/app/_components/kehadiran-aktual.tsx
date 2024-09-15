@@ -90,7 +90,6 @@ function KehadiranForm({ className }: React.ComponentProps<"form">) {
 
       await refetchStatusHadirAbsensi();
       (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
-      toast.success("Form submitted");
     } catch (error) {
       console.log(error);
       (document.getElementById("btn-submit") as HTMLButtonElement).disabled = false;
