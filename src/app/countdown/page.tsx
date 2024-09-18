@@ -29,8 +29,10 @@ export default async function PesertaPage() {
   return (
     // <div className="flex flex-col bg-[url('/day6_background.png')] bg-cover bg-bottom  text-white">
     <div className="flex flex-col relative text-white bg-black/40">
-      <Image src="/bg-lantik-2023.jpg" alt="Cover Image" className="object-cover object-bottom absolute -z-50 " fill />
-      <Image src="/bg-lantik-2023-mobile.jpg" alt="Cover Image" className="object-cover object-bottom absolute -z-50 md:hidden" fill />
+      <div className="fixed inset-0 -z-50">
+        <Image src="/bg-lantik-2023.jpg" alt="Cover Image" className="object-cover object-center" fill />
+        <Image src="/bg-lantik-2023-mobile.jpg" alt="Cover Image" className="object-cover object-center md:hidden" fill />
+      </div>
       <div
         className="absolute right-0 top-0 max-h-[20rem] max-w-[25rem] bg-local" // session status bar
       >
