@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client";
 import { Button } from "~/components/ui/button";
 import { toast } from "~/components/ui/use-toast";
@@ -5,7 +6,7 @@ import { api } from "~/trpc/react";
 
 export const QueryAdmin = () => {
   //fetch multiple queries
-  const queries = api.useQueries((t) => [t.user.getUserSession()]);
+  const queries = api.useQueries((t) => [t.user.getUserSession(), t.tugasPeserta.getLeaderboardData()]);
 
   return (
     <div className="grid grid-cols-1 gap-4">

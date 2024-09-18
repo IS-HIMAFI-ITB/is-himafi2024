@@ -19,7 +19,7 @@ export default function Leaderboard() {
 
   const session = api.user.getUserSession.useQuery();
   const getCumulativeScore = api.user.getCumulativeScore.useQuery({
-    userId: session.data?.id
+    userId: session.data!.id
   })
 
   const { data: tugass, refetch: refetchTugass } = api.tugasAdmin.getAll.useQuery();
