@@ -69,8 +69,10 @@ export default async function PesertaPage() {
           Intellektuelle<span className="text-[#39a2e2]">schule</span>
         </h1>
         <p className="w-9/12 pt-10 text-center text-base font-extrabold tracking-widest text-[#fff8e8] md:text-xl">
-          Selamat datang, para kurcaci pengembara cahaya. Hutan yang lebat mungkin telah menutup pandanganmu, namun penduduk istana selalu
-          menunggumu untuk menemuinya, tapi kapankah datangnya kesempatan itu? Jalanilah proses ini, hingga kau menemukan celah terang...
+          Perjalanan panjang telah ditempuh dan ikatan yang ditemukan akan menjadi kekuatan kalian. Setiap keputusan yang diambil akan
+          menentukan masa depanmu di HIMAFI ITB. Datang, atau kalian akan tenggelam dalam bayangan. Tidak ada ruang bagi mereka yang ragu
+          atau melarikan diri—hanya <span className="font-black font-mono">keberanian</span> yang akan{" "}
+          <span className="font-black font-mono">bertahan</span>.
         </p>
         {/* <PostList/> */}
         <div className="pt-14">
