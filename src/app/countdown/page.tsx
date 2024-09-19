@@ -24,7 +24,7 @@ export default async function PesertaPage() {
     userId: session.user.id,
   });
 
-  const countdownTime = new Date("Sept 20, 2024 19:00:00");
+  const countdownTime = new Date("Sept 20, 2024 19:00:00+07:00");
 
   return (
     // <div className="flex flex-col bg-[url('/day6_background.png')] bg-cover bg-bottom  text-white">

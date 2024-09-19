@@ -9,7 +9,7 @@ export default function Countdown({ count }: { count: Date }) {
   });
 
   useEffect(() => {
-    const countdownDate = new Date(count).getTime() - 7 * 60000;
+    const countdownDate = new Date(count).getTime();
 
     const timer = setInterval(() => {
       const now = new Date().getTime();
