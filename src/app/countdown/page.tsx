@@ -75,7 +75,7 @@ export default async function PesertaPage() {
           <span className="font-black font-mono">bertahan</span>.
         </p>
         {/* <PostList/> */}
-        <div className="pt-14">
+        <div className="pt-14 w-full">
           <Countdown count={countdownTime} />
         </div>
         <div className="flex flex-col items-center justify-center pb-20 pt-10">
