@@ -31,7 +31,7 @@ export default function Countdown({ count }: { count: Date }) {
   }, []);
 
   return (
-    <div className="w-screen px-10 md:px-[20%] sm:px-[10%]">
+    <div className="px-10 md:px-[20%] sm:px-[10%]">
       <div className="text-center content-stretch">
         <h1 className="text-5xl md:text-8xl font-bold mb-8 text-[#39a2e2] animate-pulse w-auto">Hari Kemenangan</h1>
         <div className="grid grid-cols-3 sm:gap-10">
