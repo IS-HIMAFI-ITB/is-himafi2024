@@ -10,8 +10,6 @@ export default async function DebugPage() {
   const session = await getServerAuthSession();
   if (!session) {
     redirect("/authpage/login/");
-  } else if (session.user.role !== "ADMIN") {
-    redirect("/");
   }
 
   return (
