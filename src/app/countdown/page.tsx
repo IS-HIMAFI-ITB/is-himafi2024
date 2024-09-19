@@ -9,6 +9,7 @@ import Image from "next/image";
 
 import { api, HydrateClient } from "~/trpc/server";
 import { TugasListTabControlledCarousel } from "../_components/tugasList-tab-controlled-carousel";
+import Countdown from "../_components/countdown";
 
 export default async function PesertaPage() {
   const session = await getServerAuthSession();
@@ -17,18 +18,21 @@ export default async function PesertaPage() {
   }
   if (session.user.role === "ADMIN") {
     redirect("/");
-  } else if (session.user.role !== "ADMIN") {
-    redirect("/countdown/");
   }
 
   const getCumulativeScore = await api.user.getCumulativeScore({
     userId: session.user.id,
   });
 
+  const countdownTime = new Date("Sept 20, 2024 19:00:00");
+
   return (
     // <div className="flex flex-col bg-[url('/day6_background.png')] bg-cover bg-bottom  text-white">
-    <div className="flex flex-col relative text-white">
-      <Image src="/day6_background.png" alt="Cover Image" className="object-cover object-bottom absolute -z-50" fill />
+    <div className="flex flex-col relative text-white bg-black/40">
+      <div className="fixed inset-0 -z-50">
+        <Image src="/bg-lantik-2023.jpg" alt="Cover Image" className="object-cover object-center" fill />
+        <Image src="/bg-lantik-2023-mobile.jpg" alt="Cover Image" className="object-cover object-center md:hidden" fill />
+      </div>
       <div
         className="absolute right-0 top-0 max-h-[20rem] max-w-[25rem] bg-local" // session status bar
       >
@@ -65,15 +69,14 @@ export default async function PesertaPage() {
           Intellektuelle<span className="text-[#39a2e2]">schule</span>
         </h1>
         <p className="w-9/12 pt-10 text-center text-base font-extrabold tracking-widest text-[#fff8e8] md:text-xl">
-          Selamat datang, para kurcaci pengembara cahaya. Hutan yang lebat mungkin telah menutup pandanganmu, namun penduduk istana selalu
-          menunggumu untuk menemuinya, tapi kapankah datangnya kesempatan itu? Jalanilah proses ini, hingga kau menemukan celah terang...
+          Perjalanan panjang telah ditempuh dan ikatan yang ditemukan akan menjadi kekuatan kalian. Setiap keputusan yang diambil akan
+          menentukan masa depanmu di HIMAFI ITB. Datang, atau kalian akan tenggelam dalam bayangan. Tidak ada ruang bagi mereka yang ragu
+          atau melarikan diri—hanya <span className="font-black font-mono">keberanian</span> yang akan{" "}
+          <span className="font-black font-mono">bertahan</span>.
         </p>
         {/* <PostList/> */}
         <div className="pt-14">
-          <News />
-        </div>
-        <div className="pt-16">
-          <TugasListTabControlledCarousel />
+          <Countdown count={countdownTime} />
         </div>
         <div className="flex flex-col items-center justify-center pb-20 pt-10">
           <p className="text-center font-bluecashews text-base font-extrabold tracking-widest text-[#fff8e8] md:text-2xl">
