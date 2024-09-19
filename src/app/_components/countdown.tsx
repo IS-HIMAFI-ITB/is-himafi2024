@@ -6,7 +6,6 @@ export default function Countdown({ count }: { count: Date }) {
     hours: 0,
     minutes: 0,
     seconds: 0,
-    miliseconds: 0,
   });
 
   useEffect(() => {
@@ -20,27 +19,26 @@ export default function Countdown({ count }: { count: Date }) {
         hours: Math.floor(distance / (1000 * 60 * 60)),
         minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
         seconds: Math.floor((distance % (1000 * 60)) / 1000),
-        miliseconds: Math.floor(distance % 1000),
       });
 
       if (distance < 0) {
         clearInterval(timer);
-        setTimeLeft({ hours: 0, minutes: 0, seconds: 0, miliseconds: 0 });
+        setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
       }
-    }, 50);
+    }, 1000);
 
     return () => clearInterval(timer);
   }, []);
 
   return (
     <div className="w-screen px-10 sm:px-[15%]">
-      <div className="text-center">
+      <div className="text-center content-stretch">
         <h1 className="text-5xl md:text-8xl font-bold mb-8 text-[#39a2e2] animate-pulse w-auto">Hari Kemenangan</h1>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-3 sm:gap-4">
           {Object.entries(timeLeft).map(([unit, value]) => (
             <div key={unit} className="bg-gray-800/50 p-4 rounded-lg shadow-lg">
               <div className="text-5xl md:text-6xl font-bold text-gray-100 mb-2">{value.toString().padStart(2, "0")}</div>
-              <div className="text-md sm:text-xl text-gray-400 uppercase overflow-clip">{unit}</div>
+              <div className="text-xs sm:text-xl text-gray-400 uppercase overflow-clip">{unit}</div>
             </div>
           ))}
         </div>
