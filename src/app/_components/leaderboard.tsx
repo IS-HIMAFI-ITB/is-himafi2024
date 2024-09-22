@@ -29,7 +29,7 @@ export default function Leaderboard() {
       <Image src="/2.png" width ={0} height={0} sizes="100vw" style={{width: "100vw", height: "auto"}} alt={""}></Image>
     </div>
     <div
-      className="bg-local bg-repeat-y px-8"
+      className="bg-local bg-repeat-y px-8 font-roman"
       style={{
         backgroundImage: `url('/3.png')`,
         backgroundSize: "100%"

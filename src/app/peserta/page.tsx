@@ -75,11 +75,11 @@ export default async function PesertaPage() {
         <div className="pt-24">
           <TugasListTabControlledCarousel />
         </div>
-        <div className="pt-24">
-          <Link href={"leaderboard"}>🏆Leaderboard🏆</Link>
+        <div className="mt-10 text-4xl rounded-full bg-[#731c1b] px-20 py-10 font-bold transition hover:bg-red-700/60">
+          <Link href={"leaderboard"}>🏆 Leaderboard 🏆</Link>
         </div>
         <div className="flex flex-col items-center justify-center pb-20 pt-10">
-          <p className="text-center font-bluecashews text-base font-extrabold tracking-widest text-[#fff8e8] md:text-2xl">
+          <p className="text-center font-bluecashews text-base font-extrabold text-[#fff8e8] md:text-2xl">
             Teman adalah saudara <br />
             Saudara adalah keluarga <br />
             Kebersamaan adalah segalanya <br />

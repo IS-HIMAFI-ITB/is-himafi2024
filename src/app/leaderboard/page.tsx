@@ -1,6 +1,5 @@
 "use client";
 import Leaderboard from "../_components/leaderboard";
-import Image from "next/image"
 
 export default function LeaderboardPage(){
 
