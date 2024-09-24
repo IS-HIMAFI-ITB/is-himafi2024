@@ -49,12 +49,12 @@ export default function Leaderboard() {
               <TableRow
                 key={index}
                 className={
-                    index === 0? '  bg-[#ffd700]/80' : //for the first rank
+                    (item.nim === session.data?.nim? 'outline outline-2 outline-blue-600' : '') + //for the logged in user
+                    (index === 0? '  bg-[#ffd700]/80 ' : //for the first rank
                     index === 1? '  bg-[#c0c0c0]/80' : //for the second rank
                     index === 2? '  bg-[#cd7f32]/80' : //for the third rank
-                    item.nim === session.data?.nim? '  bg-slate-600' : //for the logged in user
                     item.score === 0? '  bg-[#c92e26]/80' : //for those with zero score
-                    item.score < 1000? '  bg-[#f49e27]/80' : '' //for those whose score is less than required
+                    item.score < 1000? '  bg-[#f49e27]/80' : '') //for those whose score is less than required
                   }
                 >
                 <TableCell>{index + 1}</TableCell> {/* Rank */}
