@@ -75,7 +75,7 @@ export default async function PesertaPage() {
         <div className="pt-24">
           <TugasListTabControlledCarousel />
         </div>
-        <div className="mt-10 text-4xl rounded-full bg-[#731c1b] px-20 py-10 font-bold transition hover:bg-red-700/60">
+        <div className="mt-10 text-3xl rounded-full bg-[#731c1b] px-10 py-5 font-bold transition hover:bg-red-700/60">
           <Link href={"leaderboard"}>🏆 Leaderboard 🏆</Link>
         </div>
         <div className="flex flex-col items-center justify-center pb-20 pt-10">

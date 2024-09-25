@@ -39,7 +39,7 @@ export default function Leaderboard() {
           <TableHeader>
             <TableRow className={'bg-[#40260b]'}>
               <TableHead className={'!text-[#ffb03b]'} style={{ textAlign: 'center' }}>Rank</TableHead>
-              <TableHead className={'!text-[#ffb03b]'} style={{ width: "1080px" }}>Name</TableHead>
+              <TableHead className={'!text-[#ffb03b]'} style={{  width: "1080px" }}>Name</TableHead>
               <TableHead className={'!text-[#ffb03b]'} style={{ textAlign: 'center' }}>NIM</TableHead>
               <TableHead className={'!text-[#ffb03b]'} style={{ textAlign: 'center' }}>Score</TableHead>
             </TableRow>
