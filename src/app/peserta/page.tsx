@@ -7,6 +7,7 @@ import { ImageUpload } from "../_components/image-upload";
 import { News } from "../_components/news";
 import Image from "next/image";
 
+
 import { api, HydrateClient } from "~/trpc/server";
 import { TugasListTabControlledCarousel } from "../_components/tugasList-tab-controlled-carousel";
 
@@ -73,8 +74,11 @@ export default async function PesertaPage() {
         <div className="pt-16">
           <TugasListTabControlledCarousel />
         </div>
+        <div className="mt-10 text-3xl rounded-full bg-[#731c1b] px-10 py-5 font-bold transition hover:bg-red-700/60">
+          <Link href={"leaderboard"}>🏆 Leaderboard 🏆</Link>
+        </div>
         <div className="flex flex-col items-center justify-center pb-20 pt-10">
-          <p className="text-center font-bluecashews text-base font-extrabold tracking-widest text-[#fff8e8] md:text-2xl">
+          <p className="text-center font-bluecashews text-base font-extrabold text-[#fff8e8] md:text-2xl">
             Teman adalah saudara <br />
             Saudara adalah keluarga <br />
             Kebersamaan adalah segalanya <br />
