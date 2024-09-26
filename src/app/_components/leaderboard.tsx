@@ -54,7 +54,7 @@ export default function Leaderboard() {
                     index === 1? '  bg-[#c0c0c0]/80' : //for the second rank
                     index === 2? '  bg-[#cd7f32]/80' : //for the third rank
                     item.score === 0? '  bg-[#c92e26]/80' : //for those with zero score
-                    item.score < 1000? '  bg-[#f49e27]/80' : '') //for those whose score is less than required
+                    item.score < 1500? '  bg-[#f49e27]/80' : '') //for those whose score is less than required
                   }
                 >
                 <TableCell>{index + 1}</TableCell> {/* Rank */}

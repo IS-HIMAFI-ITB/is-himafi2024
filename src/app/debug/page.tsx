@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 
 import { TestBtnAdmin, TestBtnPeserta } from "~/app/_components-for-backend/testBtn";
+import { QueryAdmin, QueryPeserta } from "~/app/_components-for-backend/testQuery";
 
 export default async function DebugPage() {
   const session = await getServerAuthSession();
@@ -20,18 +21,30 @@ export default async function DebugPage() {
           Debug <span className="text-[hsl(280,100%,70%)]">Page</span>
         </h1>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:p-20">
-          <div className="border-4 border-violet-400 rounded-lg drop-shadow-md p-10">
-            <h1 className="text-3xl font-extrabold text-center pb-5">
-              Admin <span className="text-[hsl(280,100%,70%)]">Action</span>
-            </h1>
-            <TestBtnAdmin />
-          </div>
-          <div className="border-4 border-violet-400 rounded-lg drop-shadow-md p-10">
-            <h1 className="text-3xl font-extrabold text-center pb-5">
-              Peserta <span className="text-[hsl(280,100%,70%)]">Action</span>
-            </h1>
-            <TestBtnPeserta />
-          </div>
+          {session.user.role === "ADMIN" && (
+            <div className="border-4 border-violet-400 rounded-lg drop-shadow-md p-10">
+              <h1 className="text-3xl font-extrabold text-center pb-5">
+                Admin <span className="text-[hsl(280,100%,70%)]">Action</span>
+              </h1>
+              <TestBtnAdmin />
+              <h1 className="text-3xl font-extrabold text-center b-5">
+                Admin <span className="text-[hsl(280,100%,70%)]">Queries</span>
+              </h1>
+              <QueryAdmin />
+            </div>
+          )}
+          {session.user.role === "PESERTA" && (
+            <div className="border-4 border-violet-400 rounded-lg drop-shadow-md p-10">
+              <h1 className="text-3xl font-extrabold text-center pb-5">
+                Peserta <span className="text-[hsl(280,100%,70%)]">Action</span>
+              </h1>
+              <TestBtnPeserta />
+              <h1 className="text-3xl font-extrabold text-center p-5">
+                Peserta <span className="text-[hsl(280,100%,70%)]">Queries</span>
+              </h1>
+              <QueryPeserta />
+            </div>
+          )}
         </div>
       </div>
     </div>
