@@ -10,12 +10,14 @@ type Topts = inferProcedureBuilderResolverOptions<typeof protectedProcedure>;
 export interface tugasDataExtend extends Prisma.TugasGetPayload<{ include: { submissions: true } }> {
   tugasScore?: number | null;
 }
+
 interface TleaderboardData {
   nim: string;
   nama: string;
   score: number;
 }
 export type TleaderboardDatas = Array<TleaderboardData>;
+
 async function getAllTugasData(opts: Topts) {
   const { ctx } = opts;
   return await ctx.db.tugas.findMany({
@@ -44,41 +46,14 @@ async function getAllTugasData(opts: Topts) {
   });
 }
 
-async function getCumulatedSubmissionScore(submissions: Submission[]){
-  // check if no submission
-  if (!submissions) return null;
-
-  //check if ungraded
-  let isUngraded = true;
-  for (const submissionForThisTugas of submissions) {
-// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    if (submissionForThisTugas.score !== null) isUngraded = false;
-  }
-  if (isUngraded) return null;
-
-  //cumulate score
-  const cumulatedScore = submissions?.reduce((prev, current) => prev + (current.score ?? 0), 0) ?? 0;
-  return cumulatedScore;
-}
-
-function quickSortLeaderboardDatas(datas: TleaderboardDatas): TleaderboardDatas{
-  if(datas.length <=1) {
-    return datas;
-  }
-  const pivot: TleaderboardData = datas[0]!;
-  const leftArr: TleaderboardDatas = [];
-  const rightArr: TleaderboardDatas = [];
-
-  //exclude pivot in sorting
-  datas.slice(1).forEach((data) => {
-    // > operator for descending
-    if (data.score > pivot.score){
-      leftArr.push(data);
-    } else {
-      rightArr.push(data);
-    }
-  })
-  return [...quickSortLeaderboardDatas(leftArr), pivot, ...quickSortLeaderboardDatas(rightArr)];  
+async function getAllSubmission(opts: Topts) {
+  const { ctx } = opts;
+  return await ctx.db.submission.findMany({
+    where: {
+      submissionById: ctx.session.user.id,
+      hidden: false,
+    },
+  });
 }
 
 async function getAllUserSubmission(opts: Topts) {
@@ -94,31 +69,64 @@ async function getAllUserSubmission(opts: Topts) {
   });
 }
 
+async function getCumulatedSubmissionScore(submissions: Submission[]) {
+  //check if no submission
+  if (!submissions) return null;
+
+  //check if ungraded
+  let isUngraded = true;
+  for (const submissionForThisTugas of submissions) {
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    if (submissionForThisTugas.score !== null) isUngraded = false;
+  }
+  if (isUngraded) return null;
+
+  //cumulate score
+  const cumulatedScore = submissions?.reduce((prev, current) => prev + (current.score ?? 0), 0) ?? 0;
+  return cumulatedScore;
+}
+
+function quickSortLeaderboardDatas(datas: TleaderboardDatas): TleaderboardDatas {
+  if (datas.length <= 1) {
+    return datas;
+  }
+
+  const pivot: TleaderboardData = datas[0]!;
+  const leftArr: TleaderboardDatas = [];
+  const rightArr: TleaderboardDatas = [];
+
+  //exclude pivot in sorting
+  datas.slice(1).forEach((data) => {
+    // ">" operator for descending
+    if (data.score > pivot.score) {
+      leftArr.push(data);
+    } else {
+      rightArr.push(data);
+    }
+  });
+
+  return [...quickSortLeaderboardDatas(leftArr), pivot, ...quickSortLeaderboardDatas(rightArr)];
+}
 
 export const tugasPesertaRouter = createTRPCRouter({
   getAllSubmission: protectedProcedure.query((opts) => {
     return getAllUserSubmission(opts);
   }),
   getLeaderboardData: protectedProcedure.query(async (opts) => {
-    const leaderboardDatas : TleaderboardDatas = [];
+    const leaderboardDatas: TleaderboardDatas = [];
     const allUserSubmission = await getAllUserSubmission(opts);
     const all23UserSubmission = allUserSubmission.filter((userSubmission) => parseInt(userSubmission.nim!) > 10223000);
 
     //generate leaderboard data
-    for(const userSubmission of all23UserSubmission){
+    for (const userSubmission of all23UserSubmission) {
       const cumulatedScore = (await getCumulatedSubmissionScore(userSubmission.submissions)) ?? 0;
-      leaderboardDatas.push({
-        nim: userSubmission.nim!,
-        nama: userSubmission.name!,
-        score: cumulatedScore
-    });
+      leaderboardDatas.push({ nim: userSubmission.nim!, nama: userSubmission.name!, score: cumulatedScore });
     }
 
-    //descending sort by score using quicksore algorithm
+    // descending sort by score using quicksort algorithm
     const sortedLeaderboardDatas = quickSortLeaderboardDatas(leaderboardDatas);
     return sortedLeaderboardDatas;
   }),
-
   getCarouselTugasData: protectedProcedure.query(async (opts) => {
     const { ctx } = opts;
     const allTugasData = await getAllTugasData(opts);
