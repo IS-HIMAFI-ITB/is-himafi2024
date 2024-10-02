@@ -10,6 +10,7 @@ import Image from "next/image";
 import { api, HydrateClient } from "~/trpc/server";
 import { TugasListTabControlledCarousel } from "../_components/tugasList-tab-controlled-carousel";
 import Countdown from "../_components/countdown";
+import ReactPlayer from "react-player";
 
 export default async function PesertaPage() {
   const session = await getServerAuthSession();
@@ -24,11 +25,13 @@ export default async function PesertaPage() {
     userId: session.user.id,
   });
 
-  const countdownTime = new Date("Sept 20, 2024 19:00:00+07:00");
+  const countdownTime = new Date("Oct 3, 2024 20:30:00+07:00");
 
   return (
     // <div className="flex flex-col bg-[url('/day6_background.png')] bg-cover bg-bottom  text-white">
     <div className="flex flex-col relative text-white bg-black/40">
+      {/* <audio src="/mars himafi.mp3"></audio> */}
+
       <div className="fixed inset-0 -z-50">
         <Image src="/bg-lantik-2023.jpg" alt="Cover Image" className="object-cover object-center" fill />
         <Image src="/bg-lantik-2023-mobile.jpg" alt="Cover Image" className="object-cover object-center md:hidden" fill />
