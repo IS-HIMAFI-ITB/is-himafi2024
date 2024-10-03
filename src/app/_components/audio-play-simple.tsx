@@ -46,7 +46,7 @@ export default function AudioPlaySimple({ audioSrc }: { audioSrc: string }) {
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: -100 }}
-              animate={{ opacity: 1, y: -200 }}
+              animate={{ opacity: 1, y: -190 }}
               exit={{ opacity: 0, y: -100 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="absolute top-32 left-10 right-10 sm:left-32 sm:right-32 bg-none p-4 rounded-t-full -z-10 bg-sky-400/20 shadow-xl"
