@@ -11,6 +11,7 @@ import { api, HydrateClient } from "~/trpc/server";
 import { TugasListTabControlledCarousel } from "../_components/tugasList-tab-controlled-carousel";
 import Countdown from "../_components/countdown";
 import ReactPlayer from "react-player";
+import AudioPlaySimple from "../_components/audio-play-simple";
 
 export default async function PesertaPage() {
   const session = await getServerAuthSession();
@@ -25,7 +26,7 @@ export default async function PesertaPage() {
     userId: session.user.id,
   });
 
-  const countdownTime = new Date("Oct 3, 2024 20:30:00+07:00");
+  const countdownTime = new Date("Oct 4, 2024 20:30:00+07:00");
 
   return (
     // <div className="flex flex-col bg-[url('/day6_background.png')] bg-cover bg-bottom  text-white">
@@ -77,8 +78,9 @@ export default async function PesertaPage() {
           atau melarikan diri—hanya <span className="font-black font-mono">keberanian</span> yang akan{" "}
           <span className="font-black font-mono">bertahan</span>.
         </p>
-        {/* <PostList/> */}
+
         <div className="pt-14 w-full">
+          <AudioPlaySimple audioSrc="/mars himafi.mp3" />
           <Countdown count={countdownTime} />
         </div>
         <div className="flex flex-col items-center justify-center pb-20 pt-10">

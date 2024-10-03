@@ -45,7 +45,7 @@ export default function Countdown({ count }: { count: Date }) {
             ))}
           </div>
           <div className="my-20 text-2xl md:text-4xl gap-5 grid grid-cols-1 text-gray-300 whitespace-pre-wrap text-center ">
-            <div className="font-black font-mono tracking-widest overflow-x-auto no-scrollbar">{`-6.8643391, 107.6178311`}</div>
+            <div className="font-black font-mono tracking-widest overflow-x-auto no-scrollbar">{`-6.894763, 107.610533`}</div>
             <div>{`Tidak ada keluarga yang ditinggalkan.`}</div>
             <div>{`Sekarang, hanya ada satu kekuatan yang tersisa.`}</div>
           </div>
@@ -70,11 +70,11 @@ export default function Countdown({ count }: { count: Date }) {
               <li className="pl-5">Identitas angkatan: penanda angkatan, jaket angkatan dan yel-yel</li>
               <li className="pl-5">Senter dengan cahaya terang</li>
               <li className="pl-5">Tas ransel yang memuat seluruh spek yang tidak digunakan (jangan ada tas tambahan)</li>
-              <li className="pl-5">Madurasa 1 buah</li>
-              <li className="pl-5">Obat pribadi</li>
-              <li className="pl-5">Alat tulis </li>
+              <li className="pl-5">Jaket yang hangat (dikenakan di dalam jaket angkatan)</li>
               <li className="pl-5">Cobalt Book</li>
-              <li className="pl-5">Jaket yang hangat (dikenakan didalam jaket angkatan)</li>
+              <li className="pl-5">Alat tulis </li>
+              <li className="pl-5">Obat pribadi </li>
+              <li className="pl-5">Madurasa 1 buah</li>
               <li className="pl-5">Tolak Angin 1 buah</li>
               <li className="pl-5">Roti Kembung 1 buah</li>
               <li className="pl-5">Kresek 3 lembar</li>
@@ -93,6 +93,7 @@ export default function Countdown({ count }: { count: Date }) {
           <div>
             <div className="text-3xl text-[#9a82dc]">Non-Lapangan</div>
             <ol className="grid grid-cols-1 gap-2 pt-4 text-pretty list-decimal text-left">
+              <li className="pl-5">Uang tunai Rp20.000</li>
               <li className="pl-5">pakaian ganti minimal 1 pasang</li>
               <li className="pl-5">keperluan mandi (opsional)</li>
               <li className="pl-5">alat sholat (opsional)</li>
