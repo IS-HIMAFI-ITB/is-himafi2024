@@ -14,6 +14,7 @@ export default function AudioPlaySimple({ audioSrc }: { audioSrc: string }) {
       if (isPlaying) {
         audioRef.current.pause();
       } else {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         audioRef.current.play();
       }
       setIsPlaying(!isPlaying);
