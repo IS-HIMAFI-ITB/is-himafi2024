@@ -45,7 +45,7 @@ export default function Countdown({ count }: { count: Date }) {
             ))}
           </div>
           <div className="my-20 text-2xl md:text-4xl gap-5 grid grid-cols-1 text-gray-300 whitespace-pre-wrap text-center ">
-            <div className="font-black font-mono tracking-widest overflow-x-auto no-scrollbar">{`-6.894763, 107.610533`}</div>
+            <div className="font-black font-mono tracking-widest overflow-x-auto no-scrollbar">{`-6.893306, 107.610448`}</div>
             <div>{`Tidak ada keluarga yang ditinggalkan.`}</div>
             <div>{`Sekarang, hanya ada satu kekuatan yang tersisa.`}</div>
           </div>
