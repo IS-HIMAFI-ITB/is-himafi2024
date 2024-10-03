@@ -33,14 +33,16 @@ export default function Countdown({ count }: { count: Date }) {
 
   return (
     <div className="w-full">
-      <div className="px-10 md:px-[20%] sm:px-[10%]">
+      <div className="pt-16 px-10 md:px-[20%] sm:px-[10%]">
         <div className="text-center content-stretch">
-          <h1 className="text-5xl md:text-8xl font-bold mb-8 text-[#39a2e2] animate-pulse w-auto">Hari Kemenangan</h1>
+          <h1 className="text-5xl md:text-8xl font-bold mb-8 text-[#39a2e2] animate-pulse w-auto mix-blend-color-dodge">Hari Kemenangan</h1>
           <div className="grid grid-cols-3 sm:gap-10">
             {Object.entries(timeLeft).map(([unit, value]) => (
-              <div key={unit} className="bg-gray-800/50 sm:p-4 py-4 rounded-lg shadow-lg">
-                <div className="text-5xl md:text-6xl font-bold text-gray-100 mb-2">{value.toString().padStart(2, "0")}</div>
-                <div className="text-sm sm:text-xl text-gray-400 uppercase overflow-clip">{unit}</div>
+              <div key={unit} className="bg-gray-800/50 sm:p-4 py-4 rounded-lg shadow-lg ">
+                <div className="text-5xl md:text-6xl font-bold text-gray-100 mb-2 mix-blend-overlay">
+                  {value.toString().padStart(2, "0")}
+                </div>
+                <div className="text-sm sm:text-xl text-gray-400 uppercase overflow-clip mix-blend-color-dodge">{unit}</div>
               </div>
             ))}
           </div>
@@ -52,11 +54,13 @@ export default function Countdown({ count }: { count: Date }) {
         </div>
       </div>
       <div className="px-10 sm:px-[10%] text-center content-stretch text-lg">
-        <h1 className="text-5xl md:text-8xl font-bold mb-8 text-[#39a2e2] tracking-widest animate-pulse w-auto">SPEK</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-20 font-semibold">
+        <h1 className="text-5xl md:text-8xl font-bold mb-8 text-[#39a2e2] tracking-widest animate-pulse w-auto mix-blend-color-dodge">
+          SPEK
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-20 font-semibold mix-blend-plus-lighter opacity-70">
           <div>
             <div className="text-3xl text-[#9a82dc]">Angkatan</div>
-            <ol className=" grid grid-cols-1 gap-2 pt-4 text-pretty list-decimal text-left">
+            <ol className=" grid grid-cols-1 gap-2 pt-4 pl-5 text-pretty list-decimal text-left">
               <li className="pl-5">Tenda komunal kapasitas 5 orang 2 buah</li>
               <li className="pl-5">Tikar besar 10 buah</li>
               <li className="pl-5">Bendera keresahan</li>
@@ -66,7 +70,7 @@ export default function Countdown({ count }: { count: Date }) {
           </div>
           <div>
             <div className="text-3xl text-[#9a82dc]">Lapangan</div>
-            <ol className="grid grid-cols-1 gap-2 pt-4 text-pretty list-decimal text-left ">
+            <ol className="grid grid-cols-1 gap-2 pt-4 pl-5 text-pretty list-decimal text-left ">
               <li className="pl-5">Identitas angkatan: penanda angkatan, jaket angkatan dan yel-yel</li>
               <li className="pl-5">Senter dengan cahaya terang</li>
               <li className="pl-5">Tas ransel yang memuat seluruh spek yang tidak digunakan (jangan ada tas tambahan)</li>
@@ -92,7 +96,7 @@ export default function Countdown({ count }: { count: Date }) {
           </div>
           <div>
             <div className="text-3xl text-[#9a82dc]">Non-Lapangan</div>
-            <ol className="grid grid-cols-1 gap-2 pt-4 text-pretty list-decimal text-left">
+            <ol className="grid grid-cols-1 gap-2 pt-4 pl-5 text-pretty list-decimal text-left">
               <li className="pl-5">Uang tunai Rp25.000</li>
               <li className="pl-5">pakaian ganti minimal 1 pasang</li>
               <li className="pl-5">keperluan mandi (opsional)</li>

@@ -26,7 +26,7 @@ export default function AudioPlaySimple({ audioSrc }: { audioSrc: string }) {
       <Button
         onClick={togglePlayPause}
         size="icon"
-        className={`rounded-full hover:bg-sky-600/25 relative transition-all duration-1000 ease-in-out ${isPlaying ? "w-full h-24 bg-sky-600/50" : "w-24 h-24 bg-black/20"}`}
+        className={`rounded-full hover:bg-sky-600/25 relative transition-all duration-1000 ease-in-out mix-blend-color-dodge ${isPlaying ? "w-full h-24 bg-sky-600/50" : "w-24 h-24 bg-black/20"}`}
         aria-label={isPlaying ? "Pause" : "Play"}
       >
         {isPlaying ? <Pause className="h-12 w-12" /> : <Play className="h-12 w-12" />}
@@ -51,7 +51,7 @@ export default function AudioPlaySimple({ audioSrc }: { audioSrc: string }) {
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="absolute top-32 left-10 right-10 sm:left-32 sm:right-32 bg-none p-4 rounded-t-full -z-10 bg-sky-400/20 shadow-xl"
             >
-              <p className="text-lg font-bold text-center">Now Playing:</p>
+              <p className="text-lg font-bold text-center ">Now Playing:</p>
             </motion.div>
           </div>
         )}
