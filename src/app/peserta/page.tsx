@@ -7,7 +7,6 @@ import { ImageUpload } from "../_components/image-upload";
 import { News } from "../_components/news";
 import Image from "next/image";
 
-
 import { api, HydrateClient } from "~/trpc/server";
 import { TugasListTabControlledCarousel } from "../_components/tugasList-tab-controlled-carousel";
 
@@ -17,6 +16,9 @@ export default async function PesertaPage() {
     redirect("/authpage/login/");
   }
   if (session.user.role === "ADMIN") {
+    redirect("/");
+  }
+  if (session.user.role === "PESERTA") {
     redirect("/");
   }
 

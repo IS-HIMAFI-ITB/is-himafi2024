@@ -2,32 +2,32 @@ import Link from "next/link";
 
 import { getServerAuthSession } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
-import { redirect } from 'next/navigation'
-import { PrismaClient } from  "@prisma/client";
+import { redirect } from "next/navigation";
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export default async function Home() {
-  const session = await getServerAuthSession();  
-  console.log("jwt session -------------------------------------------------------")
-  console.log(session)
+  const session = await getServerAuthSession();
+  console.log("jwt session -------------------------------------------------------");
+  console.log(session);
   if (!session) {
-      redirect('/authpage/login/')
+    redirect("/authpage/login/");
   }
   const canResetPassword = await prisma.user.findFirst({
     where: {
       nim: session.user.nim,
       passwordOverride: true,
     },
-  })
+  });
   if (canResetPassword) {
-    redirect('/authpage/resetpassword/')
+    redirect("/authpage/resetpassword/");
   }
-  if (session.user.role === 'PESERTA') {
-      redirect('/peserta/')
+  if (session.user.role === "PESERTA") {
+    redirect("/countdown/");
   }
-  if (session.user.role === 'ADMIN') {
-    redirect('/admin/')
-  } 
+  if (session.user.role === "ADMIN") {
+    redirect("/admin/");
+  }
 
   return (
     <HydrateClient>
@@ -37,20 +37,19 @@ export default async function Home() {
             Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
           </h1>
           <div className="flex flex-col items-center justify-center gap-4">
-            <p className="text-center text-2xl text-white">
-              {session && <span>Logged in as {session.user?.name}</span>}
-            </p>
+            <p className="text-center text-2xl text-white">{session && <span>Logged in as {session.user?.name}</span>}</p>
             <Link
               href={"/api/auth/signin"}
-                className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
-              >signin
+              className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
+            >
+              signin
             </Link>
             <Link
               href={"/api/auth/signout"}
-                className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
-              >signout
+              className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
+            >
+              signout
             </Link>
-            
           </div>
         </div>
       </main>
