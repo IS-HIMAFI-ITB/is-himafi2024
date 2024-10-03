@@ -80,7 +80,7 @@ export default async function PesertaPage() {
         </p>
 
         <div className="pt-14 w-full">
-          <AudioPlaySimple audioSrc="/mars-himafi_cut.mp3" />
+          <AudioPlaySimple audioSrc="/mars himafi_final.mp3" />
           <Countdown count={countdownTime} />
         </div>
         <div className="flex flex-col items-center justify-center pb-20 pt-10">
