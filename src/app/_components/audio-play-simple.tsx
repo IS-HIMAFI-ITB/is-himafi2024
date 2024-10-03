@@ -31,7 +31,7 @@ export default function AudioPlaySimple({ audioSrc }: { audioSrc: string }) {
       >
         {isPlaying ? <Pause className="h-12 w-12" /> : <Play className="h-12 w-12" />}
       </Button>
-      <audio ref={audioRef} src={audioSrc} onEnded={() => setIsPlaying(false)} />
+      <audio ref={audioRef} src={audioSrc} loop />
       <AnimatePresence>
         {isPlaying && (
           <div>
