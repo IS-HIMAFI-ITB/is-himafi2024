@@ -40,7 +40,7 @@ export default function AudioPlaySimple({ audioSrc }: { audioSrc: string }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -50 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="absolute top-32 left-32 right-32 bg-none p-4 rounded-b-full -z-10 bg-sky-400/20 shadow-xl"
+              className="absolute top-32 left-10 right-10 sm:left-32 sm:right-32 bg-none p-4 rounded-b-full -z-10 bg-sky-400/20 shadow-xl"
             >
               <p className="text-lg font-bold text-center">MARS HIMAFI</p>
             </motion.div>
@@ -49,7 +49,7 @@ export default function AudioPlaySimple({ audioSrc }: { audioSrc: string }) {
               animate={{ opacity: 1, y: -200 }}
               exit={{ opacity: 0, y: -100 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="absolute top-32 left-32 right-32 bg-none p-4 rounded-t-full -z-10 bg-sky-400/20 shadow-xl"
+              className="absolute top-32 left-10 right-10 sm:left-32 sm:right-32 bg-none p-4 rounded-t-full -z-10 bg-sky-400/20 shadow-xl"
             >
               <p className="text-lg font-bold text-center">Now Playing:</p>
             </motion.div>
