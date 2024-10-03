@@ -93,7 +93,7 @@ export default function Countdown({ count }: { count: Date }) {
           <div>
             <div className="text-3xl text-[#9a82dc]">Non-Lapangan</div>
             <ol className="grid grid-cols-1 gap-2 pt-4 text-pretty list-decimal text-left">
-              <li className="pl-5">Uang tunai Rp20.000</li>
+              <li className="pl-5">Uang tunai Rp25.000</li>
               <li className="pl-5">pakaian ganti minimal 1 pasang</li>
               <li className="pl-5">keperluan mandi (opsional)</li>
               <li className="pl-5">alat sholat (opsional)</li>
