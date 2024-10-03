@@ -61,49 +61,46 @@ export default function Countdown({ count }: { count: Date }) {
           <div>
             <div className="text-3xl text-[#9a82dc]">Angkatan</div>
             <ol className=" grid grid-cols-1 gap-2 pt-4 pl-5 text-pretty list-decimal text-left">
-              <li className="pl-5">Tenda komunal kapasitas 5 orang 2 buah</li>
-              <li className="pl-5">Tikar besar 10 buah</li>
-              <li className="pl-5">Bendera keresahan</li>
-              <li className="pl-5">terminal stopkontak 5 buah</li>
-              <li className="pl-5">Performa dan semangat terbaik</li>
+              <li className="pl-5"> Dua buah Tenda Komunal Kapasitas 5 orang</li>
+              <li className="pl-5"> Bendera Keresahan</li>
+              <li className="pl-5"> Sepuluh buah Tikar Besar</li>
+              <li className="pl-5"> Lima buah Terminal Stopkontak</li>
+              <li className="pl-5"> Performa dan Semangat Terbaik</li>
             </ol>
           </div>
           <div>
             <div className="text-3xl text-[#9a82dc]">Lapangan</div>
             <ol className="grid grid-cols-1 gap-2 pt-4 pl-5 text-pretty list-decimal text-left ">
-              <li className="pl-5">Identitas angkatan: penanda angkatan, jaket angkatan dan yel-yel</li>
-              <li className="pl-5">Senter dengan cahaya terang</li>
-              <li className="pl-5">Tas ransel yang memuat seluruh spek yang tidak digunakan (jangan ada tas tambahan)</li>
-              <li className="pl-5">Jaket yang hangat (dikenakan di dalam jaket angkatan)</li>
+              <li className="pl-5">Identitas Angkatan: Penanda Angkatan, Jaket Angkatan dan Yel-Yel</li>
+              <li className="pl-5">Satu buah Jaket yang Hangat (dikenakan di dalam jaket angkatan)</li>
+              <li className="pl-5">Satu buah Senter dengan Cahaya Terang</li>
+              <li className="pl-5">Satu buah Madurasa</li>
+              <li className="pl-5">Dua buah Tolak Angin</li>
+              <li className="pl-5">Dua buah Roti Kembung (merk Prime Bread)</li>
+              <li className="pl-5">Tiga lembar Kresek Hitam</li>
+              <li className="pl-5">Satu buah Air Mineral 1.5L</li>
+              <li className="pl-5">Satu buah Ponco Kelelawar (tidak bau, tidak sobek, tidak berjamur)</li>
               <li className="pl-5">Cobalt Book</li>
-              <li className="pl-5">Alat tulis </li>
-              <li className="pl-5">Obat pribadi </li>
-              <li className="pl-5">Madurasa 1 buah</li>
-              <li className="pl-5">Tolak Angin 1 buah</li>
-              <li className="pl-5">Roti Kembung 1 buah</li>
-              <li className="pl-5">Kresek 3 lembar</li>
-              <li className="pl-5">Air Mineral 1.5L</li>
-              <li className="pl-5">Ponco</li>
-              <li className="pl-5">lilin 1 buah</li>
-              <li className="pl-5">Celana panjang olahraga yang tidak robek</li>
-              <li className="pl-5">Sepatu bertali dan menutup tumit </li>
-              <li className="pl-5">Kaos kaki menutup mata kaki</li>
+              <li className="pl-5">Alat Tulis</li>
+              <li className="pl-5">Obat-obatan Pribadi</li>
+              <li className="pl-5">Tas Ransel yang Memuat Seluruh Spek Lapangan</li>
+              <li className="pl-5">Celana Panjang Olahraga (tidak robek, tidak ketat)</li>
+              <li className="pl-5">Sepatu Bertali dan Menutup Tumit</li>
+              <li className="pl-5">Kaos Kaki Menutup Mata Kaki</li>
               <li className="pl-5">Dalam keadaan siap: perut sudah terisi, sudah sholat, dan tidak perlu ke wc.</li>
-              <li className="pl-5">
-                Sudah menyelesaikan tugas akademik yang memiliki deadline Jumat 4 Oktober 23.59 WIB dan Sabtu 5 Oktober 23.59 WIB
-              </li>
+              <li className="pl-5">Sudah menyelesaikan tugas akademik yang memiliki deadline hingga Sabtu 5 Oktober 23.59 WIB</li>
             </ol>
           </div>
           <div>
             <div className="text-3xl text-[#9a82dc]">Non-Lapangan</div>
             <ol className="grid grid-cols-1 gap-2 pt-4 pl-5 text-pretty list-decimal text-left">
-              <li className="pl-5">Uang tunai Rp25.000</li>
-              <li className="pl-5">pakaian ganti minimal 1 pasang</li>
-              <li className="pl-5">keperluan mandi (opsional)</li>
-              <li className="pl-5">alat sholat (opsional)</li>
-              <li className="pl-5">sleeping bag (opsional)</li>
-              <li className="pl-5">sandal (opsional)</li>
-              <li className="pl-5">wadah/tas yang memuat spek non lapangan (pisahkan dengan spek lapangan)</li>
+              <li className="pl-5">Uang Tunai Rp20.000</li>
+              <li className="pl-5">Satu pasang (minimal) Pakaian Ganti</li>
+              <li className="pl-5">Keperluan Mandi (opsional)</li>
+              <li className="pl-5">Alat Sholat (opsional)</li>
+              <li className="pl-5">Sleeping Bag (opsional)</li>
+              <li className="pl-5">Sandal (opsional)</li>
+              <li className="pl-5">Satu buah Wadah/Tas yang memuat spek non lapangan (pisahkan dengan spek lapangan)</li>
             </ol>
           </div>
         </div>
