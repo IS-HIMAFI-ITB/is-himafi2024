@@ -10,6 +10,8 @@ import Image from "next/image";
 import { api, HydrateClient } from "~/trpc/server";
 import { TugasListTabControlledCarousel } from "../_components/tugasList-tab-controlled-carousel";
 import Countdown from "../_components/countdown";
+import ReactPlayer from "react-player";
+import AudioPlaySimple from "../_components/audio-play-simple";
 
 export default async function PesertaPage() {
   const session = await getServerAuthSession();
@@ -26,11 +28,13 @@ export default async function PesertaPage() {
     userId: session.user.id,
   });
 
-  const countdownTime = new Date("Sept 20, 2024 19:00:00+07:00");
+  const countdownTime = new Date("Oct 4, 2024 18:30:00+07:00");
 
   return (
     // <div className="flex flex-col bg-[url('/day6_background.png')] bg-cover bg-bottom  text-white">
     <div className="flex flex-col relative text-white bg-black/40">
+      {/* <audio src="/mars himafi.mp3"></audio> */}
+
       <div className="fixed inset-0 -z-50">
         <Image src="/bg-lantik-2023.jpg" alt="Cover Image" className="object-cover object-center" fill />
         <Image src="/bg-lantik-2023-mobile.jpg" alt="Cover Image" className="object-cover object-center md:hidden" fill />
@@ -67,17 +71,18 @@ export default async function PesertaPage() {
         </div>
       </div>
       <div className="flex min-h-screen flex-col items-center justify-center pt-72">
-        <h1 className="font-bluecashews text-3xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
+        <h1 className="font-bluecashews text-3xl font-extrabold tracking-tight sm:text-5xl md:text-6xl ">
           Intellektuelle<span className="text-[#39a2e2]">schule</span>
         </h1>
-        <p className="w-9/12 pt-10 text-center text-base font-extrabold tracking-widest text-[#fff8e8] md:text-xl">
+        <p className="w-9/12 pt-10 text-center text-base font-extrabold tracking-widest text-[#fff8e8] md:text-xl ">
           Perjalanan panjang telah ditempuh dan ikatan yang ditemukan akan menjadi kekuatan kalian. Setiap keputusan yang diambil akan
           menentukan masa depanmu di HIMAFI ITB. Datang, atau kalian akan tenggelam dalam bayangan. Tidak ada ruang bagi mereka yang ragu
           atau melarikan diri—hanya <span className="font-black font-mono">keberanian</span> yang akan{" "}
           <span className="font-black font-mono">bertahan</span>.
         </p>
-        {/* <PostList/> */}
+
         <div className="pt-14 w-full">
+          <AudioPlaySimple audioSrc="/mars himafi_final.mp3" />
           <Countdown count={countdownTime} />
         </div>
         <div className="flex flex-col items-center justify-center pb-20 pt-10">
