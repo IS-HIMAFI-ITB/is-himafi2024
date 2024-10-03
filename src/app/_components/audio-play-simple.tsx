@@ -22,7 +22,7 @@ export default function AudioPlaySimple({ audioSrc }: { audioSrc: string }) {
   };
 
   return (
-    <div className="flex items-center relative justify-center p-4 m-24">
+    <div className="flex items-center relative justify-center p-4 my-24">
       <Button
         onClick={togglePlayPause}
         size="icon"
