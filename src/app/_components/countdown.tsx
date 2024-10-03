@@ -101,6 +101,7 @@ export default function Countdown({ count }: { count: Date }) {
               <li className="pl-5">pakaian ganti minimal 1 pasang</li>
               <li className="pl-5">keperluan mandi (opsional)</li>
               <li className="pl-5">alat sholat (opsional)</li>
+              <li className="pl-5">sleeping bag (opsional)</li>
               <li className="pl-5">sandal (opsional)</li>
               <li className="pl-5">wadah/tas yang memuat spek non lapangan (pisahkan dengan spek lapangan)</li>
             </ol>
