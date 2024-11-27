@@ -18,9 +18,6 @@ export default async function PesertaPage() {
   if (session.user.role === "ADMIN") {
     redirect("/");
   }
-  if (session.user.role === "PESERTA") {
-    redirect("/");
-  }
 
   const getCumulativeScore = await api.user.getCumulativeScore({
     userId: session.user.id,

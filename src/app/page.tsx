@@ -23,7 +23,7 @@ export default async function Home() {
     redirect("/authpage/resetpassword/");
   }
   if (session.user.role === "PESERTA") {
-    redirect("/countdown/");
+    redirect("/peserta/");
   }
   if (session.user.role === "ADMIN") {
     redirect("/admin/");
